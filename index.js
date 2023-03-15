@@ -1,12 +1,13 @@
 const express = require('express')
 const {createMultipleNewWallet,getWallet,getPrivateKey} = require("./Services/createwallet")
+const {MonitorBlock} = require("./Services/WalletMonitor")
 const app = express()
 const Port = 3001
 
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send(`Hello World!${MonitorBlock()}`)
 })
 
 app.get('/getMultipleWallet/:TotalNumber', (req, res) => {
