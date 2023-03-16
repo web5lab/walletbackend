@@ -1,8 +1,8 @@
-const {mn} = require('../Config/Config');
+const { mn } = require('../Config/Config');
 const walletList = require('../wallets/wallets.json')
 const Web3 = require('web3')
 const MonitorWallet = () => {
-    
+
 }
 
 const MonitorBlock = () => {
@@ -60,13 +60,7 @@ const MonitorBlock = () => {
           console.log(result)
         }
       })   
-      web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
-        if (error) {
-          console.error(error)
-        } else {
-          console.log(result)
-        }
-      })   
+
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
 const ethers = require("ethers")
-const {mn} = require("../Config/Config")
-const walletNode = ethers.HDNodeWallet.fromPhrase(mn)
+const {MasterPhrase} = require("../Config/Config")
+const walletNode = ethers.HDNodeWallet.fromPhrase(MasterPhrase)
 const createMultipleNewWallet = (n) => {
     let ad = []
     for (let i = 1; i <= n; i++) {
