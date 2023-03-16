@@ -39,7 +39,8 @@ app.listen(Port, () => {
   console.log(`server listening on port ${Port}`)
 })
 
-app.get('/testFn/:UserAdrres',(req,res)=> {
+app.get('/testFn/:UserAdrres',async (req,res)=> {
   const ad = req.params.UserAdrres;
-  res.send(`the balance is ${CheckBalanceTestnet(ad,'Matic','Usdt')}`)
+  const t = await  CheckBalanceTestnet(ad,'Matic','Usdt')
+  res.send(`the balance is ${t}`)
 })
