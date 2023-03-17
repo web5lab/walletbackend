@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 app.get('/getMultipleWallet/:TotalNumber', (req, res) => {
   const no = req.params.TotalNumber
-  res.send(`wallets are ${createMultipleNewWallet(no)}`)
+  res.json(createMultipleNewWallet(no))
 })
 
 app.get('/getKey/:uid', (req,res)=> {
@@ -32,7 +32,7 @@ app.get('/mainnet/:param',(req,res)=> {
 
 app.get('/getWallet/:uid', (req,res) => {
   const uid = req.params.uid
-  res.send(`user adress is ${getWallet(uid)}`)
+  res.json(getWallet(uid))
 })
 
 app.listen(Port, () => {

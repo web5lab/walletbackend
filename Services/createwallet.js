@@ -1,10 +1,27 @@
 const ethers = require("ethers")
 const {MasterPhrase} = require("../Config/Config")
+const bitcoinWalletNode = require('bitcoinjs-lib')
 const walletNode = ethers.HDNodeWallet.fromPhrase(MasterPhrase)
+const seed = bitcoinWalletNode.crypto.sha256(MasterPhrase);
+const ecc = require('tiny-secp256k1')
+const { BIP32Factory } = require('bip32');
+const bip32 = BIP32Factory(ecc)
+const bitcoinMasterKey = bip32.fromSeed(seed)
+
+
+// get multiple wallet in single click
 const createMultipleNewWallet = (n) => {
     let ad = []
     for (let i = 1; i <= n; i++) {
-      ad.push(walletNode.derivePath(`m/44'/60'/0'/0/${i}`).address); // push each number into the array
+      const child = bitcoinMasterKey.derivePath(`m/0/${i}`)
+      const publicKey = child.publicKey;
+      const { address } = bitcoinWalletNode.payments.p2pkh({ pubkey: publicKey });
+      const obj = {
+        Userid: i,
+        BtcAdrress:`your bitcoin wallet adress is ${address}`,
+        EthAdress:`your etherum based network wallet address is ${walletNode.derivePath(`m/44'/60'/0'/0/${i}`).address}`
+      }
+      ad.push(obj)
     }
     console.log(ad)
      return ad
@@ -12,7 +29,17 @@ const createMultipleNewWallet = (n) => {
 
 // get wallet address from here
 const getWallet = (Userid)  => {
- return walletNode.derivePath(`m/44'/60'/0'/0/${Userid}`).address
+  const child = bitcoinMasterKey.derivePath(`m/0/${Userid}`)
+  const publicKey = child.publicKey;
+  const privateKey = child.privateKey.buffer;
+  const { address} = bitcoinWalletNode.payments.p2pkh({ pubkey: publicKey });
+  const obj = {
+    Userid:Userid,
+    BtcAdrress:address,
+    BtcPrivateKey:privateKey||"wallet key not availabel",
+    EthAdress:walletNode.derivePath(`m/44'/60'/0'/0/${Userid}`).address
+  };
+ return obj
 }
 
 

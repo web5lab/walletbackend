@@ -8,7 +8,6 @@ const web3BscTestnet = new Web3(TestnetRpc.Bsc);
 const web3MaticTestnet = new Web3(TestnetRpc.Matic);
 
 const CheckBalanceTestnet = async (userAddress, networkName, TokenName) => {
-   
         if (networkName == "Eth") {
             checkBalanceEthTestnet(userAddress, TokenName)
         }else if (networkName == "Bsc") {
@@ -25,10 +24,8 @@ const CheckBalanceTestnet = async (userAddress, networkName, TokenName) => {
 const checkBalancePolygonTestnet = async (userAddress, TokenName) => {
     try {
         if (TokenName == "Usdt") {
-
             try {
-     
-                const UsdtInterface = new web3MaticTestnet.eth.Contract(contractAbi, TestnetContract.Usdtmatic);
+               const UsdtInterface = new web3MaticTestnet.eth.Contract(contractAbi, TestnetContract.Usdtmatic);
                const t = await UsdtInterface.methods.balanceOf(userAddress).call((error, result) => {
                     if (error) {
                         console.log(error);
