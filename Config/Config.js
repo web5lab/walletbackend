@@ -1,3 +1,6 @@
+// Mainnet Master Secret Phrase
+const mainMasterPhrase = ""
+// Testnet Master Secret Phrase
 const MasterPhrase = "session dial switch visual distance twelve adjust cotton metal know bring void"
 // Testnet rpc
 const TestnetRpc = {

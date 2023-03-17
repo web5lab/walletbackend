@@ -2,14 +2,16 @@ const express = require('express')
 const {createMultipleNewWallet,getWallet,getPrivateKey} = require("./Services/createwallet")
 const {MonitorBlock} = require("./Services/WalletMonitor")
 const {CheckBalanceTestnet} = require('./Modals/WalletBalnces')
+// const { testnet } = require('bitcoinjs-lib/src/networks')
 const app = express()
 const Port = 3001
 
+const router = express.Router()
+// routes import here
+const testnet = require('./routes/testnetRoutes')
 
 
-app.get('/', (req, res) => {
-  res.send(`Hello World!${MonitorBlock()}`)
-})
+app.use('/', router)
 
 app.get('/getMultipleWallet/:TotalNumber', (req, res) => {
   const no = req.params.TotalNumber
@@ -21,14 +23,14 @@ app.get('/getKey/:uid', (req,res)=> {
   res.send(`Private Key Is ${getPrivateKey(no)}`)
 })
 
-app.get('/testnet/:param', (req,res) => {
- 
-})
+
 
 app.get('/mainnet/:param',(req,res)=> {
   const param = req.params.param
 
 })
+
+app.use('/testNet',testnet)
 
 app.get('/getWallet/:uid', (req,res) => {
   const uid = req.params.uid
