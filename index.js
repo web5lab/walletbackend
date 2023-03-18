@@ -8,7 +8,7 @@ const Port = 3001
 
 const router = express.Router()
 // routes import here
-const testnet = require('./routes/testnetRoutes')
+const testnet = require('./routes/testnetRoutes');
 
 
 app.use('/', router)
@@ -25,10 +25,6 @@ app.get('/getKey/:uid', (req,res)=> {
 
 
 
-app.get('/mainnet/:param',(req,res)=> {
-  const param = req.params.param
-
-})
 
 app.use('/testNet',testnet)
 

@@ -9,7 +9,8 @@ const bip32 = BIP32Factory(ecc)
 const bitcoinMasterKey = bip32.fromSeed(seed, bitcoinWalletNode.networks.testnet)
 
 // get multiple wallet in single click
-const createMultipleNewWallet = (n) => {
+const createMultipleNewWallet = (req,res) => {
+    const n = req.params.no
     let ad = []
     for (let i = 1; i <= n; i++) {
         const child = bitcoinMasterKey.derivePath(`m/0/${i}`)
@@ -23,7 +24,7 @@ const createMultipleNewWallet = (n) => {
         ad.push(obj)
     }
     console.log(ad)
-    return ad
+    return res.json(ad)
 }
 
 // get wallet address from here
