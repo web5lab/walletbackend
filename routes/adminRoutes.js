@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 // API => GET
-router.get('/privatekey')
+router.get('/privatekey/:network/:userId');
+router.post('/withdrawFund/:userId');
 // API => POST
 // API => PATCH
 // API => DELETE

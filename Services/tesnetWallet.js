@@ -32,12 +32,10 @@ const getWallet = (req,res) => {
     const Userid = req.params.userId
     const child = bitcoinMasterKey.derivePath(`m/0/${Userid}`)
     const publicKey = child.publicKey;
-    const privateKey = child.toWIF();
     const { address } = bitcoinWalletNode.payments.p2pkh({ pubkey: publicKey, network: bitcoinWalletNode.networks.testnet });
     const obj = {
         Userid: Userid,
         BtcAdrress: address,
-        BtcPrivateKey: privateKey,
         EthAdress: walletNode.derivePath(`m/44'/60'/0'/0/${Userid}`).address
     };
     return res.json(obj)
