@@ -33,7 +33,8 @@ const UserSchema = new Schema({
     testPayBalnce: {
         type: Number,
         required: true
-    }
+    },
+    
 });
 
 module.exports = mongoose.model('User', UserSchema);
