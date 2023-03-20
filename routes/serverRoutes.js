@@ -3,4 +3,4 @@ const router = express.Router();
 
 router.get('/getBalanceOnNetwork/:userId');
 router.get('totalRegisterdUser');
-router.post('/checkTopup/:userId');
+router.get('/checkTopup/:userId');

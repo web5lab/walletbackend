@@ -22,10 +22,10 @@ const faucetSchema = new Schema({
     type:String,
     required:true
    },
-   hash:{
+   transactionHash:{
     type:String,
     required:true
    }
 });
 
-module.exports = mongoose.model('User', faucetSchema);
+module.exports = mongoose.model('faucetSchema', faucetSchema);
