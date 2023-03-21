@@ -8,9 +8,7 @@ const getBalUsdtBsc = (userAddress) => {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `USDT balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
 };
@@ -23,9 +21,7 @@ const getBalBusdBsc = (userAddress) => {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `Busd balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
 };
@@ -38,9 +34,7 @@ const getBalTestPayBsc = (userAddress) => {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `USDT balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
 };
@@ -53,9 +47,7 @@ const getBalUsdtEth = (userAddress) => {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `USDT balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
 };
@@ -68,9 +60,7 @@ const getBalBusdEth = (userAddress) => {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `USDT balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
 };
@@ -83,9 +73,7 @@ const getBalTestPayEth = (userAddress) => {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `USDT balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
 };
@@ -98,9 +86,7 @@ const getBalUsdtMatic = (userAddress) => {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `USDT balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
 };
@@ -113,27 +99,41 @@ const getBalBusdMatic = (userAddress) => {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `USDT balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
 };
 
 const getBalTestPayMatic = (userAddress) => {
-  ContractInstance.testPayMatic.methods
+  const t = ContractInstance.testPayMatic.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
         const balance = result / 1e6; // USDT has 6 decimal place,
-        const obj = `USDT balance of ${userAddress}: ${balance}`;
-        console.log(obj);
-        return obj;
+        return balance;
       }
     });
+    return t;
 };
+
+const Walletbalance = async (walletAddress) => {
+    busdBsc = getBalBusdBsc(walletAddress);
+    const  obj = {
+         BalBusdBsc : getBalBusdBsc(walletAddress),
+        //  BalBusdEth :  getBalBusdEth(walletAddress),
+         BalBusdMatic : getBalBusdMatic(walletAddress),
+         BalTestPayBsc : getBalTestPayBsc(walletAddress),
+        //  BalTestPayEth : getBalTestPayEth(walletAddress),
+         BalTestPayMatic : await getBalTestPayMatic(walletAddress),
+         BalUsdtBsc : getBalUsdtBsc(walletAddress),
+        //  BalUsdtEth :getBalUsdtEth(walletAddress),
+         BalUsdtMatic :getBalUsdtMatic(walletAddress),
+    }
+    console.log(obj)
+    return obj;
+}
 
 module.exports = {
     getBalBusdBsc,
@@ -144,5 +144,6 @@ module.exports = {
     getBalTestPayMatic,
     getBalUsdtBsc,
     getBalUsdtEth,
-    getBalUsdtMatic
+    getBalUsdtMatic,
+    Walletbalance
 }

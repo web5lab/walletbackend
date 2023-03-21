@@ -22,23 +22,50 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    maticAddress:{
+       type:String,
+       required:true
+    },
     btcBalance: {
-        type: Number,
-        required: true
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
     },
-    usdtBalance: {
-        type: Number,
-        required: true
+    usdtBalanceOnBsc: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
     },
-    busdBalance: {
-        type: Number,
-        required: true
+    usdtBalanceOnEth: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
     },
-    testPayBalnce: {
-        type: Number,
-        required: true
+    usdtBalanceOnMatic: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
     },
-    
+    busdBalanceOnBsc: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
+    },
+    busdBalanceOnEth: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
+    },
+    busdBalanceOnMatic: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
+    },
+    testPayBalnceOnBsc: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
+    },
+    testPayBalnceOnEth: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
+    },
+    testPayBalnceOnMatic: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
+    }
 });
 
 module.exports = mongoose.model('User', UserSchema);

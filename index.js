@@ -1,5 +1,5 @@
 const express = require('express')
-
+const {Walletbalance} = require('./Services/testnet/walletBalance')
 const {getFaucetUsdtBsc} = require('./Services/testnet/faucetService')
 const bodyParser = require('body-parser');
 const databaseConnection = require('./mongoDb/db')
@@ -31,8 +31,8 @@ databaseConnection(() => {
   })
 })
 
-app.get('/testfn',async (req,res)=> {
-  const ad = req.params.UserAdrres;
-  const t = await  getFaucetUsdtBsc(1000,'0x8045287B546E4fB8C069553fA972FF52eaB5AE78')
+app.get('/testfn/:UserAddress',async (req,res)=> {
+  const ad = req.params.UserAddress;
+  const t =  Walletbalance(ad)
   res.send(`the balance is ${t}`)
 })

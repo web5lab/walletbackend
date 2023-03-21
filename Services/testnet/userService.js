@@ -9,10 +9,7 @@ const registerNewUser = async (req,res) => {
     btcAddress:t.BtcAdrress,
     bscAddress:t.EthAdress,
     ethAddress:t.EthAdress,
-    btcBalance:0.0000,
-    usdtBalance:0.0000,
-    busdBalance:0.0000,
-    testPayBalnce:0.0000
+    maticAddress:t.EthAdress,
   })
   user.save()
   res.send('succesfully saved')

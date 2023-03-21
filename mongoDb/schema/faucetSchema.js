@@ -21,6 +21,10 @@ const faucetSchema = new Schema({
    transactionHash:{
     type:String,
     required:true
+   },
+   timeStamp:{
+      type:Date,
+      default:Date.now()
    }
 });
 

@@ -53,13 +53,6 @@ const getFaucetBusdBsc = async (Amount, reciver_address) => {
     const txReceipt = await testnetInstance.web3bsc.eth.sendSignedTransaction(
         signedTx.rawTransaction
     );
-    const obj = {
-        txHash: txReceipt.transactionHash,
-        Amount: Amount,
-        test:"testdats",
-        reciver_address: reciver_address,
-        timeStamp: Date.now(),
-    };
     const db = new faucetDb({
         walletAddress:reciver_address,
         currencyType:"usdt",
@@ -69,9 +62,8 @@ const getFaucetBusdBsc = async (Amount, reciver_address) => {
 
     })
     db.save().then(() => console.log('New user saved to MongoDB successfully')).catch(err => console.log(err));
-    console.log(obj);
-    return obj;
 };
+
 const getFaucetTestPayBsc = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3bsc.eth.getGasPrice();
     const tx = {
@@ -99,6 +91,7 @@ const getFaucetTestPayBsc = async (Amount, reciver_address) => {
     console.log(obj);
     return obj;
 };
+
 const getFaucetBusdEth = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3bsc.eth.getGasPrice();
     const tx = {
@@ -126,6 +119,7 @@ const getFaucetBusdEth = async (Amount, reciver_address) => {
     console.log(obj);
     return obj;
 };
+
 const getFaucetUsdtEth = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3eth.eth.getGasPrice();
     const tx = {
@@ -153,6 +147,7 @@ const getFaucetUsdtEth = async (Amount, reciver_address) => {
     console.log(obj);
     return obj;
 };
+
 const getFaucetTestPayEth = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3eth.eth.getGasPrice();
     const tx = {
@@ -180,6 +175,7 @@ const getFaucetTestPayEth = async (Amount, reciver_address) => {
     console.log(obj);
     return obj;
 };
+
 const getFaucetBusdMatic = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3matic.eth.getGasPrice();
     const tx = {
@@ -207,6 +203,7 @@ const getFaucetBusdMatic = async (Amount, reciver_address) => {
     console.log(obj);
     return obj;
 };
+
 const getFaucetUsdtMatic = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3matic.eth.getGasPrice();
     const tx = {
@@ -234,6 +231,7 @@ const getFaucetUsdtMatic = async (Amount, reciver_address) => {
     console.log(obj);
     return obj;
 };
+
 const getFaucetTestPayMatic = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3matic.eth.getGasPrice();
     const tx = {
@@ -262,7 +260,7 @@ const getFaucetTestPayMatic = async (Amount, reciver_address) => {
     return obj;
 };
 
-const getBalance = async () => {
+const getAFucetBalance = async () => {
     const t = await ContractInstance.usdtBsc.methods
         .balanceOf(testnetWallet.address)
         .call((error, result) => {
