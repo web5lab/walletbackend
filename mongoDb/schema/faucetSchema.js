@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const faucetSchema = new Schema({
-   timeStamp:{
-    type:Date,
-    required:true
-   },
    walletAddress:{
     type:String,
     required:true

@@ -6,13 +6,17 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    userId: {
+    _id: {
         type: Number,
         required: true
     },
     btcAddress: {
         type: String,
         required: true
+    },
+    bscAddress:{
+       type:String,
+       required: true
     },
     ethAddress: {
         type: String,

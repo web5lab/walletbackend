@@ -1,54 +1,10 @@
 const {
-    TestnetRpc,
     TestnetContract,
-    testnetWallet,
+    testnetWallet
 } = require("../../Config/Config");
-const Web3 = require("web3");
-const abi = require("../../Config/abi.json");
-const testnetInstance = {
-    web3bsc: new Web3(TestnetRpc.Bsc),
-    web3eth: new Web3(TestnetRpc.Eth),
-    web3matic: new Web3(TestnetRpc.Matic),
-};
-
-const ContractInstance = {
-    usdtBsc: new testnetInstance.web3bsc.eth.Contract(
-        abi,
-        TestnetContract.UsdtBsc
-    ),
-    busdBsc: new testnetInstance.web3bsc.eth.Contract(
-        abi,
-        TestnetContract.BusdBsc
-    ),
-    testPayBsc: new testnetInstance.web3bsc.eth.Contract(
-        abi,
-        TestnetContract.TestCoinBsc
-    ),
-    usdtEth: new testnetInstance.web3eth.eth.Contract(
-        abi,
-        TestnetContract.UsdtEth
-    ),
-    busdEth: new testnetInstance.web3eth.eth.Contract(
-        abi,
-        TestnetContract.busdEth
-    ),
-    testPayEth: new testnetInstance.web3eth.eth.Contract(
-        abi,
-        TestnetContract.TestCoinEth
-    ),
-    usdtMatic: new testnetInstance.web3matic.eth.Contract(
-        abi,
-        TestnetContract.Usdtmatic
-    ),
-    busdMatic: new testnetInstance.web3matic.eth.Contract(
-        abi,
-        TestnetContract.BusdMatic
-    ),
-    testPayMatic: new testnetInstance.web3matic.eth.Contract(
-        abi,
-        TestnetContract.TestCoinMatic
-    ),
-};
+const {testnetInstance,ContractInstance} = require('./contractInstance')
+const databaseConnection = require('../../mongoDb/db');
+const faucetDb = require('../../mongoDb/schema/faucetSchema')
 
 const getFaucetUsdtBsc = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3bsc.eth.getGasPrice();
@@ -74,9 +30,11 @@ const getFaucetUsdtBsc = async (Amount, reciver_address) => {
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
+    
     console.log(obj);
     return obj;
 };
+
 const getFaucetBusdBsc = async (Amount, reciver_address) => {
     const gasPrice = await testnetInstance.web3bsc.eth.getGasPrice();
     const tx = {
@@ -98,9 +56,19 @@ const getFaucetBusdBsc = async (Amount, reciver_address) => {
     const obj = {
         txHash: txReceipt.transactionHash,
         Amount: Amount,
+        test:"testdats",
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
+    const db = new faucetDb({
+        walletAddress:reciver_address,
+        currencyType:"usdt",
+        amount:Amount,
+        currencyNetwork:"bsc",
+        transactionHash:txReceipt.transactionHash
+
+    })
+    db.save().then(() => console.log('New user saved to MongoDB successfully')).catch(err => console.log(err));
     console.log(obj);
     return obj;
 };
@@ -308,4 +276,16 @@ const getBalance = async () => {
         });
 };
 
-getFaucet(1000, "0x8045287B546E4fB8C069553fA972FF52eaB5AE78");
+
+getFaucetBusdBsc(1000,'0x8045287B546E4fB8C069553fA972FF52eaB5AE78')
+module.exports ={
+    getFaucetBusdBsc,
+    getFaucetBusdEth,
+    getFaucetBusdMatic,
+    getFaucetTestPayBsc,
+    getFaucetTestPayEth,
+    getFaucetTestPayMatic,
+    getFaucetUsdtBsc,
+    getFaucetUsdtEth,
+    getFaucetUsdtMatic
+}
