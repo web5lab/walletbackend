@@ -1,6 +1,8 @@
 const express = require('express')
 const {Walletbalance} = require('./Services/testnet/walletBalance')
 const {getFaucetUsdtBsc} = require('./Services/testnet/faucetService')
+const {VerifyAdmin} = require('./middleware/adminAuth')
+const {VerifyServer} = require('./middleware/serverAuth')
 const bodyParser = require('body-parser');
 const databaseConnection = require('./mongoDb/db')
 
@@ -21,8 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // routes using here
-app.use('/testNet',testnetRoute);
-app.use('/admin',adminRoute);
+app.use('/testnet',testnetRoute);
+app.use('/admin/:secretKey',VerifyAdmin,adminRoute);
+app.use('/server/:secretKey',VerifyServer,)
 
 
 databaseConnection(() => {
@@ -31,8 +34,9 @@ databaseConnection(() => {
   })
 })
 
-app.get('/testfn/:UserAddress',async (req,res)=> {
+app.post('/testfn/:UserAddress',async (req,res)=> {
+  
   const ad = req.params.UserAddress;
-  const t =  Walletbalance(ad)
-  res.send(`the balance is ${t}`)
+  const t =  await Walletbalance(ad)
+  res.json(t)
 })

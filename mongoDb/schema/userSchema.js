@@ -30,39 +30,15 @@ const UserSchema = new Schema({
         type: Schema.Types.Decimal128,
         default:"0.0000"
     },
-    usdtBalanceOnBsc: {
+    usdtBalance: {
         type: Schema.Types.Decimal128,
         default:"0.0000"
     },
-    usdtBalanceOnEth: {
+    busdBalance: {
         type: Schema.Types.Decimal128,
         default:"0.0000"
     },
-    usdtBalanceOnMatic: {
-        type: Schema.Types.Decimal128,
-        default:"0.0000"
-    },
-    busdBalanceOnBsc: {
-        type: Schema.Types.Decimal128,
-        default:"0.0000"
-    },
-    busdBalanceOnEth: {
-        type: Schema.Types.Decimal128,
-        default:"0.0000"
-    },
-    busdBalanceOnMatic: {
-        type: Schema.Types.Decimal128,
-        default:"0.0000"
-    },
-    testPayBalnceOnBsc: {
-        type: Schema.Types.Decimal128,
-        default:"0.0000"
-    },
-    testPayBalnceOnEth: {
-        type: Schema.Types.Decimal128,
-        default:"0.0000"
-    },
-    testPayBalnceOnMatic: {
+    testPayBalance: {
         type: Schema.Types.Decimal128,
         default:"0.0000"
     }

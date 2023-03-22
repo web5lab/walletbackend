@@ -1,107 +1,115 @@
 const { ContractInstance } = require("./contractInstance");
 
 const getBalUsdtBsc = (userAddress) => {
-  ContractInstance.usdtBsc.methods
+  const t = ContractInstance.usdtBsc.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
+    return t;
 };
 
 const getBalBusdBsc = (userAddress) => {
-  ContractInstance.busdBsc.methods
+  const t = ContractInstance.busdBsc.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
+    return t;
 };
 
 const getBalTestPayBsc = (userAddress) => {
-  ContractInstance.testPayBsc.methods
+  const t = ContractInstance.testPayBsc.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
+    return t;
 };
 
 const getBalUsdtEth = (userAddress) => {
-  ContractInstance.usdtEth.methods
+  const t = ContractInstance.usdtEth.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
+    return t;
 };
 
 const getBalBusdEth = (userAddress) => {
-  ContractInstance.busdEth.methods
+  const t = ContractInstance.busdEth.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
+    return t;
 };
 
 const getBalTestPayEth = (userAddress) => {
-  ContractInstance.testPayEth.methods
+  const t = ContractInstance.testPayEth.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
+    return t;
 };
 
 const getBalUsdtMatic = (userAddress) => {
-  ContractInstance.usdtMatic.methods
+  const t = ContractInstance.usdtMatic.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
+    return t;
 };
 
 const getBalBusdMatic = (userAddress) => {
-  ContractInstance.busdMatic.methods
+ const t =  ContractInstance.busdMatic.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
+    return t;
 };
 
 const getBalTestPayMatic = (userAddress) => {
@@ -111,7 +119,7 @@ const getBalTestPayMatic = (userAddress) => {
       if (error) {
         console.log(error);
       } else {
-        const balance = result / 1e6; // USDT has 6 decimal place,
+        const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
     });
@@ -121,18 +129,18 @@ const getBalTestPayMatic = (userAddress) => {
 const Walletbalance = async (walletAddress) => {
     busdBsc = getBalBusdBsc(walletAddress);
     const  obj = {
-         BalBusdBsc : getBalBusdBsc(walletAddress),
-        //  BalBusdEth :  getBalBusdEth(walletAddress),
-         BalBusdMatic : getBalBusdMatic(walletAddress),
-         BalTestPayBsc : getBalTestPayBsc(walletAddress),
-        //  BalTestPayEth : getBalTestPayEth(walletAddress),
-         BalTestPayMatic : await getBalTestPayMatic(walletAddress),
-         BalUsdtBsc : getBalUsdtBsc(walletAddress),
-        //  BalUsdtEth :getBalUsdtEth(walletAddress),
-         BalUsdtMatic :getBalUsdtMatic(walletAddress),
+         BalBusdBsc :await getBalBusdBsc(walletAddress),
+         BalBusdEth : await getBalBusdEth(walletAddress),
+         BalBusdMatic :await getBalBusdMatic(walletAddress),
+         BalTestPayBsc :await getBalTestPayBsc(walletAddress),
+         BalTestPayEth :await getBalTestPayEth(walletAddress),
+         BalTestPayMatic :await getBalTestPayMatic(walletAddress),
+         BalUsdtBsc :await getBalUsdtBsc(walletAddress),
+         BalUsdtEth : await getBalUsdtEth(walletAddress),
+         BalUsdtMatic :await getBalUsdtMatic(walletAddress),
     }
-    console.log(obj)
-    return obj;
+    
+    return obj ;
 }
 
 module.exports = {

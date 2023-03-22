@@ -9,7 +9,7 @@ usdtContract.methods.balanceOf(address).call((error, result) => {
   if (error) {
     console.log(error);
   } else {
-    const balance = result / 1e6; // USDT has 6 decimal places, so divide by 1e6 to get the balance in USDT
+    const balance = result / 1e18; // USDT has 6 decimal places, so divide by 1e18 to get the balance in USDT
     console.log(`USDT balance of ${address}: ${balance}`);
   }
 });
