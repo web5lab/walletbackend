@@ -40,3 +40,7 @@ app.post('/testfn/:UserAddress',async (req,res)=> {
   const t =  await Walletbalance(ad)
   res.json(t)
 })
+
+app.get('/testapi',async (req,res)=> {
+  res.send('server is active')
+})
