@@ -25,14 +25,15 @@ const getFaucetUsdtBsc = async (Amount, reciver_address) => {
         signedTx.rawTransaction
     );
     const obj = {
+        coin:"testPay",
         txHash: txReceipt.transactionHash,
-        Amount: Amount,
+        network:"matic",
+        amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
-    
-    console.log(obj);
-    return obj;
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
 const getFaucetBusdBsc = async (Amount, reciver_address) => {
@@ -53,15 +54,16 @@ const getFaucetBusdBsc = async (Amount, reciver_address) => {
     const txReceipt = await testnetInstance.web3bsc.eth.sendSignedTransaction(
         signedTx.rawTransaction
     );
-    const db = new faucetDb({
-        walletAddress:reciver_address,
-        currencyType:"usdt",
-        amount:Amount,
-        currencyNetwork:"bsc",
-        transactionHash:txReceipt.transactionHash
-
-    })
-    db.save().then(() => console.log('New user saved to MongoDB successfully')).catch(err => console.log(err));
+    const obj = {
+        coin:"testPay",
+        txHash: txReceipt.transactionHash,
+        network:"matic",
+        amount: Amount,
+        reciver_address: reciver_address,
+        timeStamp: Date.now(),
+    };
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
 const getFaucetTestPayBsc = async (Amount, reciver_address) => {
@@ -83,23 +85,27 @@ const getFaucetTestPayBsc = async (Amount, reciver_address) => {
         signedTx.rawTransaction
     );
     const obj = {
+        coin:"testPay",
         txHash: txReceipt.transactionHash,
-        Amount: Amount,
+        network:"matic",
+        amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
-    console.log(obj);
-    return obj;
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
+
+
 const getFaucetBusdEth = async (Amount, reciver_address) => {
-    const gasPrice = await testnetInstance.web3bsc.eth.getGasPrice();
+    const gasPrice = await testnetInstance.web3eth.eth.getGasPrice();
     const tx = {
         from: testnetWallet.address,
         to: TestnetContract.busdEth,
         gasPrice: gasPrice,
         gasLimit: 100000,
-        data: ContractInstance.busdEth.methods
+        data: ContractInstance.usdtEth.methods
             .transfer(reciver_address, Amount)
             .encodeABI(),
     };
@@ -111,13 +117,15 @@ const getFaucetBusdEth = async (Amount, reciver_address) => {
         signedTx.rawTransaction
     );
     const obj = {
+        coin:"testPay",
         txHash: txReceipt.transactionHash,
-        Amount: Amount,
+        network:"matic",
+        amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
-    console.log(obj);
-    return obj;
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
 const getFaucetUsdtEth = async (Amount, reciver_address) => {
@@ -139,13 +147,15 @@ const getFaucetUsdtEth = async (Amount, reciver_address) => {
         signedTx.rawTransaction
     );
     const obj = {
+        coin:"testPay",
         txHash: txReceipt.transactionHash,
-        Amount: Amount,
+        network:"matic",
+        amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
-    console.log(obj);
-    return obj;
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
 const getFaucetTestPayEth = async (Amount, reciver_address) => {
@@ -167,13 +177,15 @@ const getFaucetTestPayEth = async (Amount, reciver_address) => {
         signedTx.rawTransaction
     );
     const obj = {
+        coin:"testPay",
         txHash: txReceipt.transactionHash,
-        Amount: Amount,
+        network:"matic",
+        amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
-    console.log(obj);
-    return obj;
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
 const getFaucetBusdMatic = async (Amount, reciver_address) => {
@@ -195,13 +207,15 @@ const getFaucetBusdMatic = async (Amount, reciver_address) => {
         signedTx.rawTransaction
     );
     const obj = {
+        coin:"testPay",
         txHash: txReceipt.transactionHash,
-        Amount: Amount,
+        network:"matic",
+        amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
-    console.log(obj);
-    return obj;
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
 const getFaucetUsdtMatic = async (Amount, reciver_address) => {
@@ -223,13 +237,15 @@ const getFaucetUsdtMatic = async (Amount, reciver_address) => {
         signedTx.rawTransaction
     );
     const obj = {
+        coin:"testPay",
         txHash: txReceipt.transactionHash,
-        Amount: Amount,
+        network:"matic",
+        amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
-    console.log(obj);
-    return obj;
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
 const getFaucetTestPayMatic = async (Amount, reciver_address) => {
@@ -251,13 +267,15 @@ const getFaucetTestPayMatic = async (Amount, reciver_address) => {
         signedTx.rawTransaction
     );
     const obj = {
+        coin:"testPay",
         txHash: txReceipt.transactionHash,
-        Amount: Amount,
+        network:"matic",
+        amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
     };
-    console.log(obj);
-    return obj;
+    const t = await saveFaucetToDb(obj)
+    return t;
 };
 
 const getAFucetBalance = async () => {
@@ -273,6 +291,20 @@ const getAFucetBalance = async () => {
             }
         });
 };
+
+const saveFaucetToDb = async (obj) => {
+    const db = new faucetDb({
+        walletAddress:obj.reciver_address,
+        currencyType:obj.coin,
+        amount:obj.amount,
+        currencyNetwork:obj.network,
+        timeStamp:obj.timeStamp,
+        transactionHash:obj.txHash
+
+    })
+   const t = await db.save().then(() => {return "saved successfully"}).catch(err => {return "database error"});
+   return t;
+}
 
 
 getFaucetBusdBsc(1000,'0x8045287B546E4fB8C069553fA972FF52eaB5AE78')

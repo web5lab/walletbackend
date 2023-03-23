@@ -24,7 +24,18 @@ const registerNewUser = async (req,res) => {
   })
   chainData.save()
   user.save()
-  res.send('succesfully saved')
+  const returnResponse = {
+    _id:userId,
+    btcAddress:t.BtcAdrress,
+    bscAddress:t.EthAdress,
+    ethAddress:t.EthAdress,
+    maticAddress:t.EthAdress,
+    btcBalance:0,
+    usdtBalance:0,
+    maticAddress:0,
+    busdBalance:0,
+  }
+  res.json(returnResponse);
 }
 
 const getUser = async (userId) => {
