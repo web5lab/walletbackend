@@ -5,7 +5,7 @@ const databaseConnection = function (callback) {
    mongoose
       .connect(mongodbUri, {
          useNewUrlParser: true,
-         useUnifiedTopology: true,
+         useUnifiedTopology: false,
       })
       .then((res) => {
          console.log('database connected');
