@@ -127,7 +127,6 @@ const getBalTestPayMatic = (userAddress) => {
 };
 
 const Walletbalance = async (walletAddress) => {
-    busdBsc = getBalBusdBsc(walletAddress);
     const  obj = {
          BalBusdBsc :await getBalBusdBsc(walletAddress),
          BalBusdEth : await getBalBusdEth(walletAddress),

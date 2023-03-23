@@ -27,13 +27,13 @@ const registerNewUser = async (req,res) => {
   res.send('succesfully saved')
 }
 
-const findUser = async (userId) => {
+const getUser = async (userId) => {
    const user = await userSchema.findById(userId);
    return user;
 }
 
 const checkTopUp = async (userId) => {
-  const user = await findUser(userId);
+  const user = await getUser(userId);
   console.log(user.ethAddress);
   const onChainBalance = await Walletbalance(user.ethAddress);
   console.log(onChainBalance);
