@@ -1,5 +1,5 @@
 const ethers = require("ethers")
-const { MasterPhrase } = require("../Config/Config")
+const { MasterPhrase } = require("../config/Config")
 const bitcoinWalletNode = require('bitcoinjs-lib')
 const walletNode = ethers.HDNodeWallet.fromPhrase(MasterPhrase)
 const seed = bitcoinWalletNode.crypto.sha256(MasterPhrase);

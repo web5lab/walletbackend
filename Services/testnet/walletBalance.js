@@ -98,6 +98,13 @@ const getBalUsdtMatic = (userAddress) => {
     return t;
 };
 
+const testFn = () => {
+  const t = 10000/1e2
+  console.log(t);
+}
+
+testFn();
+
 const getBalBusdMatic = (userAddress) => {
  const t =  ContractInstance.busdMatic.methods
     .balanceOf(userAddress)

@@ -1,19 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const {registerNewUser} = require('../Services/testnet/userService')
+const {VerifyServer} = require('../middleware/serverAuth')
+const {VerifyAdmin} = require('../middleware/adminAuth')
+const userController = require('../Services/testnet/userService')
 const {faucetController} = require('../controller/testnet/faucetController')
+const {checkBalance,getMasterData} = require('../controller/testnet/adminController');
 
 // API => GET
-router.get('/balance/:address');
-router.get('/checkTopup/:UserId/:currency/:network');
-router.get('/getMultipleWallet/:no')
-router.get('/walletAddress/:userId');
-router.get('/walletbalance/:userId',);
-router.get('/masterInfo/:secretKey/:userId',);
-router.get('/userInfo/:userId');
+router.get('/balance',VerifyServer);
+router.get('/checkTopup',);
+router.get('/getMultipleWallet',VerifyServer,)
+router.get('/walletAddress/',VerifyServer);
+router.get('/walletbalance',VerifyServer,checkBalance);
+router.get('/masterInfo',VerifyAdmin,getMasterData);
+router.get('/userInfo/',VerifyServer,userController.getUser);
 
 //API => POST
 router.post('/faucet',faucetController);
-router.post('/addUser/:userId',registerNewUser)
+router.post('/addUser/:userId',userController.registerNewUser)
 
 module.exports = router;

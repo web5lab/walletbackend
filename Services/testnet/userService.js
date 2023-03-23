@@ -38,19 +38,18 @@ const registerNewUser = async (req,res) => {
   res.json(returnResponse);
 }
 
-const getUser = async (userId) => {
+
+
+const getUser = async (req,res) => {
+  const userId = req.body.userId
    const user = await userSchema.findById(userId);
-   return user;
+   res.json(user);
 }
 
-const checkTopUp = async (userId) => {
-  const user = await getUser(userId);
-  console.log(user.ethAddress);
-  const onChainBalance = await Walletbalance(user.ethAddress);
-  console.log(onChainBalance);
-}
-checkTopUp(1)
+
+
 
 module.exports = {
-     registerNewUser
+     registerNewUser,
+     getUser
 }

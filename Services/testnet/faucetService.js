@@ -1,7 +1,7 @@
 const {
     TestnetContract,
     testnetWallet
-} = require("../../Config/Config");
+} = require("../../config/Config");
 const {testnetInstance,ContractInstance} = require('./contractInstance')
 const databaseConnection = require('../../mongoDb/db');
 const faucetDb = require('../../mongoDb/schema/faucetSchema')

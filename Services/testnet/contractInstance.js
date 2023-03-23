@@ -1,7 +1,7 @@
-const {TestnetRpc} = require('../../Config/Config')
-const {TestnetContract} = require('../../Config/Config')
+const {TestnetRpc} = require('../../config/Config')
+const {TestnetContract} = require('../../config/Config')
 const Web3 = require("web3");
-const abi = require("../../Config/abi.json");
+const abi = require("../../config/abi.json");
 
 
 const testnetInstance = {

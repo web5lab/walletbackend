@@ -1,4 +1,4 @@
-const { mn } = require('../Config/Config');
+const { mn } = require('../config/Config');
 const walletList = require('../wallets/wallets.json')
 const Web3 = require('web3')
 const MonitorWallet = () => {
