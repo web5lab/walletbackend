@@ -1,3 +1,4 @@
+const { catchAsync } = require("../../helper/helper");
 const {
   getFaucetBusdBsc,
   getFaucetBusdEth,
@@ -10,7 +11,7 @@ const {
   getFaucetUsdtMatic,
 } = require("../../Services/testnet/faucetService");
 
-const faucetController = async (req, res) => {
+const faucetController = catchAsync(async (req, res) => {
   const { network, coin, address, amount } = req.body;
   if (network == "eth") {
     if (coin == "Busd") {
@@ -46,7 +47,7 @@ const faucetController = async (req, res) => {
     res.send("invalid network");
   }
   
-};
+});
 
 module.exports = {
   faucetController,

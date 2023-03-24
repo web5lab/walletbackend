@@ -6,7 +6,9 @@ const catchAsync = function (fn) {
  
     return (req, res, next) => {
        fn(req, res, next).catch((err) => {
-          console.log(err);
+         Error(err);
+         res.json("error occured in server")
+         
        });
     };
  };
