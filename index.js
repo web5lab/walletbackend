@@ -5,25 +5,18 @@ const {VerifyAdmin} = require('./middleware/adminAuth')
 const {VerifyServer} = require('./middleware/serverAuth')
 const bodyParser = require('body-parser');
 const databaseConnection = require('./mongoDb/db')
-const fs = require('fs');
-const path = require('path');
+
 
 const app = express()
 const Port = 3001
 const router = express.Router()
 
-const errorLogStream = fs.createWriteStream(path.join(__dirname, 'error.log'), { flags: 'a' });
 
-// Middleware function to log errors
-function logErrors(err, req, res, next) {
-  console.error(err.stack);
-  errorLogStream.write(`${new Date().toISOString()} ${err.stack}\n`);
-  next(err);
-}
 
 // routes import here
 const testnetRoute = require('./routes/testnetRoutes');
 const adminRoute = require('./routes/adminRoutes');
+const logErrors = require('./helper/errorLogger')
 
 app.use('/', router);
 app.use(bodyParser.json());
@@ -61,5 +54,6 @@ app.get('/testapi',async (req,res)=> {
 })
 
 app.get('/error', function(req, res) {
+  console.error("test err")
   throw new Error('Example error');
 });

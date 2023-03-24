@@ -1,3 +1,5 @@
+const logErrors = require("./errorLogger");
+
 const catchAsync = function (fn) {
     /**
      * @fn function which is wrapperd by the catchAsync function to use the DRY method.
@@ -6,7 +8,7 @@ const catchAsync = function (fn) {
  
     return (req, res, next) => {
        fn(req, res, next).catch((err) => {
-         Error(err);
+         logErrors(err)
          res.json("error occured in server")
          
        });
