@@ -17,6 +17,7 @@ const router = express.Router()
 const testnetRoute = require('./routes/testnetRoutes');
 const adminRoute = require('./routes/adminRoutes');
 const logErrors = require('./helper/errorLogger')
+const { level } = require('winston')
 
 app.use('/', router);
 app.use(bodyParser.json());
@@ -54,6 +55,8 @@ app.get('/testapi',async (req,res)=> {
 })
 
 app.get('/error', function(req, res) {
-  console.error("test err")
-  throw new Error('Example error');
+  for (let index = 0; index < 100000000; index++) {
+    logErrors(`test${Date()}`)
+  }
+res.send("updated")
 });

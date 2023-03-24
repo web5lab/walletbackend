@@ -6,6 +6,7 @@ const logger = winston.createLogger({
         filename: 'error.log', // filename for the error log file
         format: winston.format.combine(
           winston.format.timestamp(), // add timestamp to each log entry
+          winston.format.simple("db"),
           winston.format.json() // log entries in JSON format
         ),
       }),
@@ -14,7 +15,8 @@ const logger = winston.createLogger({
 
   // Middleware function to log errors
 function logErrors(err, req, res, next) {
-    logger.error(err.stack); // log the error stack trace
+   
+    logger.error(err); // log the error stack trace
    
   }
 
