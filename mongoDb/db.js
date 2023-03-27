@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongodbUri = 'mongodb+srv://shiva:77395644@cluster0.3glqe9i.mongodb.net/test';
+const mongodbUri = 'mongodb+srv://shiva:77395644@cluster0.3glqe9i.mongodb.net/metaversity';
 
 const databaseConnection = function (callback) {
    mongoose

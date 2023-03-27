@@ -57,7 +57,7 @@ const getFaucetBusdBsc = async (Amount, reciver_address) => {
     const obj = {
         coin:"testPay",
         txHash: txReceipt.transactionHash,
-        network:"matic",
+        network:"Bsc",
         amount: Amount,
         reciver_address: reciver_address,
         timeStamp: Date.now(),
@@ -307,7 +307,6 @@ const saveFaucetToDb = async (obj) => {
 }
 
 
-getFaucetBusdBsc(1000,'0x8045287B546E4fB8C069553fA972FF52eaB5AE78')
 module.exports ={
     getFaucetBusdBsc,
     getFaucetBusdEth,

@@ -7,15 +7,16 @@ const userController = require('../controller/testnet/userController')
 const adminController = require('../controller/testnet/adminController');
 
 // API => GET
-router.get('/balance',VerifyServer);
-router.get('/checkTopup',userController.checkTopup);
+router.get('/balance',VerifyServer);// body params required => user
+router.get('/checkTopup',userController.checkTopup);// body params required => userId
 router.get('/getMultipleWallet',VerifyServer,)
 router.get('/walletAddress/',VerifyServer);
 router.get('/masterInfo',VerifyAdmin,adminController.getMasterData);
-router.get('/userInfo/',VerifyServer,userController.getUser);
+router.get('/userInfo/',userController.getUser);
 
 //API => POST
 router.post('/faucet',faucetController);
-router.post('/addUser/:userId',VerifyServer,userController.registerNewUser)
+router.post('/validateUser',)
+router.post('/addUser/',userController.registerNewUser)// body Par
 
 module.exports = router;

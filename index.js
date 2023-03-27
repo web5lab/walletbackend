@@ -16,9 +16,7 @@ const router = express.Router()
 // routes import here
 const testnetRoute = require('./routes/testnetRoutes');
 const adminRoute = require('./routes/adminRoutes');
-const logErrors = require('./helper/errorLogger')
-const { level } = require('winston')
-
+const logErrors = require('./helper/errorLogger');
 app.use('/', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

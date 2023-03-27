@@ -4,13 +4,19 @@ const { getUserData, addUser } = require("../../Services/testnet/userService");
 const onChainData = require("../../mongoDb/schema/onChainData");
 const { catchAsync } = require("../../helper/helper");
 
-const checkTopup = catchAsync(async (req, res) => {
+const checkTopup = async(req, res) => {
+  try {
+    
+ 
   const userId = req.body.userId;
   const userPreviousData = await onChainData.findById(userId);
   const latestbal = await Walletbalance(userPreviousData.bscAddress);
-  const t = await compareBalance(userPreviousData, latestbal);
+  const t = await compareBalance(userPreviousData, latestbal,userId);
   res.send(t);
-});
+} catch (error) {
+    console.log(error)
+}
+};
 
 const getUser = catchAsync(async (req, res) => {
   const userId = req.body.userId;

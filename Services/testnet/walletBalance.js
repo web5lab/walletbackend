@@ -1,7 +1,7 @@
 const { ContractInstance } = require("./contractInstance");
 
-const getBalUsdtBsc = (userAddress) => {
-  const t = ContractInstance.usdtBsc.methods
+const getBalUsdtBsc =  (userAddress) => {
+  const t =  ContractInstance.usdtBsc.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
@@ -14,8 +14,8 @@ const getBalUsdtBsc = (userAddress) => {
     return t;
 };
 
-const getBalBusdBsc = (userAddress) => {
-  const t = ContractInstance.busdBsc.methods
+const getBalBusdBsc = async (userAddress) => {
+  const t =  ContractInstance.busdBsc.methods
     .balanceOf(userAddress)
     .call((error, result) => {
       if (error) {
@@ -134,13 +134,13 @@ const getBalTestPayMatic = (userAddress) => {
 };
 
 const Walletbalance = async (walletAddress) => {
-    const  obj = {
-         BalBusdBsc :await getBalBusdBsc(walletAddress),
+    const  obj =  {
+         BalBusdBsc : await  getBalBusdBsc(walletAddress),
          BalBusdEth : await getBalBusdEth(walletAddress),
-         BalBusdMatic :await getBalBusdMatic(walletAddress),
+         BalBusdMatic :await  getBalBusdMatic(walletAddress),
          BalTestPayBsc :await getBalTestPayBsc(walletAddress),
          BalTestPayEth :await getBalTestPayEth(walletAddress),
-         BalTestPayMatic :await getBalTestPayMatic(walletAddress),
+         BalTestPayMatic :await  getBalTestPayMatic(walletAddress),
          BalUsdtBsc :await getBalUsdtBsc(walletAddress),
          BalUsdtEth : await getBalUsdtEth(walletAddress),
          BalUsdtMatic :await getBalUsdtMatic(walletAddress),
@@ -148,6 +148,7 @@ const Walletbalance = async (walletAddress) => {
     
     return obj ;
 }
+
 
 module.exports = {
     getBalBusdBsc,

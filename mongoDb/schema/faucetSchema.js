@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const desiredTime = new Date();
+  desiredTime.setHours(10);
+  desiredTime.setMinutes(30);
+  desiredTime.setSeconds(0);
+  desiredTime.setMilliseconds(0);
+
+
 const faucetSchema = new Schema({
    walletAddress:{
     type:String,
@@ -23,7 +30,7 @@ const faucetSchema = new Schema({
     required:true
    },
    timeStamp:{
-      type:Date,
+      type:Number,
       default:Date.now()
    }
 });
