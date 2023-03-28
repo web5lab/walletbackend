@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const databaseConnection = require('./mongoDb/db')
 
 
+
 const app = express()
 const Port = 3001
 const router = express.Router()
@@ -17,6 +18,7 @@ const router = express.Router()
 const testnetRoute = require('./routes/testnetRoutes');
 const adminRoute = require('./routes/adminRoutes');
 const logErrors = require('./helper/errorLogger');
+const { fn3 } = require('./Services/testnet/coinService')
 app.use('/', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -41,10 +43,8 @@ databaseConnection(() => {
   })
 })
 
-app.post('/testfn/:UserAddress',async (req,res)=> {
-  
-  const ad = req.params.UserAddress;
-  const t =  await Walletbalance(ad)
+app.post('/testfn',async (req,res)=> {
+  const t =  await fn3()
   res.json(t)
 })
 
