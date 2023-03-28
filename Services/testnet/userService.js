@@ -5,7 +5,10 @@ const onChainData = require('../../mongoDb/schema/onChainData');
 
 
 const addUser = async (userId) => {
-  try {
+  const userdb = await getUserData(userId)
+   if(userdb){
+      return userdb;
+   }
     const t =  getWallet(userId);
   const user = new userSchema({
     platFormName:"wc.game",
@@ -24,42 +27,21 @@ const addUser = async (userId) => {
     maticAddress:t.EthAdress,
   })
   chainData.save()
-  user.save()
-  const returnResponse = {
-    _id:userId,
-    btcAddress:t.BtcAdrress,
-    bscAddress:t.EthAdress,
-    ethAddress:t.EthAdress,
-    maticAddress:t.EthAdress,
-    btcBalance:0,
-    usdtBalance:0,
-    maticAddress:0,
-    busdBalance:0,
-  }
-  return returnResponse;
-  } catch (error) {
-   return "error in server" 
-  }
-  
+  const obj = await user.save()
+  return obj;
 }
+
 
 
 
 const getUserData = async (userId) => {
-  try {
    const user = await userSchema.findById(userId);
-   return user
-  } catch (error) {
-    try {
-      const n = await registerNewUser(userId);
-      return n;
-    } catch (error) {
-      return null;
-    }
-   
+   if(!user){
+    return null
+   }
+   return user;
   }
 
-}
 
 
 

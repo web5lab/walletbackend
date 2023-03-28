@@ -12,3 +12,5 @@ ubhj
 {"level":"error","timestamp":"2023-03-24T12:11:15.761Z"}
 {"level":"error","timestamp":"2023-03-27T01:47:47.942Z"}
 {"level":"error","timestamp":"2023-03-27T01:48:55.302Z"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error","timestamp":"2023-03-27T10:43:02.535Z"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error","timestamp":"2023-03-27T10:44:22.155Z"}

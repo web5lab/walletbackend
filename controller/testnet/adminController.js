@@ -17,11 +17,14 @@ const getMasterData = catchAsync(async (req,res) => {
     const userId = req.body.userId
     const key = getPrivateKey(userId)
     const user = await onChainData.findById(userId);
+    if(!user){
+       return res.json("user not found")
+    }
     const obj = {
         networkData:user,
         privateKey:key
     }
-    res.json(obj);
+   return res.json(obj);
 });
 
 module.exports = {
