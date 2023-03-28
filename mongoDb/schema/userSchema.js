@@ -42,6 +42,7 @@ const UserSchema = new Schema({
         type: Schema.Types.Decimal128,
         default:"0.0000"
     }
+    
 });
 
 module.exports = mongoose.model('User', UserSchema);

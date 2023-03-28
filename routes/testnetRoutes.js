@@ -17,6 +17,6 @@ router.get('/userInfo/',userController.getUser);
 //API => POST
 router.post('/faucet',faucetController);
 router.post('/validateUser',)
-router.post('/addUser/',userController.registerNewUser)// body Par
+router.post('/addUser',userController.registerNewUser)// body Par
 
 module.exports = router;
