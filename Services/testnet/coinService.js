@@ -13,14 +13,14 @@ const fn2 = async () => {
     console.log(t)
 }
 
-const  fn3 = async () => {
+
+
+const getAllCoins = async () => {
     const na = await currencyModel.find();
-    return na;
-    
+    return na;   
 }
 
 
-
 module.exports ={
-    fn3
+    getAllCoins
 }

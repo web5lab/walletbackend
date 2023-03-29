@@ -8,6 +8,7 @@ const adminController = require('../controller/testnet/adminController');
 
 // API => GET
 router.get('/balance',VerifyServer);// body params required => user
+router.get('/getcoins',userController.getCoins);
 router.get('/checkTopup',userController.checkTopup);// body params required => userId
 router.get('/getMultipleWallet',VerifyServer,)
 router.get('/walletAddress/',VerifyServer);
