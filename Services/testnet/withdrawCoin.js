@@ -1,5 +1,5 @@
 const {ContractInstance} = require('./contractInstance');
-const {testnetWallet} = require('../../config/Config')
+const {testnetWallet} = require('../../Config/Config')
 const withdrawBusdeth = async() =>{
    
 }
