@@ -5,6 +5,7 @@ const {VerifyAdmin} = require('./middleware/adminAuth')
 const {VerifyServer} = require('./middleware/serverAuth')
 const bodyParser = require('body-parser');
 const databaseConnection = require('./mongoDb/db')
+const { fn3 } = require('./Services/testnet/coinService')
 const cors = require('cors');
 
 
@@ -18,7 +19,7 @@ const router = express.Router()
 const testnetRoute = require('./routes/testnetRoutes');
 const adminRoute = require('./routes/adminRoutes');
 const logErrors = require('./helper/errorLogger');
-const { fn3 } = require('./Services/testnet/coinService')
+
 app.use('/', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

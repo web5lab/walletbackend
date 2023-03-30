@@ -7,9 +7,7 @@ const { address } = require('bitcoinjs-lib');
 
 const addUser = async (userId) => {
   const userdb = await getUserData(userId)
-   if(userdb){
-      return "user already registerd";
-   }
+   
     const t =  getWallet(userId);
   const user = new userSchema({
     platFormName:"wc.game",
