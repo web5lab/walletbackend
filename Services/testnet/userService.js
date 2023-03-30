@@ -122,33 +122,38 @@ const getAddress = async(userId,currency)=>{
 
 const getUserData = async (userId) => {
    const user = await userSchema.findById(userId);
+
+   console.log(user);
+
+   
    if(!user){
     return "user not found"
    }
-   const obj = {
-    btc:{
+   
+   const userAr = [
+    {
       icon:"https://bc.game/coin/BTC.black.png",
       symbol:"Btc",
       balnance:user.btcBalance,
     },
-    usdt:{
+    {
       icon:"https://bc.game/coin/USDT.black.png",
       symbol:"Usdt",
       balnance:user.usdtBalance,
     },
-    busd:{
+    {
       icon:"https://bc.game/coin/BUSD.black.png",
       symbol:"Busd",
       balnance:user.busdBalance,
     },
-    testPay:{
+    {
       icon:"https://bc.game/coin/PEOPLE.black.png",
       symbol:"testPay",
       balnance:user.testPayBalance,
     }
-   }
+  ]
    
-   return obj;
+   return userAr;
   }
 
 
