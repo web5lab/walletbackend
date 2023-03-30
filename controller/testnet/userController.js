@@ -36,7 +36,7 @@ const checkCoinTopup = async(req,res) => {
 }
 
 const getUser = catchAsync(async (req, res) => {
-  const userId = req.body.userId;
+  const userId = req.query.userId;
   const n = await getUserData(userId);
   res.json(n);
 });
