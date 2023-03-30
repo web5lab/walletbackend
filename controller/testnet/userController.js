@@ -1,6 +1,6 @@
 const wallet = require("../../Services/testnet/walletBalance");
 const { compareBalance } = require("../../Services/testnet/topupService");
-const { getUserData, addUser } = require("../../Services/testnet/userService");
+const { getUserData, addUser,getAddress } = require("../../Services/testnet/userService");
 const {getAllCoins} = require('../../Services/testnet/coinService')
 const onChainData = require("../../mongoDb/schema/onChainData");
 const { catchAsync, httpStatusCodes } = require("../../helper/helper");
@@ -20,16 +20,16 @@ const checkTopup = async(req, res) => {
 const checkCoinTopup = async(req,res) => {
   const userId = req.body.userId;
   const currency = req.body.currency;
-  if(currency == "btc"){
+  if(currency == "Btc"){
      return res.json("currently this service is unavilabel")
   }
-  if(currency == "usdt"){
+  if(currency == "Usdt"){
 
   }
-  if(currency == "busd"){
+  if(currency == "Busd"){
 
   }
-  if(currency == "testPay"){
+  if(currency == "TestPay"){
 
   }
   return res.json("coin not supported")
@@ -47,6 +47,13 @@ const registerNewUser = catchAsync(async (req, res) => {
   res.status(httpStatusCodes.CREATED).json(n);
 });
 
+const getUserAdress = catchAsync(async (req, res) => {
+  const userId = req.body.userId;
+  const currency = req.body.userId;
+  const n = await getAddress(userId);
+  res.status(httpStatusCodes.OK).json(n);
+});
+
 const getCoins = catchAsync(async (req,res) => {
    const obj = await getAllCoins();
    res.status(httpStatusCodes.OK).json(obj)
@@ -55,6 +62,7 @@ const getCoins = catchAsync(async (req,res) => {
 module.exports = {
   checkTopup,
   getCoins,
+  getUserAdress,
   getUser,
   registerNewUser,
 };

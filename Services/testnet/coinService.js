@@ -17,6 +17,9 @@ const fn2 = async () => {
 
 const getAllCoins = async () => {
     const na = await currencyModel.find();
+    const obj = {
+        
+    }
     return na;   
 }
 

@@ -1,0 +1,6 @@
+======> api list  <======
+=> for admin use only
+http://localhost:30001/privatekey/  => type get
+http://localhost:30001//withdrawFund/  ==> type post
+
+=> for server use only
