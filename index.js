@@ -5,7 +5,7 @@ const {VerifyAdmin} = require('./middleware/adminAuth')
 const {VerifyServer} = require('./middleware/serverAuth')
 const bodyParser = require('body-parser');
 const databaseConnection = require('./mongoDb/db')
-
+const cors = require('cros');
 
 
 const app = express()
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Add the error log middleware to the app
 app.use(logErrors);
-
+app.use(cors('*'))
 
 
 
