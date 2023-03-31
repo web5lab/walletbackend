@@ -5,9 +5,9 @@ const {getAllCoins} = require('../../Services/testnet/coinService')
 const onChainData = require("../../mongoDb/schema/onChainData");
 const { catchAsync, httpStatusCodes } = require("../../helper/helper");
 
-const checkTopup = async(req, res) => {
+const checkTopup = async(req, res, userid) => {
   try {
-  const userId = req.body.userId;
+  const userId = req.body.userId || userid;
   const userPreviousData = await onChainData.findById(userId);
   const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
   const t = await compareBalance(userPreviousData, latestbal,userId);

@@ -285,7 +285,7 @@ const getAFucetBalance = async () => {
             if (error) {
                 console.log(error);
             } else {
-                const balance = result / 1e18; // USDT has 6 decimal places, so divide by 1e18 to get the balance in USDT
+                const balance = result / 10**18; // USDT has 8 decimal places, so divide by 10**18 to get the balance in USDT
                 const obj = `USDT balance of ${testnetWallet.address}: ${balance}`;
                 console.log(obj);
             }

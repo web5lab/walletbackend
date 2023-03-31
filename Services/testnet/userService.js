@@ -30,7 +30,7 @@ const addUser = async (userId) => {
 const getuserDepositeAdressBtc = async (userId) => {
   const user = await userSchema.findById(userId);
   if (!user) {
-    return "user not found";
+    return null;
   }
   const data =  [
       {
@@ -44,7 +44,7 @@ const getuserDepositeAdressBtc = async (userId) => {
 const getuserDepositeAdressUsdt = async (userId) => {
   const user = await userSchema.findById(userId);
   if (!user) {
-    return "user not found";
+    return null;
   }
   const data =  [
       {
@@ -56,7 +56,7 @@ const getuserDepositeAdressUsdt = async (userId) => {
         address: user.ethAddress,
       },
       {
-        network: "matci",
+        network: "matic",
         address: user.ethAddress,
       },
     ]
@@ -66,7 +66,7 @@ const getuserDepositeAdressUsdt = async (userId) => {
 const getuserDepositeAdressBusd = async (userId) => {
   const user = await userSchema.findById(userId);
   if (!user) {
-    return "user not found";
+    return null;
   }
   const data =  [
       {
@@ -78,7 +78,7 @@ const getuserDepositeAdressBusd = async (userId) => {
         address: user.ethAddress,
       },
       {
-        network: "matci",
+        network: "matic",
         address: user.ethAddress,
       },
     ]
@@ -88,7 +88,7 @@ const getuserDepositeAdressBusd = async (userId) => {
 const getuserDepositeAdressTestPay = async (userId) => {
   const user = await userSchema.findById(userId);
   if (!user) {
-    return "user not found";
+    return null;
   }
   const data = 
     [
@@ -101,7 +101,7 @@ const getuserDepositeAdressTestPay = async (userId) => {
         address: user.ethAddress,
       },
       {
-        network: "matci",
+        network: "matic",
         address: user.ethAddress,
       },
     ]

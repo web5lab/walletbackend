@@ -14,8 +14,8 @@ const compareBalance = async (previousBal, latestBal,userId) => {
       usdtEth: latestBal.BalUsdtEth - previousBal.testPayBalnceOnEth,
       usdtMatic: latestBal.BalUsdtMatic - previousBal.testPayBalnceOnMatic,
     };
-    console.log(obj)
-    if (obj.busdBsc != 0 ||obj.busdEth != 0||obj.busdMatic != 0||obj.usdtBsc != 0||obj.usdtEth != 0||obj.usdtMatic != 0 ||obj.testPayBsc != 0||obj.testPayEth != 0||obj.testPayMatic != 0) {
+    console.log(obj,"comapre balance")
+    if (obj.busdBsc != 0) {
         await onChainData.updateMany({_id:userId},{ $inc: {busdBalanceOnBsc:obj.busdBsc } });
         await userSchema.updateOne({_id:userId},{$inc:{busdBalance:obj.busdBsc}});
     }  
