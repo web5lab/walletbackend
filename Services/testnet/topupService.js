@@ -7,12 +7,12 @@ const compareBalance = async (previousBal, latestBal,userId) => {
       busdBsc: latestBal.BalBusdBsc - previousBal.busdBalanceOnBsc,
       busdEth: latestBal.BalBusdEth - previousBal.busdBalanceOnEth,
       busdMatic: latestBal.BalBusdMatic - previousBal.busdBalanceOnMatic,
-      testPayBsc: latestBal.BalTestPayBsc - previousBal.usdtBalanceOnBsc,
-      testPayEth: latestBal.BalTestPayEth - previousBal.usdtBalanceOnEth,
-      testPayMatic: latestBal.BalTestPayMatic - previousBal.usdtBalanceOnMatic,
-      usdtBsc: latestBal.BalUsdtBsc - previousBal.testPayBalnceOnBsc,
-      usdtEth: latestBal.BalUsdtEth - previousBal.testPayBalnceOnEth,
-      usdtMatic: latestBal.BalUsdtMatic - previousBal.testPayBalnceOnMatic,
+      testPayBsc: latestBal.BalTestPayBsc - previousBal.testPayBalnceOnBsc,
+      testPayEth: latestBal.BalTestPayEth - previousBal.testPayBalnceOnEth,
+      testPayMatic: latestBal.BalTestPayMatic - previousBal.testPayBalnceOnMatic,
+      usdtBsc: latestBal.BalUsdtBsc -  previousBal.usdtBalanceOnBsc,
+      usdtEth: latestBal.BalUsdtEth -  previousBal.usdtBalanceOnEth,
+      usdtMatic: latestBal.BalUsdtMatic -  previousBal.usdtBalanceOnMatic,
     };
     console.log(obj,"comapre balance")
     if (obj.busdBsc != 0) {
