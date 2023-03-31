@@ -41,6 +41,12 @@ const getUser = catchAsync(async (req, res) => {
   res.json(n);
 });
 
+const updateBal = catchAsync(async(req,res)=>{
+  const userId = req.body.userId;
+  const currency = req.body.currency;
+  const amount = req.body.amount;
+})
+
 const registerNewUser = catchAsync(async (req, res) => {
   const userId = req.body.userId;
   const n = await addUser(userId);
@@ -48,9 +54,9 @@ const registerNewUser = catchAsync(async (req, res) => {
 });
 
 const getUserAdress = catchAsync(async (req, res) => {
-  const userId = req.body.userId;
-  const currency = req.body.userId;
-  const n = await getAddress(userId);
+  const userId = req.query.userId;
+  const currency = req.query.currency;
+  const n = await getAddress(userId,currency);
   res.status(httpStatusCodes.OK).json(n);
 });
 
