@@ -32,14 +32,12 @@ const getuserDepositeAdressBtc = async (userId) => {
   if (!user) {
     return "user not found";
   }
-  const data = {
-    btc: [
+  const data =  [
       {
         network: "native",
         address: user.btcAddress,
       },
-    ],
-  };
+    ]
   return data;
 };
 
@@ -48,8 +46,7 @@ const getuserDepositeAdressUsdt = async (userId) => {
   if (!user) {
     return "user not found";
   }
-  const data = {
-    Usdt: [
+  const data =  [
       {
         network: "Erc20",
         address: user.ethAddress,
@@ -62,8 +59,7 @@ const getuserDepositeAdressUsdt = async (userId) => {
         network: "matci",
         address: user.ethAddress,
       },
-    ],
-  };
+    ]
   return data;
 };
 
@@ -72,8 +68,7 @@ const getuserDepositeAdressBusd = async (userId) => {
   if (!user) {
     return "user not found";
   }
-  const data = {
-    Busd: [
+  const data =  [
       {
         network: "Erc20",
         address: user.ethAddress,
@@ -86,8 +81,7 @@ const getuserDepositeAdressBusd = async (userId) => {
         network: "matci",
         address: user.ethAddress,
       },
-    ],
-  };
+    ]
   return data;
 };
 
@@ -96,8 +90,8 @@ const getuserDepositeAdressTestPay = async (userId) => {
   if (!user) {
     return "user not found";
   }
-  const data = {
-    testPay: [
+  const data = 
+    [
       {
         network: "Erc20",
         address: user.ethAddress,
@@ -110,8 +104,8 @@ const getuserDepositeAdressTestPay = async (userId) => {
         network: "matci",
         address: user.ethAddress,
       },
-    ],
-  };
+    ]
+  ;
   return data;
 };
 
@@ -144,7 +138,7 @@ const getAddress = async (userId, currency) => {
     };
     return obj;
   }
-  if (currency == "TestPay") {
+  if (currency == "testPay") {
     const obj = {
       success: true,
       error: false,
