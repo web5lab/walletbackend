@@ -32,12 +32,12 @@ const getuserDepositeAdressBtc = async (userId) => {
   if (!user) {
     return null;
   }
-  const data =  [
-      {
-        network: "native",
-        address: user.btcAddress,
-      },
-    ]
+  const data = [
+    {
+      network: "native",
+      address: user.btcAddress,
+    },
+  ];
   return data;
 };
 
@@ -46,20 +46,20 @@ const getuserDepositeAdressUsdt = async (userId) => {
   if (!user) {
     return null;
   }
-  const data =  [
-      {
-        network: "Erc20",
-        address: user.ethAddress,
-      },
-      {
-        network: "Bep20",
-        address: user.ethAddress,
-      },
-      {
-        network: "matic",
-        address: user.ethAddress,
-      },
-    ]
+  const data = [
+    {
+      network: "Erc20",
+      address: user.ethAddress,
+    },
+    {
+      network: "Bep20",
+      address: user.ethAddress,
+    },
+    {
+      network: "matic",
+      address: user.ethAddress,
+    },
+  ];
   return data;
 };
 
@@ -68,20 +68,20 @@ const getuserDepositeAdressBusd = async (userId) => {
   if (!user) {
     return null;
   }
-  const data =  [
-      {
-        network: "Erc20",
-        address: user.ethAddress,
-      },
-      {
-        network: "Bep20",
-        address: user.ethAddress,
-      },
-      {
-        network: "matic",
-        address: user.ethAddress,
-      },
-    ]
+  const data = [
+    {
+      network: "Erc20",
+      address: user.ethAddress,
+    },
+    {
+      network: "Bep20",
+      address: user.ethAddress,
+    },
+    {
+      network: "matic",
+      address: user.ethAddress,
+    },
+  ];
   return data;
 };
 
@@ -90,22 +90,20 @@ const getuserDepositeAdressTestPay = async (userId) => {
   if (!user) {
     return null;
   }
-  const data = 
-    [
-      {
-        network: "Erc20",
-        address: user.ethAddress,
-      },
-      {
-        network: "Bep20",
-        address: user.ethAddress,
-      },
-      {
-        network: "matic",
-        address: user.ethAddress,
-      },
-    ]
-  ;
+  const data = [
+    {
+      network: "Erc20",
+      address: user.ethAddress,
+    },
+    {
+      network: "Bep20",
+      address: user.ethAddress,
+    },
+    {
+      network: "matic",
+      address: user.ethAddress,
+    },
+  ];
   return data;
 };
 
@@ -118,7 +116,7 @@ const getAddress = async (userId, currency) => {
     const obj = {
       success: true,
       error: false,
-      data: await getuserDepositeAdressBtc(userId)
+      data: await getuserDepositeAdressBtc(userId),
     };
     return obj;
   }
@@ -126,7 +124,7 @@ const getAddress = async (userId, currency) => {
     const obj = {
       success: true,
       error: false,
-      data: await getuserDepositeAdressUsdt(userId)
+      data: await getuserDepositeAdressUsdt(userId),
     };
     return obj;
   }
@@ -134,7 +132,7 @@ const getAddress = async (userId, currency) => {
     const obj = {
       success: true,
       error: false,
-      data: await getuserDepositeAdressBusd(userId)
+      data: await getuserDepositeAdressBusd(userId),
     };
     return obj;
   }
@@ -142,14 +140,76 @@ const getAddress = async (userId, currency) => {
     const obj = {
       success: true,
       error: false,
-      data: await getuserDepositeAdressTestPay(userId)
+      data: await getuserDepositeAdressTestPay(userId),
     };
     return obj;
   }
   const obj = {
     success: false,
     error: true,
-    data: "invalid currency"
+    data: "invalid currency",
+  };
+  return obj;
+};
+
+const getCoinData = async (userId, currency) => {
+  const user = await userSchema.findById(userId);
+  if (currency == "Btc") {
+    const data = {
+      icon: "https://bc.game/coin/BTC.black.png",
+      symbol: "Btc",
+      balance: user.btcBalance,
+    };
+    const obj = {
+      success: true,
+      error: false,
+      data: data,
+    };
+    return obj;
+  }
+  if (currency == "Usdt") {
+    const data = {
+      icon: "https://bc.game/coin/USDT.black.png",
+      symbol: "Usdt",
+      balance: user.usdtBalance,
+    };
+    const obj = {
+      success: true,
+      error: false,
+      data: data,
+    };
+    return obj;
+  }
+  if (currency == "Busd") {
+    const data = {
+      icon: "https://bc.game/coin/BUSD.black.png",
+      symbol: "Busd",
+      balance: user.busdBalance,
+    };
+    const obj = {
+      success: true,
+      error: false,
+      data: data,
+    };
+    return obj;
+  }
+  if (currency == "testPay") {
+    const data = {
+      icon: "https://bc.game/coin/PEOPLE.black.png",
+      symbol: "testPay",
+      balance: user.testPayBalance,
+    };
+    const obj = {
+      success: true,
+      error: false,
+      data: data,
+    };
+    return obj;
+  }
+  const obj = {
+    success: false,
+    error: true,
+    data: "invalid currency",
   };
   return obj;
 };
@@ -199,6 +259,7 @@ const getUserData = async (userId) => {
 
 module.exports = {
   addUser,
+  getCoinData,
   getUserData,
   getAddress,
 };

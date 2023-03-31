@@ -1,6 +1,6 @@
 const wallet = require("../../Services/testnet/walletBalance");
 const { compareBalance } = require("../../Services/testnet/topupService");
-const { getUserData, addUser,getAddress } = require("../../Services/testnet/userService");
+const { getUserData, addUser,getAddress, getCoinData } = require("../../Services/testnet/userService");
 const {getAllCoins} = require('../../Services/testnet/coinService')
 const onChainData = require("../../mongoDb/schema/onChainData");
 const { catchAsync, httpStatusCodes } = require("../../helper/helper");
@@ -41,6 +41,13 @@ const getUser = catchAsync(async (req, res) => {
   res.json(n);
 });
 
+const getSpecificCoin = catchAsync(async (req, res) => {
+  const userId = req.query.userId;
+  const currency = req.query.currency;
+  const n = await getCoinData(userId,currency)
+  res.status(httpStatusCodes.OK).json(n);
+});
+
 const updateBal = catchAsync(async(req,res)=>{
   const userId = req.body.userId;
   const currency = req.body.currency;
@@ -68,6 +75,7 @@ const getCoins = catchAsync(async (req,res) => {
 module.exports = {
   checkTopup,
   getCoins,
+  getSpecificCoin,
   getUserAdress,
   getUser,
   registerNewUser,
