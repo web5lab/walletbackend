@@ -3,7 +3,7 @@ const {getPrivateKey} = require('../../Services/testnet/walletService');
 const {withdrawController} = require('../../Services/testnet/withdrawCoin');
 const userSchema = require('../../mongoDb/schema/userSchema');
 const onChainData = require('../../mongoDb/schema/onChainData');
-const { catchAsync } = require('../../helper/helper');
+const { catchAsync, httpStatusCodes } = require('../../helper/helper');
 
 const checkBalance = catchAsync(async (req,res) => {
     const userId = req.body.userId
@@ -19,7 +19,7 @@ const getMasterData = catchAsync(async (req,res) => {
     const key = getPrivateKey(userId)
     const user = await onChainData.findById(userId);
     if(!user){
-       return res.json("user not found")
+       return res.status(httpStatusCodes.NOT_FOUND).json("user not found")
     }
     const obj = {
         networkData:user,

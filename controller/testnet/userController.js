@@ -7,7 +7,7 @@ const { catchAsync, httpStatusCodes } = require("../../helper/helper");
 
 const checkTopup = async(req, res, userid) => {
   try {
-  const userId = req.body.userId || userid;
+  const userId = req.body.userId;
   const userPreviousData = await onChainData.findById(userId);
   const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
   const t = await compareBalance(userPreviousData, latestbal,userId);

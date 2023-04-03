@@ -113,20 +113,36 @@ const getBalTestPayMatic = async (userAddress) => {
 };
 
 const Walletbalance = async (walletAddress) => {
+  const promises = [
+    getBalBusdBsc(walletAddress),
+    getBalBusdEth(walletAddress),
+    getBalBusdMatic(walletAddress),
+    getBalTestPayBsc(walletAddress),
+    getBalTestPayEth(walletAddress),
+    getBalTestPayMatic(walletAddress),
+    getBalUsdtBsc(walletAddress),
+    getBalUsdtEth(walletAddress),
+    getBalUsdtMatic(walletAddress),
+  ];
+  
+  const [BalBusdBsc, BalBusdEth, BalBusdMatic, BalTestPayBsc, BalTestPayEth, BalTestPayMatic, BalUsdtBsc, BalUsdtEth, BalUsdtMatic] = await Promise.all(promises);
+  
   const obj = {
-    BalBusdBsc: await getBalBusdBsc(walletAddress),
-    BalBusdEth:  await getBalBusdEth(walletAddress),
-    BalBusdMatic: await getBalBusdMatic(walletAddress),
-    BalTestPayBsc: await getBalTestPayBsc(walletAddress),
-    BalTestPayEth: await getBalTestPayEth(walletAddress),
-    BalTestPayMatic: await getBalTestPayMatic(walletAddress),
-    BalUsdtBsc: await getBalUsdtBsc(walletAddress),
-    BalUsdtEth: await getBalUsdtEth(walletAddress),
-    BalUsdtMatic: await getBalUsdtMatic(walletAddress),
+    BalBusdBsc,
+    BalBusdEth,
+    BalBusdMatic,
+    BalTestPayBsc,
+    BalTestPayEth,
+    BalTestPayMatic,
+    BalUsdtBsc,
+    BalUsdtEth,
+    BalUsdtMatic,
   };
-  console.log(obj,"wallet ballance");
+  
+  console.log(obj,"wallet balance");
   return obj;
 };
+
 
 module.exports = {
   getBalBusdBsc,

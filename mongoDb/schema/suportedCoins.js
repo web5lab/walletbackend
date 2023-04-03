@@ -11,10 +11,9 @@ const supportedCrypto = new mongoose.Schema(
             enabled:{type:Boolean,default:true}
          },
       ],
-   },
-   { timestamps: true }
+   }
 );
 
-const wallerModel = mongoose.model('supportedCrypto', supportedCrypto);
 
-module.exports = wallerModel;
+module.exports = mongoose.model('supportedCrypto', supportedCrypto);
+
