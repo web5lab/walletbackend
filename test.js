@@ -1,1 +1,7 @@
-console.log(100000000000000000/10**18)
+const obj = {
+    usdt: {
+       balance:122
+    },
+    sdvytgf:"sfv"
+}
+console.log(obj[`usdt`]['balance']);
