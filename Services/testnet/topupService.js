@@ -14,42 +14,29 @@ const compareBalance = async (previousBal, latestBal,userId) => {
       usdtEth: latestBal.BalUsdtEth -  previousBal.usdtBalanceOnEth,
       usdtMatic: latestBal.BalUsdtMatic -  previousBal.usdtBalanceOnMatic,
     };
-    if (obj.busdBsc != 0) {
-        await onChainData.updateMany({_id:userId},{ $inc: {busdBalanceOnBsc:obj.busdBsc } });
-        await userSchema.updateOne({_id:userId},{$inc:{busdBalance:obj.busdBsc}});
-    }  
-    if (obj.busdEth != 0) {
-        await onChainData.updateOne({_id:userId},{ $inc: {busdBalanceOnEth:obj.busdEth } });
-        await userSchema.updateOne({_id:userId},{$inc:{busdBalance:obj.busdEth}});
-    }  
-    if (obj.busdMatic != 0) {
-        await onChainData.updateOne({_id:userId},{ $inc: {busdBalanceOnMatic:obj.busdMatic } });
-        await userSchema.updateOne({_id:userId},{$inc:{busdBalance:obj.busdMatic}});
-    }  
-    if (obj.usdtBsc != 0) {
-        await onChainData.updateOne({_id:userId},{ $inc: {usdtBalanceOnBsc:obj.usdtBsc } });
-        await userSchema.updateOne({_id:userId},{$inc:{usdtBalance:obj.usdtBsc}});
-    }  
-    if (obj.usdtEth != 0) {
-        await onChainData.updateOne({_id:userId},{ $inc: {usdtBalanceOnEth:obj.usdtEth } });
-        await userSchema.updateOne({_id:userId},{$inc:{usdtBalance:obj.usdtEth}});
-    }  
-    if (obj.usdtMatic != 0) {
-        await onChainData.updateOne({_id:userId},{ $inc: {usdtBalanceOnMatic:obj.usdtMatic } });
-        await userSchema.updateOne({_id:userId},{$inc:{usdtBalance:obj.usdtMatic}});
-    }  
-    if (obj.testPayBsc != 0) {
-        await onChainData.updateOne({_id:userId},{ $inc: {testPayBalnceOnBsc:obj.testPayBsc } });
-        await userSchema.updateOne({_id:userId},{$inc:{testPayBalance:obj.testPayBsc}});
-    }  
-    if (obj.testPayEth != 0) {
-        await onChainData.updateOne({_id:userId},{ $inc: {testPayBalnceOnEth:obj.testPayEth } });
-        await userSchema.updateOne({_id:userId},{$inc:{testPayBalance:obj.testPayEth}});
-    }  
-    if (obj.testPayMatic != 0) {
-        await onChainData.updateOne({_id:userId},{ $inc: {testPayBalnceOnMatic:obj.testPayMatic } });
-        await userSchema.updateOne({_id:userId},{$inc:{testPayBalance:obj.testPayMatic}});
-    }  
+    if (obj.busdBsc != 0 || obj.busdEth != 0 || obj.busdMatic != 0 || obj.usdtBsc != 0 || obj.usdtEth != 0 || obj.usdtMatic != 0 || obj.testPayBsc != 0 || obj.testPayEth != 0 || obj.testPayMatic != 0) {
+      await onChainData.updateMany({_id: { $in: userId }}, {
+        $inc: {
+          busdBalanceOnBsc: obj.busdBsc,
+          busdBalanceOnEth: obj.busdEth,
+          busdBalanceOnMatic: obj.busdMatic,
+          usdtBalanceOnBsc: obj.usdtBsc,
+          usdtBalanceOnEth: obj.usdtEth,
+          usdtBalanceOnMatic: obj.usdtMatic,
+          testPayBalnceOnBsc: obj.testPayBsc,
+          testPayBalnceOnEth: obj.testPayEth,
+          testPayBalnceOnMatic: obj.testPayMatic
+        }
+      });
+      await userSchema.updateMany({_id: { $in: userId }}, {
+        $inc: {
+          busdBalance: obj.busdBsc + obj.busdEth + obj.busdMatic,
+          usdtBalance: obj.usdtBsc + obj.usdtEth + obj.usdtMatic,
+          testPayBalance: obj.testPayBsc + obj.testPayEth + obj.testPayMatic
+        }
+      });
+    }
+    
     return "succesfully updated";
   } catch (error) {
     console.log(error);

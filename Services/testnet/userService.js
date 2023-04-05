@@ -108,8 +108,28 @@ const getuserDepositeAdressTestPay = async (userId) => {
 };
 
 const updateBal = async (userId, currency, amount) => {
-  const user = await userSchema.findById(userId);
+  try {
+    const incObj = {};
+    switch (currency) {
+      case 'busd':
+        incObj.busdBalance = amount;
+        break;
+      case 'usdt':
+        incObj.usdtBalance = amount;
+        break;
+      case 'testPay':
+        incObj.testPayBalance = amount;
+        break;
+      default:
+        throw new Error('Invalid currency');
+    }
+    await userSchema.updateOne({ _id: userId }, { $inc: incObj });
+  } catch (error) {
+     console.log(error)
+  }
+
 };
+
 
 const getAddress = async (userId, currency) => {
   if (currency == "Btc") {
@@ -260,6 +280,7 @@ const getUserData = async (userId) => {
 module.exports = {
   addUser,
   getCoinData,
+  updateBal,
   getUserData,
   getAddress,
 };
