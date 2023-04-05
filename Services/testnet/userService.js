@@ -158,7 +158,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
-      balance: Number(user.btcBalance.toString()),
+      balance: user.btcBalance.toString(),
     };
     const obj = {
       success: true,
@@ -171,7 +171,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
-      balance: Number(user.usdtBalance.toString()),
+      balance: user.usdtBalance.toString(),
     };
     const obj = {
       success: true,
@@ -184,7 +184,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
-      balance: Number(user.busdBalance.toString()),
+      balance: user.busdBalance.toString(),
     };
     const obj = {
       success: true,
@@ -197,7 +197,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
-      balance: Number(user.testPayBalance.toString()),
+      balance: user.testPayBalance.toString(),
     };
     const obj = {
       success: true,
@@ -229,22 +229,22 @@ const getUserData = async (userId) => {
     {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
-      balance: Number(user.btcBalance.toString()).toFixed(4),
+      balance: user.btcBalance.toString(),
     },
     {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
-      balance: Number(user.usdtBalance.toString()).toFixed(4),
+      balance: user.usdtBalance.toString(),
     },
     {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
-      balance: Number(user.busdBalance.toString()),
+      balance: user.busdBalance.toString(),
     },
     {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
-      balance: Number(user.testPayBalance.toString()),
+      balance: user.testPayBalance.toString(),
     },
   ];
 
