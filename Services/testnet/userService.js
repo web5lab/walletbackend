@@ -158,7 +158,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
-      balance: user.btcBalance,
+      balance: Number(user.btcBalance.toString()),
     };
     const obj = {
       success: true,
@@ -171,7 +171,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
-      balance: user.usdtBalance,
+      balance: Number(user.usdtBalance.toString()),
     };
     const obj = {
       success: true,
@@ -184,7 +184,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
-      balance: user.busdBalance,
+      balance: Number(user.busdBalance.toString()),
     };
     const obj = {
       success: true,
@@ -197,7 +197,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
-      balance: user.testPayBalance,
+      balance: Number(user.testPayBalance.toString()),
     };
     const obj = {
       success: true,
@@ -229,12 +229,12 @@ const getUserData = async (userId) => {
     {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
-      balance: Number(user.btcBalance.toString()),
+      balance: Number(user.btcBalance.toString()).toFixed(4),
     },
     {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
-      balance: Number(user.usdtBalance.toString()),
+      balance: Number(user.usdtBalance.toString()).toFixed(4),
     },
     {
       icon: "https://bc.game/coin/BUSD.black.png",
