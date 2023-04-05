@@ -229,22 +229,22 @@ const getUserData = async (userId) => {
     {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
-      balance: user.btcBalance,
+      balance: Number(user.btcBalance.toString()),
     },
     {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
-      balance: user.usdtBalance,
+      balance: Number(user.usdtBalance.toString()),
     },
     {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
-      balance: user.busdBalance,
+      balance: Number(user.busdBalance.toString()),
     },
     {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
-      balance: user.testPayBalance,
+      balance: Number(user.testPayBalance.toString()),
     },
   ];
 
