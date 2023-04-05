@@ -17,23 +17,6 @@ const checkTopup = async(req, res, userid) => {
 }
 };
 
-const checkCoinTopup = async(req,res) => {
-  const userId = req.body.userId;
-  const currency = req.body.currency;
-  if(currency == "Btc"){
-     return res.json("currently this service is unavilabel")
-  }
-  if(currency == "Usdt"){
-
-  }
-  if(currency == "Busd"){
-
-  }
-  if(currency == "TestPay"){
-
-  }
-  return res.json("coin not supported")
-}
 
 const getUser = catchAsync(async (req, res) => {
   const userId = req.query.userId;

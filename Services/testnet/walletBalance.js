@@ -21,7 +21,6 @@ const getBalBusdBsc = async (userAddress) => {
         return balance;
       }
     });
-    console.log(bal,"balbusdbsc")
   return bal/ 10 ** 18;
 };
 
@@ -33,8 +32,7 @@ const getBalTestPayBsc = async (userAddress) => {
         const balance = result / 1e18; // USDT has 6 decimal place,
         return balance;
       }
-    });;
-  console.log(bal,"testpay balance")
+    });
   return bal / 10 ** 18;
 };
 
@@ -138,8 +136,6 @@ const Walletbalance = async (walletAddress) => {
     BalUsdtEth,
     BalUsdtMatic,
   };
-  
-  console.log(obj,"wallet balance");
   return obj;
 };
 

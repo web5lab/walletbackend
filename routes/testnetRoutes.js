@@ -15,7 +15,6 @@ router.get('/getMultipleWallet',VerifyServer,)
 router.get('/address',userController.getUserAdress);
 router.get('/masterInfo',VerifyAdmin,adminController.getMasterData);
 router.get('/userInfo/',userController.getUser);
-router.get('/userInfo/',userController.getUser);
 
 //API => POST
 router.post('/faucet',faucetController);
