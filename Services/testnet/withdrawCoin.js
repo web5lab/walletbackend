@@ -35,6 +35,7 @@ const getWithdrawlData = async () => {
         _id: null,
         transactions: {
           $push: {
+            uiqueId: "$_id",
             userId: "$userId",
             currencyId: "$currencyId",
             address: "$address",
