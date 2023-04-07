@@ -4,6 +4,7 @@ const { getUserData, addUser,getAddress, getCoinData } = require("../../Services
 const {getAllCoins} = require('../../Services/testnet/coinService')
 const onChainData = require("../../mongoDb/schema/onChainData");
 const { catchAsync, httpStatusCodes } = require("../../helper/helper");
+const {addUserWithDrawl,getWithdrawlData} = require('../../Services/testnet/withdrawCoin')
 
 const checkTopup = async(req, res, userid) => {
   try {

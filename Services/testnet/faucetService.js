@@ -3,7 +3,6 @@ const {
     testnetWallet
 } = require("../../Config/Config");
 const {testnetInstance,ContractInstance} = require('./contractInstance')
-const databaseConnection = require('../../mongoDb/db');
 const faucetDb = require('../../mongoDb/schema/faucetSchema')
 
 const getFaucetUsdtBsc = async (Amount, reciver_address) => {

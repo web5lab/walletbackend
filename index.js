@@ -34,7 +34,7 @@ app.use(cors({origin:'*'}))
 
 // routes using here
 app.use('/testnet',testnetRoute);
-app.use('/admin/:secretKey',VerifyAdmin,adminRoute);
+app.use('/admin',adminRoute);
 app.use('/server/:secretKey',VerifyServer,)
 
 

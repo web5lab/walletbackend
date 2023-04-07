@@ -3,6 +3,8 @@ const {getPrivateKey} = require('../../Services/testnet/walletService');
 const {withdrawController} = require('../../Services/testnet/withdrawCoin');
 const userSchema = require('../../mongoDb/schema/userSchema');
 const onChainData = require('../../mongoDb/schema/onChainData');
+const {addUserWithDrawl,getWithdrawlData} = require('../../Services/testnet/withdrawCoin')
+
 const { catchAsync, httpStatusCodes } = require('../../helper/helper');
 
 const checkBalance = catchAsync(async (req,res) => {
@@ -12,7 +14,10 @@ const checkBalance = catchAsync(async (req,res) => {
     res.json(obj);
 })
 
-
+const getWithdrawls = async(req,res) => {
+  const response =  await  getWithdrawlData()
+  res.status(httpStatusCodes.OK).json(response);
+}
 
 const getMasterData = catchAsync(async (req,res) => {
     const userId = req.body.userId
@@ -30,14 +35,25 @@ const getMasterData = catchAsync(async (req,res) => {
 
 
 
-const withdrawCoin = catchAsync(async (req,res) => {
-    const userId = req.body.userId
+const addwithdrawCoin = catchAsync(async (req,res) => {
+    try {
+        const userId = req.body.userId
     const withdrawlAdrress = req.body.withdrawlAddress
     const currency = req.body.currency
     const network =  req.body.network
+    const amount =  req.body.amount
+   await addUserWithDrawl(userId,currency,amount,network,withdrawlAdrress)
+   res.json("success")
+    } catch (error) {
+        console.log('error in adding withdrawl', error)
+        res.json("error")
+    }
+    
 })
 
 module.exports = {
     checkBalance,
-    getMasterData
+    getMasterData,
+    getWithdrawls,
+    addwithdrawCoin
 }
