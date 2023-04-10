@@ -13,6 +13,11 @@ const testnetWallet = {
    privateKey: "34b7cd0c29091919040ed9b8cc4b24f53611ba3f2311ea5028c114af88bf2cba"
 }
 
+const erc20FundWallet = {
+   address: "0x0e170E7Efe1458fe9049ACeC8B4433b79a0A7DBB",
+   privateKey: "34b7cd0c29091919040ed9b8cc4b24f53611ba3f2311ea5028c114af88bf2cba"
+}
+
 // Testnet rpc
 const TestnetRpc = {
    Bsc: "https://data-seed-prebsc-2-s1.binance.org:8545",
@@ -65,6 +70,7 @@ const MainnetContract = {
 
 module.exports = {
    MasterPhrase,
+   erc20FundWallet,
    TestnetRpc,
    MainnetRpc,
    ServerSecretKey,

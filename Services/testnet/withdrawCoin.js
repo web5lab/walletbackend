@@ -1,8 +1,79 @@
-const { ContractInstance } = require("./contractInstance");
-const { testnetWallet } = require("../../Config/Config");
+const { ContractInstance, testnetInstance } = require("./contractInstance");
+const {
+  testnetWallet,
+  erc20FundWallet,
+  TestnetContract,
+} = require("../../Config/Config");
 const userWithdrawl = require("../../mongoDb/schema/WithdrawlSchema");
-const withdrawBusdeth = async () => {};
-const withdrawController = async () => {};
+
+
+const withdrawController = async (data) => {
+  console.log(data);
+  return "success"
+};
+
+const withdrawErc20 = async (coin, coin_amount, receiver_address, network) => {
+  let tx, gasPrice, contract, contractAddress;
+  const amount = BigInt(coin_amount*10**18);
+
+  if (network === "bsc") {
+    gasPrice = await testnetInstance.web3bsc.eth.getGasPrice();
+    if (coin === "usdt") {
+      contract = ContractInstance.usdtBsc;
+      contractAddress = TestnetContract.UsdtBsc;
+    } else if (coin === "busd") {
+      contract = ContractInstance.busdBsc;
+      contractAddress = TestnetContract.BusdBsc;
+    } else if (coin === "testPay") {
+      contract = ContractInstance.testPayBsc;
+      contractAddress = TestnetContract.TestCoinBsc;
+    }
+  } else if (network === "eth") {
+    gasPrice = await testnetInstance.web3eth.eth.getGasPrice();
+    if (coin === "usdt") {
+      contract = ContractInstance.usdtEth;
+      contractAddress = TestnetContract.UsdtEth;
+    } else if (coin === "busd") {
+      contract = ContractInstance.busdEth;
+      contractAddress = TestnetContract.busdEth;
+    } else if (coin === "testPay") {
+      contract = ContractInstance.testPayEth;
+      contractAddress = TestnetContract.TestCoinEth;
+    }
+  } else if (net) {
+    gasPrice = await testnetInstance.web3matic.eth.getGasPrice();
+    if (coin === "usdt") {
+      contract = ContractInstance.usdtMatic;
+      contractAddress = TestnetContract.Usdtmatic;
+    } else if (coin === "busd") {
+      contract = ContractInstance.busdMatic;
+      contractAddress = TestnetContract.BusdMatic;
+    } else if (coin === "testPay") {
+      contract = ContractInstance.testPayMatic;
+      contractAddress = TestnetContract.TestCoinMatic;
+    }
+  } else {
+    return "invalid network";
+  }
+
+  tx = {
+    from: testnetWallet.address,
+    to: contractAddress,
+    gasPrice: gasPrice,
+    gasLimit: 100000,
+    data: contract.methods.transfer(receiver_address, amount).encodeABI(),
+  };
+
+  const signedTx = await testnetInstance.web3bsc.eth.accounts.signTransaction(
+    tx,
+    erc20FundWallet.privateKey
+  );
+  const txReceipt = await testnetInstance.web3bsc.eth.sendSignedTransaction(
+    signedTx.rawTransaction
+  );
+  console.log(txReceipt);
+};
+
 
 const addUserWithDrawl = async (
   userId,
@@ -28,7 +99,7 @@ const addUserWithDrawl = async (
 const getWithdrawlData = async () => {
   const t = await userWithdrawl.aggregate([
     {
-      $sort: { userWithdrawlTime: -1 }
+      $sort: { userWithdrawlTime: -1 },
     },
     {
       $group: {
@@ -42,18 +113,18 @@ const getWithdrawlData = async () => {
             network: "$network",
             amount: "$amount",
             userWithdrawlTime: "$userWithdrawlTime",
-          }
-        }
-      }
+          },
+        },
+      },
     },
     {
       $project: {
         _id: 0,
-        transactions: 1
-      }
-    }
-  ])
-  
+        transactions: 1,
+      },
+    },
+  ]);
+
   console.log(t);
   return t;
 };

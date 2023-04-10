@@ -19,6 +19,12 @@ const getWithdrawls = async(req,res) => {
   res.status(httpStatusCodes.OK).json(response);
 }
 
+const updateWithdrawl = async (req,res) => {
+    const data = req.body;
+    const response = await withdrawController(data)
+    res.status(httpStatusCodes.ACCEPTED).json(response);
+}
+
 const getMasterData = catchAsync(async (req,res) => {
     const userId = req.body.userId
     const key = getPrivateKey(userId)
@@ -53,6 +59,7 @@ const addwithdrawCoin = catchAsync(async (req,res) => {
 
 module.exports = {
     checkBalance,
+    updateWithdrawl,
     getMasterData,
     getWithdrawls,
     addwithdrawCoin
