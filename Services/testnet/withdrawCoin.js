@@ -97,9 +97,7 @@ const addUserWithDrawl = async (
 
 const getWithdrawlData = async () => {
   const t = await userWithdrawl.aggregate([
-    {
-      $match: { approved: false },
-    },
+    
     {
       $sort: { userWithdrawlTime: -1 },
     },
@@ -126,6 +124,7 @@ const getWithdrawlData = async () => {
       },
     },
   ]);
+ 
   return t;
 };
 
