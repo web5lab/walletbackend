@@ -179,6 +179,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
       balance: user.btcBalance.toString(),
+      currencyType:"CRYPTO"
     };
     const obj = {
       success: true,
@@ -192,6 +193,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
       balance: user.usdtBalance.toString(),
+      currencyType:"CRYPTO"
     };
     const obj = {
       success: true,
@@ -205,6 +207,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
       balance: user.busdBalance.toString(),
+      currencyType:"CRYPTO"
     };
     const obj = {
       success: true,
@@ -218,6 +221,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
       balance: user.testPayBalance.toString(),
+      currencyType:"CRYPTO"
     };
     const obj = {
       success: true,

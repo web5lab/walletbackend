@@ -9,7 +9,7 @@ const userWithdrawl = new mongoose.Schema({
   amount: { type: String },
   transactioyType: { type: String },
   userWithdrawlTime: { type: Date, default: Date() },
-  approved: { type: Boolean },
+  approved: { type: Boolean, default:false },
   approvedBy: { type: String },
 });
 module.exports = mongoose.model("userTransaction", userWithdrawl);

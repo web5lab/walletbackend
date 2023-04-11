@@ -6,15 +6,15 @@ const {
 } = require("../../Config/Config");
 const userWithdrawl = require("../../mongoDb/schema/WithdrawlSchema");
 
-
 const withdrawController = async (data) => {
   console.log(data);
-  return "success"
+  return "success";
 };
+
 
 const withdrawErc20 = async (coin, coin_amount, receiver_address, network) => {
   let tx, gasPrice, contract, contractAddress;
-  const amount = BigInt(coin_amount*10**18);
+  const amount = BigInt(coin_amount * 10 ** 18);
 
   if (network === "bsc") {
     gasPrice = await testnetInstance.web3bsc.eth.getGasPrice();
@@ -74,7 +74,6 @@ const withdrawErc20 = async (coin, coin_amount, receiver_address, network) => {
   console.log(txReceipt);
 };
 
-
 const addUserWithDrawl = async (
   userId,
   currencyName,
@@ -98,6 +97,9 @@ const addUserWithDrawl = async (
 
 const getWithdrawlData = async () => {
   const t = await userWithdrawl.aggregate([
+    {
+      $match: { approved: false },
+    },
     {
       $sort: { userWithdrawlTime: -1 },
     },
@@ -124,8 +126,6 @@ const getWithdrawlData = async () => {
       },
     },
   ]);
-
-  console.log(t);
   return t;
 };
 

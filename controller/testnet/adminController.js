@@ -20,7 +20,7 @@ const getWithdrawls = async(req,res) => {
 }
 
 const updateWithdrawl = async (req,res) => {
-    const data = req.body;
+    const data = req.body.data;
     const response = await withdrawController(data)
     res.status(httpStatusCodes.ACCEPTED).json(response);
 }
