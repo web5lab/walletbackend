@@ -95,7 +95,9 @@ const addUserWithDrawl = async (
   }
 };
 
-const getWithdrawlData = async () => {
+const getWithdrawlData = async (page, limit) => {
+  const startIndex = (page - 1) * limit;
+
   const t = await userWithdrawl.aggregate([
     
     {
@@ -115,18 +117,26 @@ const getWithdrawlData = async () => {
             userWithdrawlTime: "$userWithdrawlTime",
           },
         },
+        count: { $sum: 1 }
       },
     },
     {
       $project: {
         _id: 0,
-        transactions: 1,
+        transactions: { $slice: ["$transactions", startIndex, limit] },
+        totalPages: {
+          $ceil: {
+            $divide: ["$count", limit]
+          }
+        }
       },
     },
   ]);
- 
-  return t;
+
+  return t[0];
 };
+
+
 
 module.exports = {
   addUserWithDrawl,

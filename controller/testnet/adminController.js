@@ -15,7 +15,9 @@ const checkBalance = catchAsync(async (req,res) => {
 })
 
 const getWithdrawls = async(req,res) => {
-  const response =  await  getWithdrawlData()
+ const page = req.query.page;
+ const limit = req.query.limit;
+  const response =  await  getWithdrawlData(Number(page),Number(limit));
   res.status(httpStatusCodes.OK).json(response);
 }
 
