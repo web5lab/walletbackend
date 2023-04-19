@@ -56,13 +56,6 @@ const add_withdraw = async (req, res) => {
   });
 };
 
-/*{
-  walletAddress: 'mqass1zS43E22PDu9WWFABN5G34tkEWQox',
-  amount: '100',
-  SelectedCryptoCr: 'Usdt',
-  network: 'Bep20'
-}*/
-
 const getUser = catchAsync(async (req, res) => {
   const userId = req.query.userId;
   const n = await getUserData(userId);

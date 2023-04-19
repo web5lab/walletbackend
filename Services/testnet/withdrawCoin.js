@@ -89,12 +89,12 @@ const addUserWithDrawl = async (
       const user = await userSchema.findByIdAndUpdate(userId,{
         $inc:{usdtBalance:-amount}
       });
-      finalAmount = userData.usdtBalance
+      finalAmount = userData.usdtBalance-amount;
     } else if (currencyName ==="Busd") {
       const user = await userSchema.findByIdAndUpdate(userId,{
         $inc:{busdBalance:-amount}
       });
-      finalAmount = userData.busdBalance
+      finalAmount = userData.busdBalance-amount
     }else if (currencyName ==="testPay") {
       const user = await userSchema.findByIdAndUpdate(userId,{
         $inc:{testPayBalance:-amount}
@@ -104,7 +104,7 @@ const addUserWithDrawl = async (
       const user = await userSchema.findByIdAndUpdate(userId,{
         $inc:{btcBalance:-amount}
       });
-      finalAmount = userData.btcBalance
+      finalAmount = userData.btcBalance-amount;
     }
     const db = new userWithdrawl({
       userId: userId,
