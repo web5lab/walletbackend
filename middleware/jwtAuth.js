@@ -1,3 +1,6 @@
+const { httpStatusCodes } = require("../helper/helper");
+const jwt = require('jsonwebtoken')
+
 const getUserTokenInfromation = function (req) {
     /**
      * @param authToken check user authorization token
@@ -31,7 +34,7 @@ const getUserTokenInfromation = function (req) {
     if (!!headersVarifyData?.error && !headersVarifyData?.success) {
        return res.status(headersVarifyData?.status).json(headersVarifyData);
     }
-    jwt.verify(headersVarifyData, JWT_ACCESS_TOKEN_SECRET, (err, payload) => {
+    jwt.verify(headersVarifyData, process.env.Jwt_Secret, (err, payload) => {
        if (err) {
           const sendObject = {
              error: true,

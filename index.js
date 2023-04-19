@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const {Walletbalance} = require('./Services/testnet/walletBalance')
 const {getFaucetUsdtBsc} = require('./Services/testnet/faucetService')
