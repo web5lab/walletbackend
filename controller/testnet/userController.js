@@ -27,19 +27,7 @@ const checkTopup = async (req, res, userid) => {
 };
 
 const add_withdraw = async (req, res) => {
-  console.log(req)
-  try {
-    const userId = req.body.userId;
-    const withdrawlAdrress = req.body.withdrawlAddress;
-    const currency = req.body.currency;
-    const network = req.body.network;
-    const amount = req.body.amount;
-    await addUserWithDrawl(userId, currency, amount, network, withdrawlAdrress);
-    res.json("success");
-  } catch (error) {
-    console.log("error in adding withdrawl", error);
-    res.status(httpStatusCodes.OK).json("success");
-  }
+  console.log(req.body)
 };
 
 const getUser = catchAsync(async (req, res) => {
