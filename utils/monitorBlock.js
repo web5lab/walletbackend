@@ -1,9 +1,7 @@
 const { mn } = require('../Config/Config');
 const walletList = require('../wallets/wallets.json')
 const Web3 = require('web3')
-const MonitorWallet = () => {
 
-}
 
 const MonitorBlock = () => {
     const web3 = new Web3('wss://bsc.getblock.io/0b7a547e-cca3-435a-a9f7-f6e9fcdfea01/mainnet/');
@@ -32,38 +30,35 @@ const MonitorBlock = () => {
           console.log(result)
         }
       })   
-      web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
-        if (error) {
-          console.error(error)
-        } else {
-          console.log(result)
-        }
-      })   
-      web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
-        if (error) {
-          console.error(error)
-        } else {
-          console.log(result)
-        }
-      })   
-      web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
-        if (error) {
-          console.error(error)
-        } else {
-          console.log(result)
-        }
-      })   
-      web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
-        if (error) {
-          console.error(error)
-        } else {
-          console.log(result)
-        }
-      })   
+      // web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
+      //   if (error) {
+      //     console.error(error)
+      //   } else {
+      //     console.log(result)
+      //   }
+      // })   
+      // web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
+      //   if (error) {
+      //     console.error(error)
+      //   } else {
+      //     console.log(result)
+      //   }
+      // })   
+      // web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
+      //   if (error) {
+      //     console.error(error)
+      //   } else {
+      //     console.log(result)
+      //   }
+      // })   
+      // web3eth.eth.subscribe('newBlockHeaders', (error, result) => {
+      //   if (error) {
+      //     console.error(error)
+      //   } else {
+      //     console.log(result)
+      //   }
+      // })   
 
 }
+MonitorBlock();
 
-module.exports = {
-    MonitorWallet,
-    MonitorBlock
-}

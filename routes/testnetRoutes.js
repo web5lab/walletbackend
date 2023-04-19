@@ -20,5 +20,6 @@ router.get('/userInfo/',userController.getUser);
 router.post('/faucet',faucetController);
 router.post('/validateUser',)
 router.post('/addUser',userController.registerNewUser)// body Par
+router.post('/add-withdrawl',userController.add_withdraw)// body Par
 
 module.exports = router;

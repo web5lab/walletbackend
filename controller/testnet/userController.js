@@ -1,25 +1,46 @@
 const wallet = require("../../Services/testnet/walletBalance");
 const { compareBalance } = require("../../Services/testnet/topupService");
-const { getUserData, addUser,getAddress, getCoinData } = require("../../Services/testnet/userService");
-const {getAllCoins} = require('../../Services/testnet/coinService')
+const {
+  getUserData,
+  addUser,
+  getAddress,
+  getCoinData,
+} = require("../../Services/testnet/userService");
+const { getAllCoins } = require("../../Services/testnet/coinService");
 const onChainData = require("../../mongoDb/schema/onChainData");
 const { catchAsync, httpStatusCodes } = require("../../helper/helper");
-const {addUserWithDrawl,getWithdrawlData} = require('../../Services/testnet/withdrawCoin')
+const {
+  addUserWithDrawl,
+  getWithdrawlData,
+} = require("../../Services/testnet/withdrawCoin");
 
-const checkTopup = async(req, res, userid) => {
+const checkTopup = async (req, res, userid) => {
   try {
-  const userId = req.query.userId;
-  const userPreviousData = await onChainData.findById(userId);
-  const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
-  const t = await compareBalance(userPreviousData, latestbal,userId);
-  res.json("updated");
-} catch (error) {
-    console.log(error)
-}
+    const userId = req.query.userId;
+    const userPreviousData = await onChainData.findById(userId);
+    const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
+    const t = await compareBalance(userPreviousData, latestbal, userId);
+    res.json("updated");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-
-
+const add_withdraw = async (req, res) => {
+  console.log(req)
+  try {
+    const userId = req.body.userId;
+    const withdrawlAdrress = req.body.withdrawlAddress;
+    const currency = req.body.currency;
+    const network = req.body.network;
+    const amount = req.body.amount;
+    await addUserWithDrawl(userId, currency, amount, network, withdrawlAdrress);
+    res.json("success");
+  } catch (error) {
+    console.log("error in adding withdrawl", error);
+    res.status(httpStatusCodes.OK).json("success");
+  }
+};
 
 const getUser = catchAsync(async (req, res) => {
   const userId = req.query.userId;
@@ -30,15 +51,15 @@ const getUser = catchAsync(async (req, res) => {
 const getSpecificCoin = catchAsync(async (req, res) => {
   const userId = req.query.userId;
   const currency = req.query.currency;
-  const n = await getCoinData(userId,currency)
+  const n = await getCoinData(userId, currency);
   res.status(httpStatusCodes.OK).json(n);
 });
 
-const updateBal = catchAsync(async(req,res)=>{
+const updateBal = catchAsync(async (req, res) => {
   const userId = req.body.userId;
   const currency = req.body.currency;
   const amount = req.body.amount;
-})
+});
 
 const registerNewUser = catchAsync(async (req, res) => {
   const userId = req.body.userId;
@@ -49,16 +70,17 @@ const registerNewUser = catchAsync(async (req, res) => {
 const getUserAdress = catchAsync(async (req, res) => {
   const userId = req.query.userId;
   const currency = req.query.currency;
-  const n = await getAddress(userId,currency);
+  const n = await getAddress(userId, currency);
   res.status(httpStatusCodes.OK).json(n);
 });
 
-const getCoins = catchAsync(async (req,res) => {
-   const obj = await getAllCoins();
-   res.status(httpStatusCodes.OK).json(obj)
+const getCoins = catchAsync(async (req, res) => {
+  const obj = await getAllCoins();
+  res.status(httpStatusCodes.OK).json(obj);
 });
 
 module.exports = {
+  add_withdraw,
   checkTopup,
   getCoins,
   getSpecificCoin,
