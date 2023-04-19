@@ -5,6 +5,7 @@ const {VerifyAdmin} = require('../middleware/adminAuth')
 const {faucetController} = require('../controller/testnet/faucetController')
 const userController = require('../controller/testnet/userController')
 const adminController = require('../controller/testnet/adminController');
+const { varifyJwtToken } = require('../middleware/jwtAuth');
 
 // API => GET
 router.get('/balance',VerifyServer);// body params required => user
@@ -20,6 +21,6 @@ router.get('/userInfo/',userController.getUser);
 router.post('/faucet',faucetController);
 router.post('/validateUser',)
 router.post('/addUser',userController.registerNewUser)// body Par
-router.post('/add-withdrawl',userController.add_withdraw)// body Par
+router.post('/add-withdrawl',varifyJwtToken,userController.add_withdraw)// body Par
 
 module.exports = router;

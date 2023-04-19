@@ -28,12 +28,7 @@ const checkTopup = async (req, res, userid) => {
 };
 
 const add_withdraw = async (req, res) => {
-  console.log("request data",req)
-  const jwt = req.headers.authorization;
-  const jwtToken = jwt.split(" ")[1]
-  console.log("jwt",jwt);
-  const jwtData = await jwtExtractor(jwtToken);
-  console.log(jwtData);
+  console.log(req.userPayload)
 };
 
 /*{
