@@ -5,6 +5,7 @@ const {
   TestnetContract,
 } = require("../../Config/Config");
 const userWithdrawl = require("../../mongoDb/schema/WithdrawlSchema");
+const userSchema = require("../../mongoDb/schema/userSchema");
 
 const withdrawController = async (data) => {
   console.log(data);
@@ -82,6 +83,29 @@ const addUserWithDrawl = async (
   withdrawlAddress
 ) => {
   try {
+    let finalAmount;
+    const userData = await userSchema.findById(userId);
+    if (currencyName =="Usdt") {
+      const user = await userSchema.findByIdAndUpdate(userId,{
+        $inc:{usdtBalance:-amount}
+      });
+      finalAmount = userData.usdtBalance
+    } else if (currencyName ==="Busd") {
+      const user = await userSchema.findByIdAndUpdate(userId,{
+        $inc:{busdBalance:-amount}
+      });
+      finalAmount = userData.busdBalance
+    }else if (currencyName ==="testPay") {
+      const user = await userSchema.findByIdAndUpdate(userId,{
+        $inc:{testPayBalance:-amount}
+      });
+      finalAmount = userData.testPayBalance
+    }else if (currencyName ==="Btc") {
+      const user = await userSchema.findByIdAndUpdate(userId,{
+        $inc:{btcBalance:-amount}
+      });
+      finalAmount = userData.btcBalance
+    }
     const db = new userWithdrawl({
       userId: userId,
       address: withdrawlAddress,
@@ -90,8 +114,18 @@ const addUserWithDrawl = async (
       network: network,
     });
     await db.save();
+    const obj ={
+      error:false,
+      data:finalAmount.toString(),
+      userId:userId,
+      currency:currencyName
+    }
+    return obj;
   } catch (error) {
     console.log("error in withdrawl");
+    const obj ={
+      error:true
+    }
   }
 };
 
@@ -99,7 +133,6 @@ const getWithdrawlData = async (page, limit) => {
   const startIndex = (page - 1) * limit;
 
   const t = await userWithdrawl.aggregate([
-    
     {
       $sort: { userWithdrawlTime: -1 },
     },

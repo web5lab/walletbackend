@@ -28,7 +28,25 @@ const checkTopup = async (req, res, userid) => {
 };
 
 const add_withdraw = async (req, res) => {
-  console.log(req.userPayload)
+  const userId = req.userPayload.userId;
+  const walletAddress = req.body.walletAddress;
+  const SelectedCryptoCr = req.body.SelectedCryptoCr;
+  const network = req.body.network;
+  const amount = req.body.amount;
+  const t = await addUserWithDrawl(
+    userId,
+    SelectedCryptoCr,
+    amount,
+    network,
+    walletAddress
+  );
+  return res.status(httpStatusCodes.ACCEPTED).json({
+    error: false,
+    updatedBal: t.data,
+    currencyId: SelectedCryptoCr,
+    success: true,
+    userId: userId,
+  });
 };
 
 /*{
