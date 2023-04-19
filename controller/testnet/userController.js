@@ -40,6 +40,13 @@ const add_withdraw = async (req, res) => {
     network,
     walletAddress
   );
+  if (t.error) {
+    return res.status(httpStatusCodes.INTERNAL_SERVER).json({
+      error: true,
+      success: false,
+      userId: userId,
+    });
+  }
   return res.status(httpStatusCodes.ACCEPTED).json({
     error: false,
     updatedBal: t.data,
