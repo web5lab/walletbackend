@@ -13,6 +13,7 @@ const {
   addUserWithDrawl,
   getWithdrawlData,
 } = require("../../Services/testnet/withdrawCoin");
+const { jwtExtractor } = require("../../helper/jwtExtractor");
 
 const checkTopup = async (req, res, userid) => {
   try {
@@ -27,8 +28,17 @@ const checkTopup = async (req, res, userid) => {
 };
 
 const add_withdraw = async (req, res) => {
-  console.log(req.body)
+  const jwt = req.header.authrization;
+  const jwtData = await jwtExtractor(jwt);
+  console.log(jwtData);
 };
+
+/*{
+  walletAddress: 'mqass1zS43E22PDu9WWFABN5G34tkEWQox',
+  amount: '100',
+  SelectedCryptoCr: 'Usdt',
+  network: 'Bep20'
+}*/
 
 const getUser = catchAsync(async (req, res) => {
   const userId = req.query.userId;
