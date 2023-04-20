@@ -29,6 +29,7 @@ const checkTopup = async (req, res, userid) => {
 
 const add_withdraw = async (req, res) => {
   const userId = req.userPayload.userId;
+  console.log("user id in jwt",userId);
   const walletAddress = req.body.walletAddress;
   const SelectedCryptoCr = req.body.SelectedCryptoCr;
   const network = req.body.network;
