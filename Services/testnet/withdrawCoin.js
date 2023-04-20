@@ -12,7 +12,6 @@ const withdrawController = async (data) => {
   return "success";
 };
 
-
 const withdrawErc20 = async (coin, coin_amount, receiver_address, network) => {
   let tx, gasPrice, contract, contractAddress;
   const amount = BigInt(coin_amount * 10 ** 18);
@@ -75,59 +74,50 @@ const withdrawErc20 = async (coin, coin_amount, receiver_address, network) => {
   console.log(txReceipt);
 };
 
-const addUserWithDrawl = async (
-  userId,
-  currencyName,
-  amount,
-  network,
-  withdrawlAddress
-) => {
+
+async function addUserWithDrawl(userId, currencyName, amount, network, withdrawalAddress) {
   try {
-    let finalAmount;
-    const userData = await userSchema.findById(userId);
-    if (currencyName =="Usdt") {
-      const user = await userSchema.findByIdAndUpdate(userId,{
-        $inc:{usdtBalance:-amount}
-      });
-      finalAmount = userData.usdtBalance-amount;
-    } else if (currencyName ==="Busd") {
-      const user = await userSchema.findByIdAndUpdate(userId,{
-        $inc:{busdBalance:-amount}
-      });
-      finalAmount = userData.busdBalance-amount
-    }else if (currencyName ==="testPay") {
-      const user = await userSchema.findByIdAndUpdate(userId,{
-        $inc:{testPayBalance:-amount}
-      });
-      finalAmount = userData.testPayBalance
-    }else if (currencyName ==="Btc") {
-      const user = await userSchema.findByIdAndUpdate(userId,{
-        $inc:{btcBalance:-amount}
-      });
-      finalAmount = userData.btcBalance-amount;
-    }
-    const db = new userWithdrawl({
-      userId: userId,
-      address: withdrawlAddress,
-      currencyId: currencyName,
-      amount: amount,
-      network: network,
-    });
-    await db.save();
-    const obj ={
-      error:false,
-      data:finalAmount.toString(),
-      userId:userId,
-      currency:currencyName
-    }
-    return obj;
+    const user = await userSchema.findById(userId);
+    const balanceField = getBalanceField(currencyName);
+    const finalAmount = user[balanceField] - amount;
+    await userSchema.findByIdAndUpdate(userId, { $inc: { [balanceField]: -amount } });
+    const currencyIcon = getCurrencyIcon(currencyName);
+    const transactionData = { userId, currencyName, amount, network, withdrawalAddress, currencyIcon };
+    await saveTransactionData(transactionData);
+    return { error: false, data: finalAmount.toString(), userId, currency: currencyName };
   } catch (error) {
-    console.log("error in withdrawl");
-    const obj ={
-      error:true
-    }
+    console.error('Error in withdrawFunds:', error);
+    return { error: true };
   }
-};
+}
+
+async function saveTransactionData(data) {
+  const transaction = new userWithdrawl(data);
+  await transaction.save();
+}
+
+function getBalanceField(currencyName) {
+  const fieldNames = {
+    Usdt: 'usdtBalance',
+    Busd: 'busdBalance',
+    testPay: 'testPayBalance',
+    Btc: 'btcBalance',
+  };
+  return fieldNames[currencyName];
+}
+
+function getCurrencyIcon(currencyName) {
+  const iconUrls = {
+    Usdt: 'https://bc.game/coin/USDT.black.png',
+    Busd: 'https://bc.game/coin/BUSD.black.png',
+    testPay: 'https://bc.game/coin/PEOPLE.black.png',
+    Btc: 'https://bc.game/coin/BTC.black.png',
+  };
+  return iconUrls[currencyName];
+}
+
+
+
 
 const getWithdrawlData = async (page, limit) => {
   const startIndex = (page - 1) * limit;
@@ -150,7 +140,7 @@ const getWithdrawlData = async (page, limit) => {
             userWithdrawlTime: "$userWithdrawlTime",
           },
         },
-        count: { $sum: 1 }
+        count: { $sum: 1 },
       },
     },
     {
@@ -159,17 +149,15 @@ const getWithdrawlData = async (page, limit) => {
         transactions: { $slice: ["$transactions", startIndex, limit] },
         totalPages: {
           $ceil: {
-            $divide: ["$count", limit]
-          }
-        }
+            $divide: ["$count", limit],
+          },
+        },
       },
     },
   ]);
 
   return t[0];
 };
-
-
 
 module.exports = {
   addUserWithDrawl,

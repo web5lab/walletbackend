@@ -15,6 +15,7 @@ const data = {
 }
 
 
+
 const token = createJWT(data);
 console.log(token);
 

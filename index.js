@@ -20,6 +20,7 @@ const router = express.Router()
 const testnetRoute = require('./routes/testnetRoutes');
 const adminRoute = require('./routes/adminRoutes');
 const logErrors = require('./helper/errorLogger');
+const { testFn } = require('./Services/testnet/testServic')
 
 app.use('/', router);
 app.use(bodyParser.json());
@@ -51,7 +52,7 @@ app.post('/testfn',async (req,res)=> {
 })
 
 app.get('/testapi',async (req,res)=> {
-  res.send('server is active')
+  testFn()
 })
 
 app.get('/error', function(req, res) {
