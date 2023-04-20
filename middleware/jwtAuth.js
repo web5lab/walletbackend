@@ -30,10 +30,18 @@ const getUserTokenInfromation = function (req) {
  };
 
  const varifyJwtToken = function (req, res, next) {
+
     const headersVarifyData = getUserTokenInfromation(req, res);
+
     if (!!headersVarifyData?.error && !headersVarifyData?.success) {
+
+      console.log('token is not append in headers')
+
        return res.status(headersVarifyData?.status).json(headersVarifyData);
     }
+
+    console.log('without varify token server error')
+
     jwt.verify(headersVarifyData, process.env.Jwt_Secret, (err, payload) => {
        if (err) {
           const sendObject = {
@@ -46,6 +54,9 @@ const getUserTokenInfromation = function (req) {
           }
           return res.status(httpStatusCodes.UNAUTHORIZATION).json(sendObject);
        }
+
+       console.log(payload, 'token payload')
+
        req.userPayload = payload;
        next();
     });
