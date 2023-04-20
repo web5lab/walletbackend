@@ -49,7 +49,7 @@ const getDetailedTransaction = async(id) =>{
     const data = await userTransaction.findById(id);
     return {
       success:true,
-      transactions:{
+      transaction:{
         _id: data._id.toString(),
         status: data.status,
         network: data.network,
