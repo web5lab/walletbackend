@@ -8,14 +8,8 @@ const getUserTransctions = async (userId,page) => {
       // match transactions for the given user ID
       {
         $match: { userId: userId },
-      },
-      {
-        $lookup: {
-          from: "currencies",
-          localField: "currencyId",
-          foreignField: "_id",
-          as: "currency",
-        },
+      },{
+        $sort: { userWithdrawlTime: -1 },
       },
       {
         $project: {
@@ -25,7 +19,7 @@ const getUserTransctions = async (userId,page) => {
           createdAt: "$userWithdrawlTime",
           currencyName: "$currencyId",
           currencyIcon:"$currencyIcon",
-          transactionType: '$transactioyType'
+          transactionType: '$transactionType'
         },
       },
       {
@@ -50,6 +44,33 @@ const getUserTransctions = async (userId,page) => {
   }
 };
 
+const getDetailedTransaction = async(id) =>{
+   try {
+    const data = await userTransaction.findById(id);
+    return {
+      success:true,
+      transactions:{
+        _id: data._id.toString(),
+        status: data.status,
+        network: data.network,
+        amount: data.amount,
+        currencyName: data.currencyId,
+        currencyIcon: data.currencyIcon,
+        transactionHash:data.transactionHash,
+        transactionUrl:data.explorerUrl,
+        transactionType:data.transactionType,
+        createdAt: data.userWithdrawlTime,
+      }
+    }
+   } catch (error) {
+     console.log(error)
+     return {
+      success:false
+     }
+   }
+}
+
 module.exports = {
   getUserTransctions,
+  getDetailedTransaction
 };

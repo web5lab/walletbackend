@@ -15,7 +15,7 @@ const {
 } = require("../../Services/testnet/withdrawCoin");
 const { jwtExtractor } = require("../../helper/jwtExtractor");
 const {
-  getUserTransctions,
+  getUserTransctions, getDetailedTransaction,
 } = require("../../Services/testnet/userTransactions");
 
 const userTransaction = async (req, res) => {
@@ -31,6 +31,15 @@ const userTransaction = async (req, res) => {
   }
 };
 
+const userDetailedTransaction = async(req,res)=>{
+  try {
+    const id = req.query.id;
+    const data = await getDetailedTransaction(id);
+    res.status(httpStatusCodes.OK).jdon(data);
+  } catch (error) {
+    
+  }
+}
 const checkTopup = async (req, res, userid) => {
   try {
     const userId = req.query.userId;
@@ -119,5 +128,6 @@ module.exports = {
   getSpecificCoin,
   getUserAdress,
   getUser,
+  userDetailedTransaction,
   registerNewUser,
 };
