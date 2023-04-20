@@ -1,8 +1,8 @@
 const userTransaction = require("../../mongoDb/schema/WithdrawlSchema");
-const userId = 4001; // replace with the ID of the user you want to retrieve transactions for
+
 const perPage = 2; // replace with the number of transactions to show per page
-const page = 1;
-const testFn = async () => {
+
+const getUserTransctions = async (userId,page) => {
   try {
     const data = await userTransaction.aggregate([
       // match transactions for the given user ID
@@ -36,20 +36,19 @@ const testFn = async () => {
     ]);
     const count = await userTransaction.countDocuments({ userId });
 
-    console.log({
+    return{
       success: true,
       transactions: data,
       totalDocuments: count,
       totalPages: Math.ceil(count / perPage),
       page,
-    });
+    };
   } catch (error) {
     console.error(error);
     // return an error response
   }
 };
-testFn();
 
 module.exports = {
-  testFn,
+  getUserTransctions,
 };

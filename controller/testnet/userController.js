@@ -14,6 +14,21 @@ const {
   getWithdrawlData,
 } = require("../../Services/testnet/withdrawCoin");
 const { jwtExtractor } = require("../../helper/jwtExtractor");
+const {
+  getUserTransctions,
+} = require("../../Services/testnet/userTransactions");
+
+const userTransaction = async (req, res) => {
+  try {
+    const userId = req.userPayload.userId;
+    const page = req.query.userId;
+    const data = await getUserTransctions(userId, page);
+    res.status(httpStatusCodes.OK).json(data);
+  } catch (error) {
+    console.log("error", error);
+    res.status(httpStatusCodes.INTERNAL_SERVER)
+  }
+};
 
 const checkTopup = async (req, res, userid) => {
   try {
@@ -30,7 +45,7 @@ const checkTopup = async (req, res, userid) => {
 const add_withdraw = async (req, res) => {
   console.log(req.userPayload);
   const userId = req.userPayload.userId;
-  console.log("user id in jwt",userId);
+  console.log("user id in jwt", userId);
   const walletAddress = req.body.walletAddress;
   const SelectedCryptoCr = req.body.SelectedCryptoCr;
   const network = req.body.network;
@@ -96,6 +111,7 @@ const getCoins = catchAsync(async (req, res) => {
 });
 
 module.exports = {
+  userTransaction,
   add_withdraw,
   checkTopup,
   getCoins,
