@@ -39,6 +39,7 @@ const getUserTransctions = async (userId,page) => {
     return{
       success: true,
       transactions: data,
+      transactionsType: 'Withdraw',
       totalDocuments: count,
       totalPages: Math.ceil(count / perPage),
       page,
