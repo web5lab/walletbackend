@@ -22,8 +22,6 @@ const userTransaction = async (req, res) => {
   try {
     const userId = req.userPayload.userId;
 
-    console.log("payload is",req.userPayload.userId);
-
     const page = req.query.page;
     const data = await getUserTransctions(Number(userId),page);
     res.status(httpStatusCodes.OK).json(data);

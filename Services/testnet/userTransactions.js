@@ -24,7 +24,8 @@ const getUserTransctions = async (userId,page) => {
           status: 1,
           createdAt: "$userWithdrawlTime",
           currencyName: "$currencyId",
-          currencyIcon:"$currencyIcon"
+          currencyIcon:"$currencyIcon",
+          transactionType: '$transactioyType'
         },
       },
       {
@@ -39,7 +40,6 @@ const getUserTransctions = async (userId,page) => {
     return{
       success: true,
       transactions: data,
-      transactionsType: 'Withdraw',
       totalDocuments: count,
       totalPages: Math.ceil(count / perPage),
       page,
