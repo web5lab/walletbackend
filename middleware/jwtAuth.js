@@ -44,6 +44,9 @@ const getUserTokenInfromation = function (req) {
 
     jwt.verify(headersVarifyData, process.env.Jwt_Secret, (err, payload) => {
        if (err) {
+
+         console.log('token error', err)
+
           const sendObject = {
              error: true,
              message: 'Unauthorized',
