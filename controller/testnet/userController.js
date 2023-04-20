@@ -37,7 +37,7 @@ const userDetailedTransaction = async(req,res)=>{
     console.log(id);
     const data = await getDetailedTransaction(id);
     console.log(data);
-    res.status(httpStatusCodes.OK).jdon(data);
+    res.status(httpStatusCodes.OK).json(data);
   } catch (error) {
     
   }
