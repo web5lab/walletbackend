@@ -77,13 +77,17 @@ const withdrawErc20 = async (coin, coin_amount, receiver_address, network) => {
 
 async function addUserWithDrawl(userId, currencyName, amount, network, withdrawalAddress) {
   try {
-    const user = await userSchema.findById(Number(userId));
+    console.log("first")
+    const user = await userSchema.findById({userId});
+    console.log("second")
     const balanceField = getBalanceField(currencyName);
     const finalAmount = user[balanceField] - amount;
     await userSchema.findByIdAndUpdate(userId, { $inc: { [balanceField]: -amount } });
+    console.log("third")
     const currencyIcon = getCurrencyIcon(currencyName);
     const transactionData = { userId, currencyName, amount, network, withdrawalAddress, currencyIcon };
     await saveTransactionData(transactionData);
+    console.log("update error")
     return { error: false, data: finalAmount.toString(), userId, currency: currencyName };
   } catch (error) {
     console.error('Error in withdrawFunds:', error);
