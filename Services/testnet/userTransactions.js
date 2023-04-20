@@ -29,7 +29,7 @@ const getUserTransctions = async (userId,page) => {
         },
       },
       {
-        $skip: (page) * perPage,
+        $skip: (page-1) * perPage,
       },
       {
         $limit: perPage,
