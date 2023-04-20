@@ -34,7 +34,9 @@ const userTransaction = async (req, res) => {
 const userDetailedTransaction = async(req,res)=>{
   try {
     const id = req.query.id;
+    console.log(id);
     const data = await getDetailedTransaction(id);
+    console.log(data);
     res.status(httpStatusCodes.OK).jdon(data);
   } catch (error) {
     
