@@ -29,7 +29,7 @@ const getUserTransctions = async (userId,page) => {
         },
       },
       {
-        $skip: (page-1) * perPage,
+        $skip: (page) * perPage,
       },
       {
         $limit: perPage,
@@ -41,7 +41,7 @@ const getUserTransctions = async (userId,page) => {
       success: true,
       transactions: data,
       totalDocuments: count,
-      totalPages: Math.ceil(count / perPage),
+      totalPages: Math.ceil(count / perPage - 1),
       page,
     };
   } catch (error) {
