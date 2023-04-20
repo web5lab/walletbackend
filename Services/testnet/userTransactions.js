@@ -7,7 +7,7 @@ const getUserTransctions = async (userId,page) => {
     const data = await userTransaction.aggregate([
       // match transactions for the given user ID
       {
-        $match: { userId },
+        $match: { userId: userId },
       },
       {
         $lookup: {
@@ -28,7 +28,7 @@ const getUserTransctions = async (userId,page) => {
         },
       },
       {
-        $skip: (page - 1) * perPage,
+        $skip: (page) * perPage,
       },
       {
         $limit: perPage,

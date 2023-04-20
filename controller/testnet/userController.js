@@ -20,9 +20,9 @@ const {
 
 const userTransaction = async (req, res) => {
   try {
-    const userId = req.userPayload.userId;
-    const page = req.query.userId;
-    const data = await getUserTransctions(userId, page);
+    const userId = req.payload.userId;
+    const page = req.query.page;
+    const data = await getUserTransctions(Number(userId),page);
     res.status(httpStatusCodes.OK).json(data);
   } catch (error) {
     console.log("error", error);
