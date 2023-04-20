@@ -77,8 +77,8 @@ const withdrawErc20 = async (coin, coin_amount, receiver_address, network) => {
 
 async function addUserWithDrawl(userId, currencyName, amount, network, withdrawalAddress) {
   try {
-    console.log("first")
-    const user = await userSchema.findById({userId});
+    console.log("first",userId,currencyName, amount, network, withdrawalAddress)
+    const user = await userSchema.findById(userId);
     console.log("second")
     const balanceField = getBalanceField(currencyName);
     const finalAmount = user[balanceField] - amount;
