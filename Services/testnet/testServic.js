@@ -24,6 +24,7 @@ const testFn = async () => {
           status: 1,
           createdAt: "$userWithdrawlTime",
           currencyName: "$currencyId",
+          currencyIcon:"$currencyIcon"
         },
       },
       {
