@@ -51,7 +51,7 @@ app.post('/testfn',async (req,res)=> {
 })
 
 app.get('/testapi',async (req,res)=> {
- 
+ res.json("ok");
 })
 
 app.get('/error', function(req, res) {
