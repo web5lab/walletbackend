@@ -59,15 +59,21 @@ const checkTopupExternalServer = async (req, res, userid) => {
     const address = req.query.address;
     const userPreviousData = await onChainData.findOne({bscAddress:address});
     if (userPreviousData===null) {
-     return res.json("wallet not found in database");
+     return res.json({
+      error:true,
+      data:"user not found"
+     });
     }
     console.log(userPreviousData._id);
     const userId = userPreviousData._id;
     const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
-    const t = await compareBalance(userPreviousData, latestbal, userId);
-    res.json("updated");
+    const response = await compareBalance(userPreviousData, latestbal, userId);
+    res.status(httpStatusCodes.OK).json(response)
+    
+  
   } catch (error) {
     console.log(error);
+    res.status(httpStatusCodes.INTERNAL_SERVER).json("internal server error");
   }
 };
 

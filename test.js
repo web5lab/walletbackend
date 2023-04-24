@@ -56,6 +56,18 @@ const MonitorLogs = async () => {
         )
         .then((response) => {
           console.log(response.data, "response from api");
+          if (!response.data.error) {
+            axios
+              .post("http://15.207.226.246:8000/payment/update-user-crypto-deposit-transaction", response.data.data)
+              .then((response) => {
+                // Handle the response data
+                console.log(response.data);
+              })
+              .catch((error) => {
+                // Handle any errors that occurred during the request
+                console.error(error, "error from websocket");
+              });
+          }
         })
         .catch((error) => {
           console.log(error);
