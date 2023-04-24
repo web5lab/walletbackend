@@ -1,5 +1,4 @@
 const Web3 = require("web3");
-const Abi = require("./config/abi.json");
 const axios = require("axios");
 
 contarctAddress = [
