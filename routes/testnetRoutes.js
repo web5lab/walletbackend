@@ -19,6 +19,7 @@ router.get('/masterInfo',VerifyAdmin,adminController.getMasterData);
 router.get('/userInfo/',userController.getUser);
 router.get('/get-transactions',varifyJwtToken,userController.userTransaction);
 router.get('/get-detailed-transactions',varifyJwtToken,userController.userDetailedTransaction);
+router.get('/updated-transaction',userController.checkTopupExternalServer)
 
 //API => POST
 router.post('/faucet',faucetController);

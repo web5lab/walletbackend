@@ -54,6 +54,23 @@ const checkTopup = async (req, res, userid) => {
   }
 };
 
+const checkTopupExternalServer = async (req, res, userid) => {
+  try {
+    const address = req.query.address;
+    const userPreviousData = await onChainData.findOne({bscAddress:address});
+    if (userPreviousData===null) {
+     return res.json("wallet not found in database");
+    }
+    console.log(userPreviousData._id);
+    const userId = userPreviousData._id;
+    const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
+    const t = await compareBalance(userPreviousData, latestbal, userId);
+    res.json("updated");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const add_withdraw = async (req, res) => {
   console.log(req.userPayload);
   const userId = req.userPayload.userId;
@@ -132,4 +149,5 @@ module.exports = {
   getUser,
   userDetailedTransaction,
   registerNewUser,
+  checkTopupExternalServer
 };

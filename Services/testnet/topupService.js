@@ -28,16 +28,25 @@ const compareBalance = async (previousBal, latestBal,userId) => {
           testPayBalnceOnMatic: obj.testPayMatic
         }
       });
+      const bal = {
+        busdBalance: obj.busdBsc + obj.busdEth + obj.busdMatic,
+        usdtBalance: obj.usdtBsc + obj.usdtEth + obj.usdtMatic,
+        testPayBalance: obj.testPayBsc + obj.testPayEth + obj.testPayMatic
+      }
       await userSchema.updateMany({_id: { $in: userId }}, {
         $inc: {
-          busdBalance: obj.busdBsc + obj.busdEth + obj.busdMatic,
-          usdtBalance: obj.usdtBsc + obj.usdtEth + obj.usdtMatic,
-          testPayBalance: obj.testPayBsc + obj.testPayEth + obj.testPayMatic
+          busdBalance: bal.usdtBalance,
+          usdtBalance: bal.usdtBalance,
+          testPayBalance: bal.testPayBalance
         }
       });
     }
     
-    return "succesfully updated";
+    console.log(obj);
+    return {
+      userId:userId,
+      
+    };
   } catch (error) {
     console.log(error);
   }
