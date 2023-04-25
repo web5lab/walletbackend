@@ -111,25 +111,23 @@ const updateBal = async (userId, currency, amount) => {
   try {
     const incObj = {};
     switch (currency) {
-      case 'busd':
+      case "busd":
         incObj.busdBalance = amount;
         break;
-      case 'usdt':
+      case "usdt":
         incObj.usdtBalance = amount;
         break;
-      case 'testPay':
+      case "testPay":
         incObj.testPayBalance = amount;
         break;
       default:
-        throw new Error('Invalid currency');
+        throw new Error("Invalid currency");
     }
     await userSchema.updateOne({ _id: userId }, { $inc: incObj });
   } catch (error) {
-     console.log(error)
+    console.log(error);
   }
-
 };
-
 
 const getAddress = async (userId, currency) => {
   if (currency == "Btc") {
@@ -179,7 +177,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
       balance: user.btcBalance.toString(),
-      currencyType:"CRYPTO"
+      currencyType: "CRYPTO",
     };
     const obj = {
       success: true,
@@ -193,7 +191,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
       balance: user.usdtBalance.toString(),
-      currencyType:"CRYPTO"
+      currencyType: "CRYPTO",
     };
     const obj = {
       success: true,
@@ -207,7 +205,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
       balance: user.busdBalance.toString(),
-      currencyType:"CRYPTO"
+      currencyType: "CRYPTO",
     };
     const obj = {
       success: true,
@@ -221,7 +219,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
       balance: user.testPayBalance.toString(),
-      currencyType:"CRYPTO"
+      currencyType: "CRYPTO",
     };
     const obj = {
       success: true,
@@ -248,31 +246,31 @@ const getUserData = async (userId) => {
     };
     return obj;
   }
-// converted to number
+  // converted to number
   const userAr = [
     {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
       balance: user.btcBalance.toString(),
-      currencyType:"CRYPTO"
+      currencyType: "CRYPTO",
     },
     {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
       balance: user.usdtBalance.toString(),
-      currencyType:"CRYPTO"
+      currencyType: "CRYPTO",
     },
     {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
       balance: user.busdBalance.toString(),
-      currencyType:"CRYPTO"
+      currencyType: "CRYPTO",
     },
     {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
       balance: user.testPayBalance.toString(),
-      currencyType:"CRYPTO"
+      currencyType: "CRYPTO",
     },
   ];
 

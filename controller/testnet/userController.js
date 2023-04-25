@@ -15,7 +15,8 @@ const {
 } = require("../../Services/testnet/withdrawCoin");
 const { jwtExtractor } = require("../../helper/jwtExtractor");
 const {
-  getUserTransctions, getDetailedTransaction,
+  getUserTransctions,
+  getDetailedTransaction,
 } = require("../../Services/testnet/userTransactions");
 
 const userTransaction = async (req, res) => {
@@ -23,25 +24,23 @@ const userTransaction = async (req, res) => {
     const userId = req.userPayload.userId;
 
     const page = req.query.page;
-    const data = await getUserTransctions(Number(userId),page);
+    const data = await getUserTransctions(Number(userId), page);
     res.status(httpStatusCodes.OK).json(data);
   } catch (error) {
     console.log("error", error);
-    res.status(httpStatusCodes.INTERNAL_SERVER)
+    res.status(httpStatusCodes.INTERNAL_SERVER);
   }
 };
 
-const userDetailedTransaction = async(req,res)=>{
+const userDetailedTransaction = async (req, res) => {
   try {
     const id = req.query.id;
     console.log(id);
     const data = await getDetailedTransaction(id);
     console.log(data);
     res.status(httpStatusCodes.OK).json(data);
-  } catch (error) {
-    
-  }
-}
+  } catch (error) { }
+};
 const checkTopup = async (req, res, userid) => {
   try {
     const userId = req.query.userId;
@@ -57,20 +56,18 @@ const checkTopup = async (req, res, userid) => {
 const checkTopupExternalServer = async (req, res, userid) => {
   try {
     const address = req.query.address;
-    const userPreviousData = await onChainData.findOne({bscAddress:address});
-    if (userPreviousData===null) {
-     return res.json({
-      error:true,
-      data:"user not found"
-     });
+    const userPreviousData = await onChainData.findOne({ bscAddress: address });
+    if (userPreviousData === null) {
+      return res.json({
+        error: true,
+        data: "user not found",
+      });
     }
     console.log(userPreviousData._id);
     const userId = userPreviousData._id;
     const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
     const response = await compareBalance(userPreviousData, latestbal, userId);
-    res.status(httpStatusCodes.OK).json(response)
-    
-  
+    res.status(httpStatusCodes.OK).json(response);
   } catch (error) {
     console.log(error);
     res.status(httpStatusCodes.INTERNAL_SERVER).json("internal server error");
@@ -155,5 +152,5 @@ module.exports = {
   getUser,
   userDetailedTransaction,
   registerNewUser,
-  checkTopupExternalServer
+  checkTopupExternalServer,
 };

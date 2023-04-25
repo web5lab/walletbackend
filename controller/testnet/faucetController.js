@@ -15,38 +15,37 @@ const faucetController = catchAsync(async (req, res) => {
   const { network, coin, address, amount } = req.body;
   if (network == "eth") {
     if (coin == "Busd") {
-        await getFaucetBusdEth(amount,address);
+      await getFaucetBusdEth(amount, address);
     } else if (coin == "Usdt") {
-       await  getFaucetUsdtEth(amount,address);
+      await getFaucetUsdtEth(amount, address);
     } else if (coin == "testPay") {
-       await getFaucetTestPayEth(amount,address);
+      await getFaucetTestPayEth(amount, address);
     } else {
       res.send("Coin Not Supported");
     }
   } else if (network == "bsc") {
     if (coin == "Busd") {
-       await getFaucetBusdBsc(amount,address);
+      await getFaucetBusdBsc(amount, address);
     } else if (coin == "Usdt") {
-       await getFaucetUsdtBsc(amount,address);
+      await getFaucetUsdtBsc(amount, address);
     } else if (coin == "testPay") {
-       await getFaucetTestPayBsc(amount,address);
+      await getFaucetTestPayBsc(amount, address);
     } else {
       res.send("Coin Not Supported");
     }
   } else if (network == "matic") {
     if (coin == "Busd") {
-       await getFaucetBusdMatic(amount,address);
+      await getFaucetBusdMatic(amount, address);
     } else if (coin == "Usdt") {
-      await  getFaucetUsdtMatic(amount,address);
+      await getFaucetUsdtMatic(amount, address);
     } else if (coin == "testPay") {
-       await getFaucetTestPayMatic(amount,address);
+      await getFaucetTestPayMatic(amount, address);
     } else {
       res.send("Coin Not Supported");
     }
   } else {
     res.send("invalid network");
   }
-  
 });
 
 module.exports = {

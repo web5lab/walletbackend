@@ -1,9 +1,9 @@
-const {Adminkey} = require('../Config/Config');
+const { Adminkey } = require('../Config/Config');
 
-const VerifyAdmin = (req,res,next) => {
-    if(req.body.secretKey == Adminkey){
+const VerifyAdmin = (req, res, next) => {
+    if (req.body.secretKey == Adminkey) {
         next()
-    }else{
+    } else {
         res.send('invalid Secret key')
     }
 }

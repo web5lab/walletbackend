@@ -2,13 +2,14 @@ const userTransaction = require("../../mongoDb/schema/WithdrawlSchema");
 
 const perPage = 2; // replace with the number of transactions to show per page
 
-const getUserTransctions = async (userId,page) => {
+const getUserTransctions = async (userId, page) => {
   try {
     const data = await userTransaction.aggregate([
       // match transactions for the given user ID
       {
         $match: { userId: userId },
-      },{
+      },
+      {
         $sort: { userWithdrawlTime: -1 },
       },
       {
@@ -18,12 +19,12 @@ const getUserTransctions = async (userId,page) => {
           status: 1,
           createdAt: "$userWithdrawlTime",
           currencyName: "$currencyId",
-          currencyIcon:"$currencyIcon",
-          transactionType: '$transactionType'
+          currencyIcon: "$currencyIcon",
+          transactionType: "$transactionType",
         },
       },
       {
-        $skip: (page) * perPage,
+        $skip: page * perPage,
       },
       {
         $limit: perPage,
@@ -31,7 +32,7 @@ const getUserTransctions = async (userId,page) => {
     ]);
     const count = await userTransaction.countDocuments({ userId });
 
-    return{
+    return {
       success: true,
       transactions: data,
       totalDocuments: count,
@@ -44,33 +45,33 @@ const getUserTransctions = async (userId,page) => {
   }
 };
 
-const getDetailedTransaction = async(id) =>{
-   try {
+const getDetailedTransaction = async (id) => {
+  try {
     const data = await userTransaction.findById(id);
     return {
-      success:true,
-      transaction:{
+      success: true,
+      transaction: {
         _id: data._id.toString(),
         status: data.status,
         network: data.network,
         amount: data.amount,
         currencyName: data.currencyId,
         currencyIcon: data.currencyIcon,
-        transactionHash:data.transactionHash,
-        transactionUrl:data.explorerUrl,
-        transactionType:data.transactionType,
+        transactionHash: data.transactionHash,
+        transactionUrl: data.explorerUrl,
+        transactionType: data.transactionType,
         createdAt: data.userWithdrawlTime,
-      }
-    }
-   } catch (error) {
-     console.log(error)
-     return {
-      success:false
-     }
-   }
-}
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+    };
+  }
+};
 
 module.exports = {
   getUserTransctions,
-  getDetailedTransaction
+  getDetailedTransaction,
 };

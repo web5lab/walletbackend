@@ -74,23 +74,49 @@ const withdrawErc20 = async (coin, coin_amount, receiver_address, network) => {
   console.log(txReceipt);
 };
 
-
-async function addUserWithDrawl(userId, currencyName, amount, network, withdrawalAddress) {
+async function addUserWithDrawl(
+  userId,
+  currencyName,
+  amount,
+  network,
+  withdrawalAddress
+) {
   try {
-    console.log("first",userId,currencyName, amount, network, withdrawalAddress)
+    console.log(
+      "first",
+      userId,
+      currencyName,
+      amount,
+      network,
+      withdrawalAddress
+    );
     const user = await userSchema.findById(userId);
-    console.log("second")
+    console.log("second");
     const balanceField = getBalanceField(currencyName);
     const finalAmount = user[balanceField] - amount;
-    await userSchema.findByIdAndUpdate(userId, { $inc: { [balanceField]: -amount } });
-    console.log("third")
+    await userSchema.findByIdAndUpdate(userId, {
+      $inc: { [balanceField]: -amount },
+    });
+    console.log("third");
     const currencyIcon = getCurrencyIcon(currencyName);
-    const transactionData = { userId, currencyName, amount, network, withdrawalAddress, currencyIcon };
+    const transactionData = {
+      userId,
+      currencyName,
+      amount,
+      network,
+      withdrawalAddress,
+      currencyIcon,
+    };
     await saveTransactionData(transactionData);
-    console.log("update error")
-    return { error: false, data: finalAmount.toString(), userId, currency: currencyName };
+    console.log("update error");
+    return {
+      error: false,
+      data: finalAmount.toString(),
+      userId,
+      currency: currencyName,
+    };
   } catch (error) {
-    console.error('Error in withdrawFunds:', error);
+    console.error("Error in withdrawFunds:", error);
     return { error: true };
   }
 }
@@ -102,26 +128,23 @@ async function saveTransactionData(data) {
 
 function getBalanceField(currencyName) {
   const fieldNames = {
-    Usdt: 'usdtBalance',
-    Busd: 'busdBalance',
-    testPay: 'testPayBalance',
-    Btc: 'btcBalance',
+    Usdt: "usdtBalance",
+    Busd: "busdBalance",
+    testPay: "testPayBalance",
+    Btc: "btcBalance",
   };
   return fieldNames[currencyName];
 }
 
 function getCurrencyIcon(currencyName) {
   const iconUrls = {
-    Usdt: 'https://bc.game/coin/USDT.black.png',
-    Busd: 'https://bc.game/coin/BUSD.black.png',
-    testPay: 'https://bc.game/coin/PEOPLE.black.png',
-    Btc: 'https://bc.game/coin/BTC.black.png',
+    Usdt: "https://bc.game/coin/USDT.black.png",
+    Busd: "https://bc.game/coin/BUSD.black.png",
+    testPay: "https://bc.game/coin/PEOPLE.black.png",
+    Btc: "https://bc.game/coin/BTC.black.png",
   };
   return iconUrls[currencyName];
 }
-
-
-
 
 const getWithdrawlData = async (page, limit) => {
   const startIndex = (page - 1) * limit;

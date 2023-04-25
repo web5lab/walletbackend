@@ -63,24 +63,25 @@ const compareBalance = async (previousBal, latestBal, userId) => {
       console.log(userData);
       if (bal.busdBalance !== 0) {
         updatedCoin = "Busd";
-        updatedBalance = userData.busdBalance
+        updatedBalance = userData.busdBalance;
       } else if (bal.usdtBalance !== 0) {
         updatedCoin = "Usdt";
-        updatedBalance = userData.usdtBalance
+        updatedBalance = userData.usdtBalance;
       } else if (bal.testPayBalance !== 0) {
         updatedCoin = "testPay";
         updatedBalance = userData.testPayBalance;
       }
-      return{
-        error:false,
-        data:{userId: userId,
+      return {
+        error: false,
+        data: {
+          userId: userId,
           symbol: updatedCoin,
           balance: updatedBalance.toString(),
           currencyType: "CRYPTO",
-          status: "COMPLETED"}
+          status: "COMPLETED",
+        },
       };
     }
-
   } catch (error) {
     console.log(error);
   }
