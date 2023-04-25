@@ -53,7 +53,7 @@ const compareBalance = async (previousBal, latestBal, userId) => {
         { _id: { $in: userId } },
         {
           $inc: {
-            busdBalance: bal.usdtBalance,
+            busdBalance: bal.busdBalance,
             usdtBalance: bal.usdtBalance,
             testPayBalance: bal.testPayBalance,
           },
