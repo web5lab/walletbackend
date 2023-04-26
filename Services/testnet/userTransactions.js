@@ -1,4 +1,5 @@
 const userTransaction = require("../../mongoDb/schema/WithdrawlSchema");
+const userWithdrawl = require("../../mongoDb/schema/WithdrawlSchema");
 
 const perPage = 2; // replace with the number of transactions to show per page
 
