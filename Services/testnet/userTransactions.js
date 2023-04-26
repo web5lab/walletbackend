@@ -3,12 +3,12 @@ const userWithdrawl = require("../../mongoDb/schema/WithdrawlSchema");
 
 const perPage = 2; // replace with the number of transactions to show per page
 
-const getUserTransctions = async (userId, page) => {
+const getUserWithdrawl = async (userId, page) => {
   try {
     const data = await userTransaction.aggregate([
       // match transactions for the given user ID
       {
-        $match: { userId: userId },
+        $match: { userId: userId,transactionType: "Withdrawl" },
       },
       {
         $sort: { userTrasactionTime: -1 },
@@ -85,6 +85,7 @@ const getUserDeposit = async (id) => {
           amount: 1,
           status: 1,
           createdAt: "$userTrasactionTime",
+          depositedBy:"$address",
           currencyName: "$currencyId",
           currencyIcon: "$currencyIcon",
           transactionType: "$transactionType",
@@ -119,6 +120,6 @@ async function saveTransactionData(data) {
 module.exports = {
   getUserDeposit,
   saveTransactionData,
-  getUserTransctions,
+  getUserWithdrawl,
   getDetailedTransaction,
 };

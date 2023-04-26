@@ -18,8 +18,16 @@ function getCurrencyIcon(currencyName) {
     return fieldNames[currencyName];
   }
 
+  function getExplorerUrl(NetworkName) {
+    const fieldNames = {
+     bscTestnet:"https://testnet.bscscan.com/"
+    };
+    return fieldNames[NetworkName];
+  }
+
 
   module.exports = {
+    getExplorerUrl,
     getCurrencyIcon,
     getBalanceField
   }

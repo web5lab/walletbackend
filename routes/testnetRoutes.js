@@ -20,11 +20,12 @@ router.get('/userInfo/',userController.getUser);
 router.get('/get-deposite',varifyJwtToken,userController.userDeposite);
 router.get('/get-withdrawl',varifyJwtToken,userController.userWithdrawl);
 router.get('/get-detailed-transactions',varifyJwtToken,userController.userDetailedTransaction);
-router.get('/updated-transaction',userController.checkTopupExternalServer)
+
 
 //API => POST
 router.post('/faucet',faucetController);
-router.post('/validateUser',)
+router.post('/validateUser',);
+router.post('/update-transaction',userController.checkTopupExternalServer)
 router.post('/addUser',userController.registerNewUser)// body Par
 router.post('/add-withdrawl',varifyJwtToken,userController.addWithdrawal)// body Par
 

@@ -1,9 +1,17 @@
 const { userWithdrawl } = require("../../controller/testnet/userController");
 const onChainData = require("../../mongoDb/schema/onChainData");
 const userSchema = require("../../mongoDb/schema/userSchema");
+const { getExplorerUrl, getCurrencyIcon } = require("./coinCommon");
 const { saveTransactionData } = require("./userTransactions");
 
-const compareBalance = async (previousBal, latestBal, userId) => {
+const compareBalance = async (
+  previousBal,
+  latestBal,
+  userId,
+  from,
+  hash,
+  network
+) => {
   try {
     const obj = {
       busdBsc: latestBal.BalBusdBsc - previousBal.busdBalanceOnBsc,
@@ -66,25 +74,29 @@ const compareBalance = async (previousBal, latestBal, userId) => {
       console.log(userData);
       if (bal.busdBalance !== 0) {
         updatedCoin = "Busd";
-        amount = bal.busdBalance,
-        updatedBalance = userData.busdBalance;
+        (amount = bal.busdBalance), (updatedBalance = userData.busdBalance);
       } else if (bal.usdtBalance !== 0) {
         updatedCoin = "Usdt";
-        amount = bal.usdtBalance,
-        updatedBalance = userData.usdtBalance;
+        (amount = bal.usdtBalance), (updatedBalance = userData.usdtBalance);
       } else if (bal.testPayBalance !== 0) {
         updatedCoin = "testPay";
-        amount = bal.testPayBalance,
-        updatedBalance = userData.testPayBalance;
+        (amount = bal.testPayBalance),
+          (updatedBalance = userData.testPayBalance);
       }
       const transactionData = {
         userId,
-        currencyName:updatedCoin,
+        currencyName: updatedCoin,
         amount,
-        withdrawalAddress,
-        currencyIcon,
+        address: from,
+        network: network,
+        transactionHash: hash,
+        transactionType:"Deposit",
+        status:"Deposited",
+        explorerUrl: getExplorerUrl("bscTestnet") + "tx/" + hash,
+        currencyIcon: getCurrencyIcon(updatedCoin),
       };
-     const saveTransaction = await saveTransactionData()
+      const saveTransaction = await saveTransactionData(transactionData);
+      console.log("ok", saveTransaction);
       return {
         error: false,
         data: {

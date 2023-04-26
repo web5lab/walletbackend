@@ -15,15 +15,16 @@ const {
 } = require("../../Services/testnet/withdrawCoin");
 const { jwtExtractor } = require("../../helper/jwtExtractor");
 const {
-  getUserTransctions,
+  getUserDeposit,
   getDetailedTransaction,
+  getUserWithdrawl,
 } = require("../../Services/testnet/userTransactions");
 
 const userWithdrawl = async (req, res) => {
   try {
     const userId = req.userPayload.userId;
     const page = req.query.page;
-    const data = await getUserTransctions(Number(userId), page);
+    const data = await getUserWithdrawl(Number(userId), page);
     res.status(httpStatusCodes.OK).json(data);
   } catch (error) {
     console.log("error", error);
@@ -45,7 +46,7 @@ const userDeposite = async (req, res) => {
   try {
     const userId = req.userPayload.userId;
     const page = req.query.page;
-    const data = await getUserTransctions(Number(userId), page);
+    const data = await getUserDeposit(Number(userId), page);
     res.status(httpStatusCodes.OK).json(data);
   } catch (error) {
     console.log("error", error);
@@ -68,7 +69,10 @@ const checkTopup = async (req, res, userid) => {
 
 const checkTopupExternalServer = async (req, res, userid) => {
   try {
-    const address = req.query.address;
+    const address = req.body.address;
+    const hash = req.body.hash;
+    const from = req.body.from;
+    const network = req.body.network;
     const userPreviousData = await onChainData.findOne({ bscAddress: address });
     if (userPreviousData === null) {
       return res.json({
@@ -79,7 +83,7 @@ const checkTopupExternalServer = async (req, res, userid) => {
     console.log(userPreviousData._id);
     const userId = userPreviousData._id;
     const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
-    const response = await compareBalance(userPreviousData, latestbal, userId);
+    const response = await compareBalance(userPreviousData, latestbal, userId,from,hash,network);
     res.status(httpStatusCodes.OK).json(response);
   } catch (error) {
     console.log(error);
