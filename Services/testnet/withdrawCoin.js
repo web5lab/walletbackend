@@ -99,13 +99,14 @@ async function addUserWithDrawl(
       $inc: { [balanceField]: -amount },
     });
     console.log("third");
+    const address =  withdrawalAddress;
     const currencyIcon = getCurrencyIcon(currencyName);
     const transactionData = {
       userId,
       currencyName,
       amount,
       network,
-     address: withdrawalAddress,
+     address,
       currencyIcon,
     };
     await saveTransactionData(transactionData);
