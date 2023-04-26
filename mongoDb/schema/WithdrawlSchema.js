@@ -10,7 +10,7 @@ const userWithdrawl = new mongoose.Schema({
   status:{type:String,default:"Withdrawl is in progress"},
   currencyIcon:{type:String},
   transactionType: { type: String,default:"Withdrawl"},
-  userWithdrawlTime: { type: Date, default: Date() },
+  userTrasactionTime: { type: Date, default: Date() },
   approvedTime:{type:Date},
   transactionHash:{type:String,default:"transaction hash is pending"},
   explorerUrl:{type:String,default:"https://bscscan.com/"},

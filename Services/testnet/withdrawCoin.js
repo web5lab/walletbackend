@@ -6,6 +6,7 @@ const {
 } = require("../../Config/Config");
 const userWithdrawl = require("../../mongoDb/schema/WithdrawlSchema");
 const userSchema = require("../../mongoDb/schema/userSchema");
+const { saveTransactionData } = require("./userTransactions");
 
 const withdrawController = async (data) => {
   console.log(data);
@@ -104,7 +105,7 @@ async function addUserWithDrawl(
       currencyName,
       amount,
       network,
-      withdrawalAddress,
+     address: withdrawalAddress,
       currencyIcon,
     };
     await saveTransactionData(transactionData);
@@ -121,10 +122,6 @@ async function addUserWithDrawl(
   }
 }
 
-async function saveTransactionData(data) {
-  const transaction = new userWithdrawl(data);
-  await transaction.save();
-}
 
 function getBalanceField(currencyName) {
   const fieldNames = {
@@ -187,6 +184,7 @@ const getWithdrawlData = async (page, limit) => {
 };
 
 module.exports = {
+  saveTransactionData,
   addUserWithDrawl,
   withdrawController,
   getWithdrawlData,

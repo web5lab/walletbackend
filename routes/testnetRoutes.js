@@ -17,7 +17,8 @@ router.get('/getMultipleWallet',VerifyServer,)
 router.get('/address',userController.getUserAdress);
 router.get('/masterInfo',VerifyAdmin,adminController.getMasterData);
 router.get('/userInfo/',userController.getUser);
-router.get('/get-transactions',varifyJwtToken,userController.userTransaction);
+router.get('/get-deposite',varifyJwtToken,userController.userDeposite);
+router.get('/get-withdrawl',varifyJwtToken,userController.userWithdrawl);
 router.get('/get-detailed-transactions',varifyJwtToken,userController.userDetailedTransaction);
 router.get('/updated-transaction',userController.checkTopupExternalServer)
 
@@ -25,6 +26,6 @@ router.get('/updated-transaction',userController.checkTopupExternalServer)
 router.post('/faucet',faucetController);
 router.post('/validateUser',)
 router.post('/addUser',userController.registerNewUser)// body Par
-router.post('/add-withdrawl',varifyJwtToken,userController.add_withdraw)// body Par
+router.post('/add-withdrawl',varifyJwtToken,userController.addWithdrawal)// body Par
 
 module.exports = router;

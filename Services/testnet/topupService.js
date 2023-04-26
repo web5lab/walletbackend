@@ -1,5 +1,7 @@
+const { userWithdrawl } = require("../../controller/testnet/userController");
 const onChainData = require("../../mongoDb/schema/onChainData");
 const userSchema = require("../../mongoDb/schema/userSchema");
+const { saveTransactionData } = require("./userTransactions");
 
 const compareBalance = async (previousBal, latestBal, userId) => {
   try {
@@ -28,6 +30,7 @@ const compareBalance = async (previousBal, latestBal, userId) => {
     ) {
       let updatedCoin;
       let updatedBalance;
+      let amount;
       await onChainData.updateMany(
         { _id: { $in: userId } },
         {
@@ -63,14 +66,25 @@ const compareBalance = async (previousBal, latestBal, userId) => {
       console.log(userData);
       if (bal.busdBalance !== 0) {
         updatedCoin = "Busd";
+        amount = bal.busdBalance,
         updatedBalance = userData.busdBalance;
       } else if (bal.usdtBalance !== 0) {
         updatedCoin = "Usdt";
+        amount = bal.usdtBalance,
         updatedBalance = userData.usdtBalance;
       } else if (bal.testPayBalance !== 0) {
         updatedCoin = "testPay";
+        amount = bal.testPayBalance,
         updatedBalance = userData.testPayBalance;
       }
+      const transactionData = {
+        userId,
+        currencyName:updatedCoin,
+        amount,
+        withdrawalAddress,
+        currencyIcon,
+      };
+     const saveTransaction = await saveTransactionData()
       return {
         error: false,
         data: {
@@ -87,13 +101,6 @@ const compareBalance = async (previousBal, latestBal, userId) => {
   }
 };
 
-// const updateData = async (userId,obj) => {
-//   const prevData = await onChainData.findById(userId).updateMany({})
-//   const n = await onChainData.findByIdAndUpdate(userId,{ usdtBalanceOnBsc: ++currencyValue }) // Specify the new value you want to set
-//   console.log(n);
-// }
-
-// updateData(1,"usdtBal",11)
 module.exports = {
   compareBalance,
 };

@@ -19,10 +19,9 @@ const {
   getDetailedTransaction,
 } = require("../../Services/testnet/userTransactions");
 
-const userTransaction = async (req, res) => {
+const userWithdrawl = async (req, res) => {
   try {
     const userId = req.userPayload.userId;
-
     const page = req.query.page;
     const data = await getUserTransctions(Number(userId), page);
     res.status(httpStatusCodes.OK).json(data);
@@ -41,6 +40,20 @@ const userDetailedTransaction = async (req, res) => {
     res.status(httpStatusCodes.OK).json(data);
   } catch (error) { }
 };
+
+const userDeposite = async (req, res) => {
+  try {
+    const userId = req.userPayload.userId;
+    const page = req.query.page;
+    const data = await getUserTransctions(Number(userId), page);
+    res.status(httpStatusCodes.OK).json(data);
+  } catch (error) {
+    console.log("error", error);
+    res.status(httpStatusCodes.INTERNAL_SERVER);
+  }
+};
+
+
 const checkTopup = async (req, res, userid) => {
   try {
     const userId = req.query.userId;
@@ -74,7 +87,7 @@ const checkTopupExternalServer = async (req, res, userid) => {
   }
 };
 
-const add_withdraw = async (req, res) => {
+const addWithdrawal = async (req, res) => {
   console.log(req.userPayload);
   const userId = req.userPayload.userId;
   console.log("user id in jwt", userId);
@@ -143,8 +156,9 @@ const getCoins = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  userTransaction,
-  add_withdraw,
+  userWithdrawl,
+  userDeposite,
+  addWithdrawal,
   checkTopup,
   getCoins,
   getSpecificCoin,

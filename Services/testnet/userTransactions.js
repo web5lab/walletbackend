@@ -10,14 +10,14 @@ const getUserTransctions = async (userId, page) => {
         $match: { userId: userId },
       },
       {
-        $sort: { userWithdrawlTime: -1 },
+        $sort: { userTrasactionTime: -1 },
       },
       {
         $project: {
           _id: { $toString: "$_id" },
           amount: 1,
           status: 1,
-          createdAt: "$userWithdrawlTime",
+          createdAt: "$userTrasactionTime",
           currencyName: "$currencyId",
           currencyIcon: "$currencyIcon",
           transactionType: "$transactionType",
@@ -60,7 +60,7 @@ const getDetailedTransaction = async (id) => {
         transactionHash: data.transactionHash,
         transactionUrl: data.explorerUrl,
         transactionType: data.transactionType,
-        createdAt: data.userWithdrawlTime,
+        createdAt: data.userTrasactionTime,
       },
     };
   } catch (error) {
@@ -71,7 +71,53 @@ const getDetailedTransaction = async (id) => {
   }
 };
 
+const getUserDeposit = async (id) => {
+  try {
+    const data = await userTransaction.aggregate([
+      { $match: { userId: id, transactionType: "Deposit" } },
+      {
+        $sort: { userTrasactionTime: -1 },
+      },
+      {
+        $project: {
+          _id: { $toString: "$_id" },
+          amount: 1,
+          status: 1,
+          createdAt: "$userTrasactionTime",
+          currencyName: "$currencyId",
+          currencyIcon: "$currencyIcon",
+          transactionType: "$transactionType",
+        },
+      },
+      {
+        $skip: page * perPage,
+      },
+      {
+        $limit: perPage,
+      },
+    ]);
+    const count = await userTransaction.countDocuments({ userId });
+
+    return {
+      success: true,
+      transactions: data,
+      totalDocuments: count,
+      totalPages: Math.ceil(count / perPage - 1),
+      page,
+    };
+  } catch (error) {
+    console.log("error from user deposit",error)
+  }
+};
+
+async function saveTransactionData(data) {
+  const transaction = new userWithdrawl(data);
+  await transaction.save();
+}
+
 module.exports = {
+  getUserDeposit,
+  saveTransactionData,
   getUserTransctions,
   getDetailedTransaction,
 };
