@@ -90,7 +90,7 @@ const compareBalance = async (
         address: from,
         network: network,
         transactionHash: hash,
-        transactionType:"Deposit",
+        transactionType:"Deposite",
         status:"Deposited",
         explorerUrl: getExplorerUrl("bscTestnet") + "tx/" + hash,
         currencyIcon: getCurrencyIcon(updatedCoin),

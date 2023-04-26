@@ -72,10 +72,10 @@ const getDetailedTransaction = async (id) => {
   }
 };
 
-const getUserDeposit = async (id) => {
+const getUserDeposit = async (userId,page) => {
   try {
     const data = await userTransaction.aggregate([
-      { $match: { userId: id, transactionType: "Deposit" } },
+      { $match: { userId: userId, transactionType: "Deposite" } },
       {
         $sort: { userTrasactionTime: -1 },
       },
@@ -85,10 +85,8 @@ const getUserDeposit = async (id) => {
           amount: 1,
           status: 1,
           createdAt: "$userTrasactionTime",
-          depositedBy:"$address",
           currencyName: "$currencyId",
           currencyIcon: "$currencyIcon",
-          transactionType: "$transactionType",
         },
       },
       {
@@ -98,7 +96,7 @@ const getUserDeposit = async (id) => {
         $limit: perPage,
       },
     ]);
-    const count = await userTransaction.countDocuments({ userId });
+    const count = await userTransaction.countDocuments({ userId,transactionType: "Deposite"});
 
     return {
       success: true,
