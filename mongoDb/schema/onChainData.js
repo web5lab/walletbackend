@@ -65,6 +65,10 @@ const onChainSchema = new Schema({
     testPayBalnceOnMatic: {
         type: Schema.Types.Decimal128,
         default:"0"
+    },
+    pepeCoinBalnceOnBsc: {
+        type: Schema.Types.Decimal128,
+        default:"0"
     }
 });
 
