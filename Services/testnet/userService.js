@@ -272,6 +272,12 @@ const getUserData = async (userId) => {
       balance: user.testPayBalance.toString(),
       currencyType: "CRYPTO",
     },
+    {
+      icon: "https://bc.game/coin/PEOPLE.black.png",
+      symbol: "pepeCoin",
+      balance: user.pepeCoinBalnace.toString(),
+      currencyType: "CRYPTO",
+    },
   ];
 
   const obj = {

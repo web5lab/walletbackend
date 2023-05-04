@@ -1,4 +1,3 @@
-const { userWithdrawl } = require("../../controller/testnet/userController");
 const onChainData = require("../../mongoDb/schema/onChainData");
 const userSchema = require("../../mongoDb/schema/userSchema");
 const { getExplorerUrl, getCurrencyIcon } = require("./coinCommon");

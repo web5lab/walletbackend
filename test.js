@@ -5,6 +5,7 @@ contarctAddress = [
   "0x0249CA3806d52e3D612aC7aeB5351b2C763dFB87",
   "0x3F0B6d90C09A82597247BA019a70921fae248Ae5",
   "0x6F85f769c9b0eb71Fcf9DAf793e2dbD23F1f3b3D",
+  "0xA260D409c47C01E4205c3f44e250be24bfe362fB",
 ];
 const MonitorLogs = async () => {
   const web3 = new Web3(

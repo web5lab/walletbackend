@@ -41,6 +41,10 @@ const UserSchema = new Schema({
     testPayBalance: {
         type: Schema.Types.Decimal128,
         default:"0.0000"
+    },
+    pepeCoinBalnace:{
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
     }
     
 });
