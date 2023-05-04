@@ -63,6 +63,20 @@ const getuserDepositeAdressUsdt = async (userId) => {
   return data;
 };
 
+const getuserDepositeAdressPepeCoin = async (userId) => {
+  const user = await userSchema.findById(userId);
+  if (!user) {
+    return null;
+  }
+  const data = [
+    {
+      network: "Bep20",
+      address: user.ethAddress,
+    }
+  ];
+  return data;
+};
+
 const getuserDepositeAdressBusd = async (userId) => {
   const user = await userSchema.findById(userId);
   if (!user) {
@@ -135,6 +149,14 @@ const getAddress = async (userId, currency) => {
       success: true,
       error: false,
       data: await getuserDepositeAdressBtc(userId),
+    };
+    return obj;
+  }
+  if (currency == "pepeCoin") {
+    const obj = {
+      success: true,
+      error: false,
+      data: await getuserDepositeAdressPepeCoin(userId),
     };
     return obj;
   }
