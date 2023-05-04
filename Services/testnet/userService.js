@@ -296,7 +296,7 @@ const getUserData = async (userId) => {
     },
     {
       icon: "http://15.207.226.246:9051/images/red-pepe-logo.png",
-      symbol: "pepeCoin",
+      symbol: "RPEPE",
       balance: user.pepeCoinBalnace.toString(),
       currencyType: "CRYPTO",
     },
