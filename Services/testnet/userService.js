@@ -302,6 +302,8 @@ const getUserData = async (userId) => {
     },
   ];
 
+  // coindetails
+
   const obj = {
     success: true,
     error: false,
