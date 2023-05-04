@@ -152,7 +152,7 @@ const getAddress = async (userId, currency) => {
     };
     return obj;
   }
-  if (currency == "pepeCoin") {
+  if (currency == "RPEPE") {
     const obj = {
       success: true,
       error: false,
