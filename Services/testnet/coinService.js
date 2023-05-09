@@ -5,7 +5,7 @@ const supportedCoin = require("../../mongoDb/schema/suportedCoins");
 const getAllCoins = async () => {
   const coins = await currencyModel.aggregate([
     {$addFields:{currencyType:"CRYPTO"}},
-    { $project: {  currencyName: 1, currencyType: 1 } },
+    { $project: {currencyId:"$_id",_id:0,  currencyName: 1, currencyType: 1 } },
    
   ]);
   return coins;
