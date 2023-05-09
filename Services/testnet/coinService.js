@@ -1,6 +1,7 @@
 const currencyModel = require("../../mongoDb/schema/currencySchema");
 const supportedCoin = require("../../mongoDb/schema/suportedCoins");
 
+// test data
 const getAllCoins = async () => {
   const coins = await currencyModel.aggregate([
     {$addFields:{currencyType:"CRYPTO"}},
