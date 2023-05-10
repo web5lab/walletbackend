@@ -159,11 +159,17 @@ const getCoins = catchAsync(async (req, res) => {
   res.status(httpStatusCodes.OK).json(obj);
 });
 
+const addUserCoin = catchAsync(async(req,res)=>{
+  console.log(req.body);
+  res.send("ok");
+})
+
 module.exports = {
   userWithdrawl,
   userDeposite,
   addWithdrawal,
   checkTopup,
+  addUserCoin,
   getCoins,
   getSpecificCoin,
   getUserAdress,
