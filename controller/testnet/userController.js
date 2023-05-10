@@ -161,7 +161,11 @@ const getCoins = catchAsync(async (req, res) => {
 
 const addUserCoin = catchAsync(async(req,res)=>{
   console.log(req.body);
-  res.send("ok");
+  res.json({
+    success:true,
+    error:false,
+    data:"ok"
+  });
 })
 
 module.exports = {
