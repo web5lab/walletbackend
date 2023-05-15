@@ -168,6 +168,7 @@ const addUserCoin = catchAsync(async(req,res)=>{
   res.json({
     success:true,
     error:false,
+    amount:amount,
     data:"ok"
   });
 })
