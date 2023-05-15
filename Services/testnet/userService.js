@@ -1,6 +1,7 @@
 const { getWallet } = require("./walletService.js");
 const userSchema = require("../../mongoDb/schema/userSchema");
 const onChainData = require("../../mongoDb/schema/onChainData");
+const currencyModel = require("../../mongoDb/schema/currencySchema.js");
 
 const addUser = async (userId) => {
   const userdb = await getUserData(userId);
@@ -138,6 +139,37 @@ const updateBal = async (userId, currency, amount) => {
         throw new Error("Invalid currency");
     }
     await userSchema.updateOne({ _id: userId }, { $inc: incObj });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateBalByCurrencyId = async (userId, currencyId, amount) => {
+  try {
+    const currencyData = await currencyModel.findById(currencyId);
+    const currency = currencyData.currencyName;
+    const incObj = {};
+    switch (currency) {
+      case "Busd":
+        incObj.busdBalance = amount;
+        break;
+      case "Usdt":
+        incObj.usdtBalance = amount;
+        break;
+      case "testPay":
+        incObj.testPayBalance = amount;
+        break;
+      case "Btc":
+        incObj.btcBalance = amount;
+        break;
+      case "RPEPE":
+        incObj.pepeCoinBalnace = amount;
+        break;
+      default:
+        throw new Error("Invalid currency");
+    }
+    await userSchema.updateOne({ _id: userId }, { $inc: incObj });
+    return true;
   } catch (error) {
     console.log(error);
   }
@@ -314,6 +346,7 @@ const getUserData = async (userId) => {
 };
 
 module.exports = {
+  updateBalByCurrencyId,
   addUser,
   getCoinData,
   updateBal,

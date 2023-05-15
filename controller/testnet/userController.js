@@ -5,6 +5,7 @@ const {
   addUser,
   getAddress,
   getCoinData,
+  updateBalByCurrencyId,
 } = require("../../Services/testnet/userService");
 const { getAllCoins } = require("../../Services/testnet/coinService");
 const onChainData = require("../../mongoDb/schema/onChainData");
@@ -160,7 +161,10 @@ const getCoins = catchAsync(async (req, res) => {
 });
 
 const addUserCoin = catchAsync(async(req,res)=>{
-  console.log(req.body);
+  const userId = req.body.userId
+  const amount = req.body.balance
+  const id = req.body.selectedCurrency
+  await updateBalByCurrencyId(userId,id,amount);
   res.json({
     success:true,
     error:false,
