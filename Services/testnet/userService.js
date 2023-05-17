@@ -162,6 +162,9 @@ const updateBalByCurrencyId = async (userId, currencyId, amount) => {
       case "Btc":
         incObj.btcBalance = amount;
         break;
+      case "LTC":
+        incObj.LTCBalance = amount;
+        break;
       case "RPEPE":
         incObj.pepeCoinBalnace = amount;
         break;
@@ -282,11 +285,26 @@ const getCoinData = async (userId, currency) => {
     };
     return obj;
   }
+  if (currency == "LTC") {
+    const data = {
+      icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.png",
+      symbol: "LTC",
+      balance: user.LTCBalance.toString(),
+      currencyType: "CRYPTO",
+    };
+    const obj = {
+      success: true,
+      error: false,
+      data: data,
+    };
+    return obj;
+  }
   const obj = {
     success: false,
     error: true,
     data: "invalid currency",
   };
+  
   return obj;
 };
 
@@ -332,6 +350,12 @@ const getUserData = async (userId) => {
       balance: user.pepeCoinBalnace.toString(),
       currencyType: "CRYPTO",
     },
+    {
+      icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.pngw",
+      symbol: "LTC",
+      balance: user.pepeCoinBalnace.toString(),
+      currencyType: "CRYPTO",
+    }
   ];
 
   // coindetails
