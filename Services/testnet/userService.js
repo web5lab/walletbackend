@@ -234,6 +234,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
       balance: user.btcBalance.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -248,6 +249,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
       balance: user.usdtBalance.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -262,6 +264,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
       balance: user.busdBalance.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -276,6 +279,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
       balance: user.testPayBalance.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -290,6 +294,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.png",
       symbol: "LTC",
       balance: user.LTCBalance.toString(),
+      lotteryCurrency:true,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -324,36 +329,42 @@ const getUserData = async (userId) => {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
       balance: user.btcBalance.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     },
     {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
       balance: user.usdtBalance.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     },
     {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
       balance: user.busdBalance.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     },
     {
       icon: "https://bc.game/coin/PEOPLE.black.png",
       symbol: "testPay",
       balance: user.testPayBalance.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     },
     {
       icon: "http://15.207.226.246:9051/images/red-pepe-logo.png",
       symbol: "RPEPE",
       balance: user.pepeCoinBalnace.toString(),
+      lotteryCurrency:false,
       currencyType: "CRYPTO",
     },
     {
       icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.png",
       symbol: "LTC",
       balance: user.LTCBalance.toString(),
+      lotteryCurrency:true,
       currencyType: "CRYPTO",
     }
   ];
