@@ -42,6 +42,11 @@ const UserSchema = new Schema({
         type: Schema.Types.Decimal128,
         default:"0.0000"
     },
+    LTCBalance: {
+        type: Schema.Types.Decimal128,
+        default:"0.0000"
+    },
+
     pepeCoinBalnace:{
         type: Schema.Types.Decimal128,
         default:"0.0000"

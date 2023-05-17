@@ -19,6 +19,7 @@ const cryptoCoinsSchema = new mongoose.Schema({
    ,
    locked: { type: Boolean, default: true },
    icon: { type: String },
+   lotteryCurrency:{type:Boolean,default: false},
    description: { type: String },
    metaDescription: { type: String },
 });
