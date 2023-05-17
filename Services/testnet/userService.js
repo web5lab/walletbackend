@@ -351,9 +351,9 @@ const getUserData = async (userId) => {
       currencyType: "CRYPTO",
     },
     {
-      icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.pngw",
+      icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.png",
       symbol: "LTC",
-      balance: user.pepeCoinBalnace.toString(),
+      balance: user.LTCBalance.toString(),
       currencyType: "CRYPTO",
     }
   ];
