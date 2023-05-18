@@ -329,12 +329,12 @@ const getUserData = async (userId) => {
   // Add currencyId to each currency object
   const userCurrencies = currencies.map((currency) => {
     const userCurrency = {
-      currencyId: currency._id,
       icon: currency.icon,
       symbol: currency.currencyName,
-      balance: getUserCurrencyBalance(user, currency.currencyName).toString(),
+      balance:  getUserCurrencyBalance(user, currency.currencyName).toString(),
       lotteryCurrency: currency.lotteryCurrency,
       currencyType: "CRYPTO",
+      currencyId: currency._id,
     };
     return userCurrency;
   });
@@ -345,17 +345,17 @@ const getUserData = async (userId) => {
 const getUserCurrencyBalance = async (user, currencyName) => {
   switch (currencyName) {
     case "Btc":
-      return user.btcBalance.toString();
+      return await user.btcBalance.toString();
     case "Usdt":
-      return user.usdtBalance.toString();
+      return await user.usdtBalance.toString();
     case "Busd":
-      return user.busdBalance.toString();
+      return await user.busdBalance.toString();
     case "testPay":
-      return user.testPayBalance.toString();
+      return await user.testPayBalance.toString();
     case "RPEPE":
-      return user.pepeCoinBalnace.toString();
+      return await user.pepeCoinBalnace.toString();
     case "LTC":
-      return user.LTCBalance.toString();
+      return await user.LTCBalance.toString();
     default:
       return "0.0000";
   }
