@@ -278,7 +278,7 @@ const getCoinData = async (userId, currency) => {
   }
   if (currency == "testPay") {
     const data = {
-      icon: "https://bc.game/coin/PEOPLE.black.png",
+      icon: "https://bc.game/coin/WCK.black.png",
       symbol: "testPay",
       balance: user.testPayBalance.toString(),
       lotteryCurrency:false,
@@ -293,7 +293,7 @@ const getCoinData = async (userId, currency) => {
   }
   if (currency == "RPEPE") {
     const data = {
-      icon: "https://bc.game/coin/USDT.black.png",
+      icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/bc-games/1683188046921.jpg",
       symbol: "testPay",
       balance: user.testPayBalance.toString(),
       lotteryCurrency:false,
