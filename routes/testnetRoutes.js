@@ -13,7 +13,8 @@ router.get('/balance',VerifyServer);// body params required => user
 router.get('/get-coins',userController.getCoins);
 router.get('/getSpecificCoin',userController.getSpecificCoin);
 router.get('/checkTopup',userController.checkTopup);// body params required => userId
-router.get('/getMultipleWallet',VerifyServer,)
+router.get('/getMultipleWallet',VerifyServer,);
+router.get('/get-crypto-price',userController.getCoinPrice);
 router.get('/address',userController.getUserAdress);
 router.get('/masterInfo',VerifyAdmin,adminController.getMasterData);
 router.get('/userInfo/',userController.getUser);

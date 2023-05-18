@@ -14,6 +14,8 @@ function getCurrencyIcon(currencyName) {
       Busd: 'busdBalance',
       testPay: 'testPayBalance',
       Btc: 'btcBalance',
+      RPEPE: 'pepeCoinBalnace',
+      LTC:"LTCBalance",
     };
     return fieldNames[currencyName];
   }

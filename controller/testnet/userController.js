@@ -20,6 +20,7 @@ const {
   getDetailedTransaction,
   getUserWithdrawl,
 } = require("../../Services/testnet/userTransactions");
+const { BtcPrice } = require("../../Services/testnet/marketPrice");
 
 const userWithdrawl = async (req, res) => {
   try {
@@ -173,6 +174,16 @@ const addUserCoin = catchAsync(async(req,res)=>{
   });
 })
 
+const getCoinPrice = catchAsync(async (req,res)=>{
+  const price = await BtcPrice()
+   res.json({
+    success:true,
+    error:false,
+    btc:price,
+   })
+})
+
+
 module.exports = {
   userWithdrawl,
   userDeposite,
@@ -183,6 +194,7 @@ module.exports = {
   getSpecificCoin,
   getUserAdress,
   getUser,
+  getCoinPrice,
   userDetailedTransaction,
   registerNewUser,
   checkTopupExternalServer,
