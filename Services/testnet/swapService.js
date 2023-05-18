@@ -1,5 +1,6 @@
 const userSchema = require('../../mongoDb/schema/userSchema');
 const { getBalanceField } = require('./coinCommon');
+const { BtcPrice } = require('./marketPrice');
 
 const Swapper = async (from, to, amount, userId) => {
   const balanceFieldFrom = getBalanceField(from);
@@ -25,17 +26,18 @@ const Swapper = async (from, to, amount, userId) => {
     $inc: { [balanceFieldFrom]: -amount, [balanceFieldTo]: convertedAmount },
   }, { new: true });
 
-  // Optional: Return the updated user object
+
   return updatedUser;
 };
 
-// Helper function to fetch the conversion rate
+
 const getConversionRate = async (from, to) => {
     const priceLookup = {
-      BTC: 1200,
-      USDT: 1,
-      Testcoin: 0.1,
-      LTC: 32
+      Btc: await BtcPrice(),
+      Usdt: 1,
+      Busd: 1,
+      testCoin: 10,
+      LTC: 0.1
     };
     if (from === to) {
       return 1; // Same currency, conversion rate is 1

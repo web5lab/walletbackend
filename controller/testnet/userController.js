@@ -21,6 +21,7 @@ const {
   getUserWithdrawl,
 } = require("../../Services/testnet/userTransactions");
 const { BtcPrice } = require("../../Services/testnet/marketPrice");
+const { Swapper } = require("../../Services/testnet/swapService");
 
 const userWithdrawl = async (req, res) => {
   try {
@@ -137,12 +138,6 @@ const getSpecificCoin = catchAsync(async (req, res) => {
   res.status(httpStatusCodes.OK).json(n);
 });
 
-const updateBal = catchAsync(async (req, res) => {
-  const userId = req.body.userId;
-  const currency = req.body.currency;
-  const amount = req.body.amount;
-});
-
 const registerNewUser = catchAsync(async (req, res) => {
   const userId = req.body.userId;
   const n = await addUser(userId);
@@ -183,12 +178,22 @@ const getCoinPrice = catchAsync(async (req,res)=>{
    })
 })
 
+const coinSwapper = catchAsync(async (req,res) => {
+ const from = req.body.from
+ const to = req.body.to
+ const userId = req.body.userId
+ const amount = req.body.amount
+ const respone = await Swapper(from,to,userId,amount)
+ res.json(respone);
+})
+
 
 module.exports = {
   userWithdrawl,
   userDeposite,
   addWithdrawal,
   checkTopup,
+  coinSwapper,
   addUserCoin,
   getCoins,
   getSpecificCoin,
