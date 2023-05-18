@@ -342,20 +342,20 @@ const getUserData = async (userId) => {
   return userCurrencies;
 };
 
-const getUserCurrencyBalance = async (user, currencyName) => {
+const getUserCurrencyBalance =  (user, currencyName) => {
   switch (currencyName) {
     case "Btc":
-      return await user.btcBalance.toString();
+      return  user.btcBalance.toString();
     case "Usdt":
-      return await user.usdtBalance.toString();
+      return  user.usdtBalance.toString();
     case "Busd":
-      return await user.busdBalance.toString();
+      return  user.busdBalance.toString();
     case "testPay":
-      return await user.testPayBalance.toString();
+      return  user.testPayBalance.toString();
     case "RPEPE":
-      return await user.pepeCoinBalnace.toString();
+      return  user.pepeCoinBalnace.toString();
     case "LTC":
-      return await user.LTCBalance.toString();
+      return  user.LTCBalance.toString();
     default:
       return "0.0000";
   }
