@@ -334,7 +334,6 @@ const getUserData = async (userId) => {
       balance:  getUserCurrencyBalance(user, currency.currencyName).toString(),
       lotteryCurrency: currency.lotteryCurrency,
       currencyType: "CRYPTO",
-      currencyId: currency._id,
     };
     return userCurrency;
   });
