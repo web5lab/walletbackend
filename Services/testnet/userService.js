@@ -178,7 +178,9 @@ const updateBalByCurrencyId = async (userId, currencyId, amount) => {
   }
 };
 
-const getAddress = async (userId, currency) => {
+const getAddress = async (userId, currencyId) => {
+  const currencyData = await currencyModel.findById(currencyId);
+  const currency = currencyData.currencyName;
   if (currency == "Btc") {
     const obj = {
       success: true,
