@@ -289,6 +289,21 @@ const getCoinData = async (userId, currency) => {
     };
     return obj;
   }
+  if (currency == "RPEPE") {
+    const data = {
+      icon: "https://bc.game/coin/USDT.black.png",
+      symbol: "testPay",
+      balance: user.testPayBalance.toString(),
+      lotteryCurrency:false,
+      currencyType: "CRYPTO",
+    };
+    const obj = {
+      success: true,
+      error: false,
+      data: data,
+    };
+    return obj;
+  }
   if (currency == "LTC") {
     const data = {
       icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.png",
