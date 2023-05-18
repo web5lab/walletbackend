@@ -73,7 +73,7 @@ const getuserDepositeAdressPepeCoin = async (userId) => {
     {
       network: "Bep20",
       address: user.ethAddress,
-    }
+    },
   ];
   return data;
 };
@@ -236,7 +236,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/BTC.black.png",
       symbol: "Btc",
       balance: user.btcBalance.toString(),
-      lotteryCurrency:false,
+      lotteryCurrency: false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -251,7 +251,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/USDT.black.png",
       symbol: "Usdt",
       balance: user.usdtBalance.toString(),
-      lotteryCurrency:false,
+      lotteryCurrency: false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -266,7 +266,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/BUSD.black.png",
       symbol: "Busd",
       balance: user.busdBalance.toString(),
-      lotteryCurrency:false,
+      lotteryCurrency: false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -281,7 +281,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://bc.game/coin/WCK.black.png",
       symbol: "testPay",
       balance: user.testPayBalance.toString(),
-      lotteryCurrency:false,
+      lotteryCurrency: false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -294,9 +294,9 @@ const getCoinData = async (userId, currency) => {
   if (currency == "RPEPE") {
     const data = {
       icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/bc-games/1683188046921.jpg",
-      symbol: "testPay",
-      balance: user.testPayBalance.toString(),
-      lotteryCurrency:false,
+      symbol: "RPEPE",
+      balance: user.pepeCoinBalnace.toString(),
+      lotteryCurrency: false,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -311,7 +311,7 @@ const getCoinData = async (userId, currency) => {
       icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.png",
       symbol: "LTC",
       balance: user.LTCBalance.toString(),
-      lotteryCurrency:true,
+      lotteryCurrency: true,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -326,7 +326,7 @@ const getCoinData = async (userId, currency) => {
     error: true,
     data: "invalid currency",
   };
-  
+
   return obj;
 };
 
@@ -348,7 +348,7 @@ const getUserData = async (userId) => {
     const userCurrency = {
       icon: currency.icon,
       symbol: currency.currencyName,
-      balance:  getUserCurrencyBalance(user, currency.currencyName).toString(),
+      balance: getUserCurrencyBalance(user, currency.currencyName).toString(),
       lotteryCurrency: currency.lotteryCurrency,
       currencyType: "CRYPTO",
       currencyId: currency._id,
@@ -356,34 +356,32 @@ const getUserData = async (userId) => {
     return userCurrency;
   });
 
-  
   const obj = {
     success: true,
     error: false,
     data: userCurrencies,
   };
-  return obj
+  return obj;
 };
 
-const getUserCurrencyBalance =  (user, currencyName) => {
+const getUserCurrencyBalance = (user, currencyName) => {
   switch (currencyName) {
     case "Btc":
-      return  user.btcBalance.toString();
+      return user.btcBalance.toString();
     case "Usdt":
-      return  user.usdtBalance.toString();
+      return user.usdtBalance.toString();
     case "Busd":
-      return  user.busdBalance.toString();
+      return user.busdBalance.toString();
     case "testPay":
-      return  user.testPayBalance.toString();
+      return user.testPayBalance.toString();
     case "RPEPE":
-      return  user.pepeCoinBalnace.toString();
+      return user.pepeCoinBalnace.toString();
     case "LTC":
-      return  user.LTCBalance.toString();
+      return user.LTCBalance.toString();
     default:
       return "0.0000";
   }
 };
-
 
 module.exports = {
   updateBalByCurrencyId,
