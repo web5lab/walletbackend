@@ -1,4 +1,4 @@
-let Btc_Price = 1000;
+let Btc_Price = 26740;
 
 
 const fetchMarketPriceFromApi = async () => {
@@ -21,6 +21,7 @@ const BtcPrice = async () => {
 
 setInterval(fetchMarketPriceFromApi, 60000);
 fetchMarketPriceFromApi();
+
 
 module.exports = {
   BtcPrice,
