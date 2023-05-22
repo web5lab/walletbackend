@@ -37,7 +37,8 @@ const getConversionRate = async (from,to) => {
       Btc: await BtcPrice(),
       Usdt: 1,
       Busd: 1,
-      testCoin: 10,
+      testPay: 10,
+      RPEPE:100,
       LTC: 0.1
     };
     if (from === to) {
