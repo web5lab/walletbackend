@@ -191,8 +191,13 @@ const coinSwapper = catchAsync(async (req,res) => {
  });
 })
 
-const SwapCrypto = catchAsync(async () => {
+const SwapCrypto = catchAsync(async (req,res) => {
   console.log(req.body);
+  res.json({
+    success:true,
+    error:false,
+    data:"ok"
+  })
 })
 
 const getConversion_Rate = catchAsync(async (req,res)=>{
