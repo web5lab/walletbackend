@@ -10,6 +10,7 @@ const { verify } = require('tiny-secp256k1');
 
 // API => GET
 router.get('/balance',VerifyServer);// body params required => user
+router.get('/crypto-conversion-rate',userController.getConversion_Rate)
 router.get('/get-coins',userController.getCoins);
 router.get('/getSpecificCoin',userController.getSpecificCoin);
 router.get('/checkTopup',userController.checkTopup);// body params required => userId

@@ -31,7 +31,8 @@ const Swapper = async (from, to, amount, userId) => {
 };
 
 
-const getConversionRate = async (from, to) => {
+const getConversionRate = async (from,to) => {
+  console.log(from,to)
     const priceLookup = {
       Btc: await BtcPrice(),
       Usdt: 1,
@@ -42,8 +43,8 @@ const getConversionRate = async (from, to) => {
     if (from === to) {
       return 1; // Same currency, conversion rate is 1
     }
-    const fromPrice = priceLookup[from];
-    const toPrice = priceLookup[to];
+    const fromPrice = priceLookup[to];
+    const toPrice = priceLookup[from];
     if (!fromPrice || !toPrice) {
       throw new Error("Invalid currency");
     }
@@ -53,5 +54,6 @@ const getConversionRate = async (from, to) => {
 
 
 module.exports = {
-    Swapper
+    Swapper,
+    getConversionRate
 }

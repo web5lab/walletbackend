@@ -21,7 +21,7 @@ const {
   getUserWithdrawl,
 } = require("../../Services/testnet/userTransactions");
 const { BtcPrice } = require("../../Services/testnet/marketPrice");
-const { Swapper } = require("../../Services/testnet/swapService");
+const { Swapper, getConversionRate } = require("../../Services/testnet/swapService");
 
 const userWithdrawl = async (req, res) => {
   try {
@@ -183,10 +183,35 @@ const coinSwapper = catchAsync(async (req,res) => {
  const to = req.body.to
  const userId = req.body.userId
  const amount = req.body.amount
- const respone = await Swapper(from,to,userId,amount)
- res.json(respone);
+ const data = await Swapper(from,to,userId,amount)
+ res.json({
+  success:true,
+  error:false,
+  data:data
+ });
 })
 
+
+const getConversion_Rate = catchAsync(async (req,res)=>{
+  try {
+    const from = req.query.from
+  const to = req.query.to
+  const amount = req.query.amount
+  const rate = await getConversionRate(from,to)
+  res.json({
+    success:true,
+    error:false,
+    data:rate*amount
+  })
+  } catch (error) {
+    res.json({
+      success:false,
+      error:true,
+      data:undefined
+    })
+  }
+  
+})
 
 module.exports = {
   userWithdrawl,
@@ -199,6 +224,7 @@ module.exports = {
   getSpecificCoin,
   getUserAdress,
   getUser,
+  getConversion_Rate,
   getCoinPrice,
   userDetailedTransaction,
   registerNewUser,

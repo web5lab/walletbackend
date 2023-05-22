@@ -228,15 +228,15 @@ const getAddress = async (userId, currencyId) => {
   };
   return obj;
 };
-
+ 
 const getCoinData = async (userId, currency) => {
   const user = await userSchema.findById(userId);
-  if (currency == "Btc") {
+  const currencyData = await currencyModel.findOne({currencyName:currency});
     const data = {
-      icon: "https://bc.game/coin/BTC.black.png",
-      symbol: "Btc",
-      balance: user.btcBalance.toString(),
-      lotteryCurrency: false,
+      icon: currencyData.icon,
+      symbol: currencyData.currencyName,
+      balance: getUserCurrencyBalance(user,currencyData.currencyName),
+      lotteryCurrency: currencyData.lotteryCurrency,
       currencyType: "CRYPTO",
     };
     const obj = {
@@ -245,89 +245,6 @@ const getCoinData = async (userId, currency) => {
       data: data,
     };
     return obj;
-  }
-  if (currency == "Usdt") {
-    const data = {
-      icon: "https://bc.game/coin/USDT.black.png",
-      symbol: "Usdt",
-      balance: user.usdtBalance.toString(),
-      lotteryCurrency: false,
-      currencyType: "CRYPTO",
-    };
-    const obj = {
-      success: true,
-      error: false,
-      data: data,
-    };
-    return obj;
-  }
-  if (currency == "Busd") {
-    const data = {
-      icon: "https://bc.game/coin/BUSD.black.png",
-      symbol: "Busd",
-      balance: user.busdBalance.toString(),
-      lotteryCurrency: false,
-      currencyType: "CRYPTO",
-    };
-    const obj = {
-      success: true,
-      error: false,
-      data: data,
-    };
-    return obj;
-  }
-  if (currency == "testPay") {
-    const data = {
-      icon: "https://bc.game/coin/WCK.black.png",
-      symbol: "testPay",
-      balance: user.testPayBalance.toString(),
-      lotteryCurrency: false,
-      currencyType: "CRYPTO",
-    };
-    const obj = {
-      success: true,
-      error: false,
-      data: data,
-    };
-    return obj;
-  }
-  if (currency == "RPEPE") {
-    const data = {
-      icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/bc-games/1683188046921.jpg",
-      symbol: "RPEPE",
-      balance: user.pepeCoinBalnace.toString(),
-      lotteryCurrency: false,
-      currencyType: "CRYPTO",
-    };
-    const obj = {
-      success: true,
-      error: false,
-      data: data,
-    };
-    return obj;
-  }
-  if (currency == "LTC") {
-    const data = {
-      icon: "https://upi-gateway.s3.ap-south-1.amazonaws.com/coin.png",
-      symbol: "LTC",
-      balance: user.LTCBalance.toString(),
-      lotteryCurrency: true,
-      currencyType: "CRYPTO",
-    };
-    const obj = {
-      success: true,
-      error: false,
-      data: data,
-    };
-    return obj;
-  }
-  const obj = {
-    success: false,
-    error: true,
-    data: "invalid currency",
-  };
-
-  return obj;
 };
 
 const getUserData = async (userId) => {

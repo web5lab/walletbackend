@@ -19,7 +19,8 @@ const BtcPrice = async () => {
   return Btc_Price;
 }
 
-setInterval(fetchMarketPriceFromApi, 20000);
+setInterval(fetchMarketPriceFromApi, 60000);
+fetchMarketPriceFromApi();
 
 module.exports = {
   BtcPrice,
