@@ -229,6 +229,7 @@ const getAddress = async (userId, currencyId) => {
   return obj;
 };
  
+// get user coin
 const getCoinData = async (userId, currency) => {
   const user = await userSchema.findById(userId);
   const currencyData = await currencyModel.findOne({currencyName:currency});
