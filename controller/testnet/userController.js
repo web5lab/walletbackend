@@ -196,12 +196,11 @@ const getConversion_Rate = catchAsync(async (req,res)=>{
   try {
     const from = req.query.from
   const to = req.query.to
-  const amount = req.query.amount
   const rate = await getConversionRate(from,to)
   res.json({
     success:true,
     error:false,
-    data:rate*amount
+    data:rate
   })
   } catch (error) {
     res.json({
