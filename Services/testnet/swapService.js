@@ -42,7 +42,7 @@ const Swapper = async (from, to, amount, userId) => {
     from: from,
     formAmount: amount,
     to: to,
-    toAmount: convertedAmount,
+    toAmount: convertedAmount.toFixed(8),
   };
   const res = {
     success: true,
@@ -70,7 +70,7 @@ const getConversionRate = async (from, to) => {
   if (!fromPrice || !toPrice) {
     throw new Error("Invalid currency");
   }
-  return toPrice / fromPrice;
+  return (toPrice / fromPrice).toFixed(8);
 };
 // swapper service
 
