@@ -235,7 +235,7 @@ const getCoinData = async (userId, currency) => {
     const data = {
       icon: currencyData.icon,
       symbol: currencyData.currencyName,
-      balance: getUserCurrencyBalance(user,currencyData.currencyName).toFixed(8),
+      balance: getUserCurrencyBalance(user,currencyData.currencyName),
       lotteryCurrency: currencyData.lotteryCurrency,
       currencyType: "CRYPTO",
     };
