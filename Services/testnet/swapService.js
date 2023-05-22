@@ -33,7 +33,7 @@ const Swapper = async (from, to, amount, userId) => {
   const updatedUser = await userSchema.findByIdAndUpdate(
     userId,
     {
-      $inc: { [balanceFieldFrom]: -amount, [balanceFieldTo]: convertedAmount },
+      $inc: { [balanceFieldFrom]: -amount, [balanceFieldTo]: convertedAmount.toFixed(8) },
     },
     { new: true }
   );
