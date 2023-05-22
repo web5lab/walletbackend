@@ -27,7 +27,7 @@ router.get('/get-detailed-transactions',varifyJwtToken,userController.userDetail
 //API => POST
 router.post('/faucet',faucetController);
 router.post('/validateUser',);
-router.post('/swap-crypto',)
+router.post('/swap-crypto',userController.SwapCrypto)
 router.post('/add-user-crypto-balance',userController.addUserCoin)
 router.post('/update-transaction',userController.checkTopupExternalServer)
 router.post('/addUser',userController.registerNewUser)// body Par

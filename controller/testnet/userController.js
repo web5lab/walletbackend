@@ -191,6 +191,9 @@ const coinSwapper = catchAsync(async (req,res) => {
  });
 })
 
+const SwapCrypto = catchAsync(async () => {
+  console.log(req.body);
+})
 
 const getConversion_Rate = catchAsync(async (req,res)=>{
   try {
@@ -213,6 +216,7 @@ const getConversion_Rate = catchAsync(async (req,res)=>{
 })
 
 module.exports = {
+  SwapCrypto,
   userWithdrawl,
   userDeposite,
   addWithdrawal,
