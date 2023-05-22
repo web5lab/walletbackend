@@ -1,6 +1,6 @@
-const userSchema = require('../../mongoDb/schema/userSchema');
-const { getBalanceField } = require('./coinCommon');
-const { BtcPrice } = require('./marketPrice');
+const userSchema = require("../../mongoDb/schema/userSchema");
+const { getBalanceField } = require("./coinCommon");
+const { BtcPrice } = require("./marketPrice");
 
 const Swapper = async (from, to, amount, userId) => {
   const balanceFieldFrom = getBalanceField(from);
@@ -11,50 +11,69 @@ const Swapper = async (from, to, amount, userId) => {
 
   const user = await userSchema.findById(userId);
   if (!user) {
-    throw new Error("User not found");
+    return {
+      success: false,
+      error: true,
+      data: "user not found",
+    };
   }
 
   const currentBalanceFrom = user[balanceFieldFrom];
   if (currentBalanceFrom < amount) {
-    throw new Error("Insufficient balance");
+    return {
+      success: false,
+      error: true,
+      data: "insufficient fund",
+    };
   }
 
   // Calculate the converted amount
   const convertedAmount = amount * conversionRate;
 
-  const updatedUser = await userSchema.findByIdAndUpdate(userId, {
-    $inc: { [balanceFieldFrom]: -amount, [balanceFieldTo]: convertedAmount },
-  }, { new: true });
+  const updatedUser = await userSchema.findByIdAndUpdate(
+    userId,
+    {
+      $inc: { [balanceFieldFrom]: -amount, [balanceFieldTo]: convertedAmount },
+    },
+    { new: true }
+  );
 
+  const obj = {
+    from: from,
+    formAmount: amount,
+    to: to,
+    toAmount: convertedAmount,
+  };
+  const res = {
+    success: true,
+    error: false,
+    data: obj,
+  };
 
-  return updatedUser;
+  return res;
 };
 
-
-const getConversionRate = async (from,to) => {
-  console.log(from,to)
-    const priceLookup = {
-      Btc: await BtcPrice(),
-      Usdt: 1,
-      Busd: 1,
-      testPay: 10,
-      RPEPE:100,
-      LTC: 0.1
-    };
-    if (from === to) {
-      return 1; // Same currency, conversion rate is 1
-    }
-    const fromPrice = priceLookup[to];
-    const toPrice = priceLookup[from];
-    if (!fromPrice || !toPrice) {
-      throw new Error("Invalid currency");
-    }
-    return toPrice / fromPrice;
+const getConversionRate = async (from, to) => {
+  const priceLookup = {
+    Btc: await BtcPrice(),
+    Usdt: 1,
+    Busd: 1,
+    testPay: 10,
+    RPEPE: 100,
+    LTC: 0.1,
   };
-  
-
+  if (from === to) {
+    return 1; // Same currency, conversion rate is 1
+  }
+  const fromPrice = priceLookup[to];
+  const toPrice = priceLookup[from];
+  if (!fromPrice || !toPrice) {
+    throw new Error("Invalid currency");
+  }
+  return toPrice / fromPrice;
+};
 
 module.exports = {
-    Swapper,
-    getConversionRate
-}
+  Swapper,
+  getConversionRate,
+};
