@@ -145,6 +145,7 @@ const updateBal = async (userId, currency, amount) => {
 };
 
 const updateBalByCurrencyId = async (userId, currencyId, amount) => {
+  console.log(userId,currencyId,amount);
   try {
     const currencyData = await currencyModel.findById(currencyId);
     const currency = currencyData.currencyName;
