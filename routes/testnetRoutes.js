@@ -20,7 +20,9 @@ router.get('/address',userController.getUserAdress);
 router.get('/masterInfo',VerifyAdmin,adminController.getMasterData);
 router.get('/userInfo/',userController.getUser);
 router.get('/get-deposite',varifyJwtToken,userController.userDeposite);
+router.get('/get-deposite-admin',userController.userDepositeAdmin);
 router.get('/get-withdrawl',varifyJwtToken,userController.userWithdrawl);
+router.get('/get-withdrawl-admin',userController.userWithdrawlAdmin);
 router.get('/get-detailed-transactions',varifyJwtToken,userController.userDetailedTransaction);
 
 

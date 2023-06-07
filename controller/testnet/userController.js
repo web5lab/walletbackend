@@ -35,6 +35,18 @@ const userWithdrawl = async (req, res) => {
   }
 };
 
+const userWithdrawlAdmin = async (req, res) => {
+  try {
+    const userId = eq.query.userId;
+    const page = req.query.page;
+    const data = await getUserWithdrawl(Number(userId), page);
+    res.status(httpStatusCodes.OK).json(data);
+  } catch (error) {
+    console.log("error", error);
+    res.status(httpStatusCodes.INTERNAL_SERVER);
+  }
+};
+
 const userDetailedTransaction = async (req, res) => {
   try {
     const id = req.query.id;
@@ -48,6 +60,18 @@ const userDetailedTransaction = async (req, res) => {
 const userDeposite = async (req, res) => {
   try {
     const userId = req.userPayload.userId;
+    const page = req.query.page;
+    const data = await getUserDeposit(Number(userId), page);
+    res.status(httpStatusCodes.OK).json(data);
+  } catch (error) {
+    console.log("error", error);
+    res.status(httpStatusCodes.INTERNAL_SERVER);
+  }
+};
+
+const userDepositeAdmin = async (req, res) => {
+  try {
+    const userId = req.query.userId;
     const page = req.query.page;
     const data = await getUserDeposit(Number(userId), page);
     res.status(httpStatusCodes.OK).json(data);
@@ -223,7 +247,9 @@ const getConversion_Rate = catchAsync(async (req,res)=>{
 module.exports = {
   SwapCrypto,
   userWithdrawl,
+  userDepositeAdmin,
   userDeposite,
+  userWithdrawlAdmin,
   addWithdrawal,
   checkTopup,
   coinSwapper,
