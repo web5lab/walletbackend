@@ -37,7 +37,7 @@ const userWithdrawl = async (req, res) => {
 
 const userWithdrawlAdmin = async (req, res) => {
   try {
-    const userId = eq.query.userId;
+    const userId = req.query.userId;
     const page = req.query.page;
     const data = await getUserWithdrawl(Number(userId), page);
     res.status(httpStatusCodes.OK).json(data);
