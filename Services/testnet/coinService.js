@@ -23,7 +23,7 @@ const getAllCoins = async () => {
 
 const getSpecifiCoins = async (id) => {
   const coins = await currencyModel.findById(id);
-  return coins;
+  return coins.currencyName;
 };
 
 module.exports = {
