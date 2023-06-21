@@ -7,7 +7,7 @@ const {
   getCoinData,
   updateBalByCurrencyId,
 } = require("../../Services/testnet/userService");
-const { getAllCoins } = require("../../Services/testnet/coinService");
+const { getAllCoins, getSpecifiCoins } = require("../../Services/testnet/coinService");
 const onChainData = require("../../mongoDb/schema/onChainData");
 const { catchAsync, httpStatusCodes } = require("../../helper/helper");
 const {
@@ -180,6 +180,27 @@ const getCoins = catchAsync(async (req, res) => {
   res.status(httpStatusCodes.OK).json(obj);
 });
 
+const getSpecificCoinDetails = catchAsync(async (req, res) => {
+  try {
+    const id = req.query.id
+    const obj = await getSpecifiCoins(id);
+    res.status(httpStatusCodes.OK).json({
+      success:true,
+      error:false,
+      data:obj
+    });
+  } catch (error) {
+    res.status(httpStatusCodes.INTERNAL_SERVER).json({
+      success:false,
+      error:true,
+      data:null
+    })
+  }
+  const id = req.query
+  const obj = await getSpecifiCoins();
+  res.status(httpStatusCodes.OK).json(obj);
+});
+
 const addUserCoin = catchAsync(async(req,res)=>{
   const userId = req.body.userId
   const amount = req.body.balance
@@ -257,6 +278,7 @@ module.exports = {
   getCoins,
   getSpecificCoin,
   getUserAdress,
+  getSpecificCoinDetails,
   getUser,
   getConversion_Rate,
   getCoinPrice,
