@@ -187,13 +187,13 @@ const getSpecificCoinDetails = catchAsync(async (req, res) => {
     res.status(httpStatusCodes.OK).json({
       success:true,
       error:false,
-      data:obj
+      currencyName:obj
     });
   } catch (error) {
     res.status(httpStatusCodes.INTERNAL_SERVER).json({
       success:false,
       error:true,
-      data:null
+      currencyName:null
     })
   }
   const id = req.query
