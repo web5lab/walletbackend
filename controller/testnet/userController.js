@@ -21,7 +21,7 @@ const {
   getUserWithdrawl,
 } = require("../../Services/testnet/userTransactions");
 const { BtcPrice } = require("../../Services/testnet/marketPrice");
-const { Swapper, getConversionRate } = require("../../Services/testnet/swapService");
+const { Swapper, getConversionRate, reffralSwapper } = require("../../Services/testnet/swapService");
 
 const userWithdrawl = async (req, res) => {
   try {
@@ -245,6 +245,15 @@ const SwapCrypto = catchAsync(async (req,res) => {
   res.json(response)
 })
 
+const SwapCryptoRefferal = catchAsync(async (req,res) => {
+  const from = req.body.from;
+  const to = req.body.to;
+  const amount = req.body.amount;
+  const userId = req.body.userId;
+  const response = await reffralSwapper(to,amount,userId);
+  res.json(response)
+})
+
 const getConversion_Rate = catchAsync(async (req,res)=>{
   try {
     const from = req.query.from
@@ -275,6 +284,7 @@ module.exports = {
   checkTopup,
   coinSwapper,
   addUserCoin,
+  SwapCryptoRefferal,
   getCoins,
   getSpecificCoin,
   getUserAdress,
