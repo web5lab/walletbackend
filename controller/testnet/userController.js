@@ -246,12 +246,16 @@ const SwapCrypto = catchAsync(async (req,res) => {
 })
 
 const SwapCryptoRefferal = catchAsync(async (req,res) => {
-  const from = req.body.from;
-  const to = req.body.to;
+  try {
+    const to = req.body.to;
   const amount = req.body.amount;
   const userId = req.body.userId;
   const response = await reffralSwapper(to,amount,userId);
   res.json(response)
+  } catch (error) {
+    console.log(error);
+  }
+  
 })
 
 const getConversion_Rate = catchAsync(async (req,res)=>{
