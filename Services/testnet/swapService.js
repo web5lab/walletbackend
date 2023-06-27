@@ -33,7 +33,10 @@ const Swapper = async (from, to, amount, userId) => {
   const updatedUser = await userSchema.findByIdAndUpdate(
     userId,
     {
-      $inc: { [balanceFieldFrom]: -amount, [balanceFieldTo]: convertedAmount.toFixed(8) },
+      $inc: {
+        [balanceFieldFrom]: -amount,
+        [balanceFieldTo]: convertedAmount.toFixed(8),
+      },
     },
     { new: true }
   );
@@ -52,9 +55,7 @@ const Swapper = async (from, to, amount, userId) => {
 
   return res;
 };
-const reffralSwapper = async ( amount, userId) => {
-
-
+const reffralSwapper = async (amount, userId) => {
   const user = await userSchema.findById(userId);
   if (!user) {
     return {
@@ -64,22 +65,17 @@ const reffralSwapper = async ( amount, userId) => {
     };
   }
 
-
   const updatedUser = await userSchema.findByIdAndUpdate(
     userId,
     {
-      $inc: {  [balanceFieldTo]: amount.toFixed(8) },
+      $inc: { ["usdtBalance"]: amount.toFixed(8) },
     },
     { new: true }
   );
 
-  const obj = {
-    formAmount: amount,
-  };
   const res = {
     success: true,
     error: false,
-    data: obj,
   };
 
   return res;

@@ -262,10 +262,10 @@ const SwapCryptoRefferal = catchAsync(async (req, res) => {
   try {
     const amount = req.body.amount;
     const userId = req.body.userId;
-    const response = await reffralSwapper( amount, userId);x
-    res.json(response);
+    const response = await reffralSwapper( amount, userId);
+    res.status(httpStatusCodes.CREATED).json(response);
   } catch (error) {
-    console.log(error);
+    res.status(httpStatusCodes.BAD_REQUEST)
   }
 });
 
