@@ -79,7 +79,6 @@ const reffralSwapper = async (to, amount, userId) => {
   );
 
   const obj = {
-    from: from,
     formAmount: amount,
     to: to,
     toAmount: convertedAmount.toFixed(8),

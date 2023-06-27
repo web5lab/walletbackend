@@ -7,7 +7,10 @@ const {
   getCoinData,
   updateBalByCurrencyId,
 } = require("../../Services/testnet/userService");
-const { getAllCoins, getSpecifiCoins } = require("../../Services/testnet/coinService");
+const {
+  getAllCoins,
+  getSpecifiCoins,
+} = require("../../Services/testnet/coinService");
 const onChainData = require("../../mongoDb/schema/onChainData");
 const { catchAsync, httpStatusCodes } = require("../../helper/helper");
 const {
@@ -21,7 +24,11 @@ const {
   getUserWithdrawl,
 } = require("../../Services/testnet/userTransactions");
 const { BtcPrice } = require("../../Services/testnet/marketPrice");
-const { Swapper, getConversionRate, reffralSwapper } = require("../../Services/testnet/swapService");
+const {
+  Swapper,
+  getConversionRate,
+  reffralSwapper,
+} = require("../../Services/testnet/swapService");
 
 const userWithdrawl = async (req, res) => {
   try {
@@ -54,7 +61,7 @@ const userDetailedTransaction = async (req, res) => {
     const data = await getDetailedTransaction(id);
     console.log(data);
     res.status(httpStatusCodes.OK).json(data);
-  } catch (error) { }
+  } catch (error) {}
 };
 
 const userDeposite = async (req, res) => {
@@ -80,7 +87,6 @@ const userDepositeAdmin = async (req, res) => {
     res.status(httpStatusCodes.INTERNAL_SERVER);
   }
 };
-
 
 const checkTopup = async (req, res, userid) => {
   try {
@@ -110,7 +116,14 @@ const checkTopupExternalServer = async (req, res, userid) => {
     console.log(userPreviousData._id);
     const userId = userPreviousData._id;
     const latestbal = await wallet.Walletbalance(userPreviousData.bscAddress);
-    const response = await compareBalance(userPreviousData, latestbal, userId,from,hash,network);
+    const response = await compareBalance(
+      userPreviousData,
+      latestbal,
+      userId,
+      from,
+      hash,
+      network
+    );
     res.status(httpStatusCodes.OK).json(response);
   } catch (error) {
     console.log(error);
@@ -182,101 +195,99 @@ const getCoins = catchAsync(async (req, res) => {
 
 const getSpecificCoinDetails = catchAsync(async (req, res) => {
   try {
-    const id = req.query.id
+    const id = req.query.id;
     const obj = await getSpecifiCoins(id);
     res.status(httpStatusCodes.OK).json({
-      success:true,
-      error:false,
-      currencyName:obj
+      success: true,
+      error: false,
+      currencyName: obj,
     });
   } catch (error) {
     res.status(httpStatusCodes.INTERNAL_SERVER).json({
-      success:false,
-      error:true,
-      currencyName:null
-    })
+      success: false,
+      error: true,
+      currencyName: null,
+    });
   }
-  const id = req.query
+  const id = req.query;
   const obj = await getSpecifiCoins();
   res.status(httpStatusCodes.OK).json(obj);
 });
 
-const addUserCoin = catchAsync(async(req,res)=>{
-  const userId = req.body.userId
-  const amount = req.body.balance
-  const id = req.body.selectedCurrency
-  await updateBalByCurrencyId(userId,id,amount);
+const addUserCoin = catchAsync(async (req, res) => {
+  const userId = req.body.userId;
+  const amount = req.body.balance;
+  const id = req.body.selectedCurrency;
+  await updateBalByCurrencyId(userId, id, amount);
   res.json({
-    success:true,
-    error:false,
-    amount:amount,
-    data:"ok"
+    success: true,
+    error: false,
+    amount: amount,
+    data: "ok",
   });
-})
+});
 
-const getCoinPrice = catchAsync(async (req,res)=>{
-  const price = await BtcPrice()
-   res.json({
-    success:true,
-    error:false,
-    btc:price,
-   })
-})
+const getCoinPrice = catchAsync(async (req, res) => {
+  const price = await BtcPrice();
+  res.json({
+    success: true,
+    error: false,
+    btc: price,
+  });
+});
 
-const coinSwapper = catchAsync(async (req,res) => {
- const from = req.body.from
- const to = req.body.to
- const userId = req.body.userId
- const amount = req.body.amount
- const data = await Swapper(from,to,userId,amount)
- res.json({
-  success:true,
-  error:false,
-  data:data
- });
-})
+const coinSwapper = catchAsync(async (req, res) => {
+  const from = req.body.from;
+  const to = req.body.to;
+  const userId = req.body.userId;
+  const amount = req.body.amount;
+  const data = await Swapper(from, to, userId, amount);
+  res.json({
+    success: true,
+    error: false,
+    data: data,
+  });
+});
 
-const SwapCrypto = catchAsync(async (req,res) => {
+const SwapCrypto = catchAsync(async (req, res) => {
   const from = req.body.from;
   const to = req.body.to;
   const amount = req.body.amount;
   const userId = req.body.userId;
-  const response = await Swapper(from,to,amount,userId);
-  res.json(response)
-})
+  const response = await Swapper(from, to, amount, userId);
+  res.json(response);
+});
 
-const SwapCryptoRefferal = catchAsync(async (req,res) => {
+const SwapCryptoRefferal = catchAsync(async (req, res) => {
   try {
     const to = req.body.to;
-  const amount = req.body.amount;
-  const userId = req.body.userId;
-  const response = await reffralSwapper(to,amount,userId);
-  res.json(response)
+    const amount = req.body.amount;
+    const userId = req.body.userId;
+    const response = await reffralSwapper(to, amount, userId);x
+    res.json(response);
   } catch (error) {
     console.log(error);
   }
-  
-})
+});
 
-const getConversion_Rate = catchAsync(async (req,res)=>{
+const getConversion_Rate = catchAsync(async (req, res) => {
   try {
-    const from = req.query.from
-  const to = req.query.to
-  const rate = await getConversionRate(from,to)
-  res.json({
-    success:true,
-    error:false,
-    data:rate
-  })
+    const from = req.query.from;
+    const to = req.query.to;
+    const rate = await getConversionRate(from, to);
+    res.json({
+      success: true,
+      error: false,
+      data: rate,
+    });
   } catch (error) {
     res.json({
-      success:false,
-      error:true,
-      data:undefined
-    })
+      success: false,
+      error: true,
+      data: undefined,
+    });
   }
-  
-})
+});
 
 module.exports = {
   SwapCrypto,
