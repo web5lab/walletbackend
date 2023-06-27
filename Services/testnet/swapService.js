@@ -56,7 +56,8 @@ const Swapper = async (from, to, amount, userId) => {
   return res;
 };
 const reffralSwapper = async (amount, userId) => {
-  const user = await userSchema.findById(userId);
+  try {
+    const user = await userSchema.findById(userId);
   if (!user) {
     return {
       success: false,
@@ -79,6 +80,15 @@ const reffralSwapper = async (amount, userId) => {
   };
 
   return res;
+  } catch (error) {
+    const res = {
+      success: false,
+      error: true,
+    };
+  
+    return res;
+  }
+  
 };
 
 const getConversionRate = async (from, to) => {
