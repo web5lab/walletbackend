@@ -52,12 +52,8 @@ const Swapper = async (from, to, amount, userId) => {
 
   return res;
 };
-const reffralSwapper = async (to, amount, userId) => {
+const reffralSwapper = async ( amount, userId) => {
 
-  const balanceFieldTo = getBalanceField(to);
-
-  // Fetch the conversion rate for the currencies
-  const conversionRate = await getConversionRate("Usdt", to);
 
   const user = await userSchema.findById(userId);
   if (!user) {
@@ -68,20 +64,17 @@ const reffralSwapper = async (to, amount, userId) => {
     };
   }
 
-  const convertedAmount = amount * conversionRate;
 
   const updatedUser = await userSchema.findByIdAndUpdate(
     userId,
     {
-      $inc: {  [balanceFieldTo]: convertedAmount.toFixed(8) },
+      $inc: {  [balanceFieldTo]: amount.toFixed(8) },
     },
     { new: true }
   );
 
   const obj = {
     formAmount: amount,
-    to: to,
-    toAmount: convertedAmount.toFixed(8),
   };
   const res = {
     success: true,

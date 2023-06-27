@@ -260,10 +260,9 @@ const SwapCrypto = catchAsync(async (req, res) => {
 
 const SwapCryptoRefferal = catchAsync(async (req, res) => {
   try {
-    const to = req.body.to;
     const amount = req.body.amount;
     const userId = req.body.userId;
-    const response = await reffralSwapper(to, amount, userId);x
+    const response = await reffralSwapper( amount, userId);x
     res.json(response);
   } catch (error) {
     console.log(error);
