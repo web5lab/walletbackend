@@ -3,7 +3,7 @@ let Btc_Price = 26740;
 
 const fetchMarketPriceFromApi = async () => {
   try {
-    const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT");
+    const response = await fetch("https://api.exchangerate.host/convert?from=BTC&to=Usd");
     if (!response.ok) {
       throw new Error("Error fetching market price from API");
     }
