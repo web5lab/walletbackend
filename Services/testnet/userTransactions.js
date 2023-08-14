@@ -6,7 +6,7 @@ const perPage = 2; // replace with the number of transactions to show per page
 const getUserWithdrawl = async (userId, page) => {
   try {
     const data = await userTransaction.aggregate([
-      { $match: { userId: userId, transactionType: "Withdrawl" } },
+      { $match: { userId: userId, transactionType: "Withdraw" } },
       {
         $sort: { userTrasactionTime: -1 },
       },
