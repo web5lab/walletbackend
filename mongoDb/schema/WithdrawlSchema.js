@@ -7,7 +7,7 @@ const userWithdrawl = new mongoose.Schema({
   address: { type: String },
   network: { type: String },
   amount: { type: String },
-  status:{type:String,default:"Withdrawl is in progress"},
+  status:{type:String,default:"Withdraw is in progress"},
   currencyIcon:{type:String},
   transactionType: { type: String,default:"Withdraw"},
   userTrasactionTime: { type: Date, default: Date() },
