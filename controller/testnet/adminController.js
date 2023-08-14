@@ -10,6 +10,7 @@ const {
 
 const { catchAsync, httpStatusCodes } = require("../../helper/helper");
 
+// check balnce
 const checkBalance = catchAsync(async (req, res) => {
   const userId = req.body.userId;
   const user = await userSchema.findById(userId);
