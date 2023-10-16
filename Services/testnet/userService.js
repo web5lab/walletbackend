@@ -235,6 +235,7 @@ const getCoinData = async (userId, currency) => {
   const user = await userSchema.findById(userId);
   const currencyData = await currencyModel.findOne({currencyName:currency});
     const data = {
+      _id:currencyData._id,
       icon: currencyData.icon,
       symbol: currencyData.currencyName,
       balance: getUserCurrencyBalance(user,currencyData.currencyName),
